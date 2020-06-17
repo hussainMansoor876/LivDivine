@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
 
-const Signup = () => {
+const Signup = ({ navigation }) => {
   return (
       <SafeAreaView>
         <Text>Signup</Text>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
 
-const Login = () => {
+const Login = ({ navigation }) => {
   return (
       <SafeAreaView>
         <Text>Login</Text>
