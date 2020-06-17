@@ -7,7 +7,7 @@ const App = () => {
   return (
     <Provider store={store} >
       <SafeAreaView>
-        <Text>hello</Text>
+        <Text>hello1</Text>
       </SafeAreaView>
     </Provider>
   )
