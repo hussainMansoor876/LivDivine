@@ -1,18 +1,11 @@
-const loginUser = (user) => {
+const loginUser = (bool) => {
     return {
-        type: "LOGIN_USER",
-        user
-    }
-}
-
-const removeUser = () => {
-    return {
-        type: "REMOVE_USER"
+        type: "UPDATE_MODE",
+        bool
     }
 }
 
 
 export {
-    loginUser,
-    removeUser
+    loginUser
 }
