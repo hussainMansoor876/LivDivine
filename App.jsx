@@ -1,11 +1,15 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import { Provider } from "react-redux";
+import store from './Redux/store';
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <Text>hello</Text>
-    </SafeAreaView>
+    <Provider store={store} >
+      <SafeAreaView>
+        <Text>hello</Text>
+      </SafeAreaView>
+    </Provider>
   )
 };
 
