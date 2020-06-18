@@ -1,7 +1,11 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux'
+import {}
 
-const Login = ({ navigation }) => {
+
+const Login = (props) => {
+  console.log('***',useSelector(state => state ))
   return (
       <SafeAreaView>
         <Text style={styles.TextStyle}>Login</Text>

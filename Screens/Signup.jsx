@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
 
-const Signup = ({ navigation }) => {
+const Signup = (props) => {
   return (
       <SafeAreaView style={styles.TextStyle}>
         <Text>Signup</Text>
