@@ -11,7 +11,7 @@ const Login = props => {
   return (
     <SafeAreaView>
       <Button title="Login" onPress={() => dispatch(loginUser(user1))} />
-      {/* <Button title="Logout" onPress={() => dispatch(removeUser())} /> */}
+      <Button title="Logout" onPress={() => dispatch(removeUser())} />
       <Text style={styles.TextStyle}>Login {user?.name}</Text>
     </SafeAreaView>
   );
