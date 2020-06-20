@@ -5,6 +5,7 @@ import { store, persistor } from "./Redux/store";
 import { PersistGate } from 'redux-persist/integration/react'
 import AppNavigator from './Navigation/AppNavigator'
 
+
 const App = () => {
   return (
     <Provider store={store} >
@@ -12,6 +13,9 @@ const App = () => {
         <AppNavigator />
       </PersistGate>
     </Provider>
+    
+    
+
   )
 };
 
@@ -28,5 +32,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   }
 });
+ 
+
 
 export default App;
