@@ -38,7 +38,6 @@ const loginStyles = StyleSheet.create({
         marginLeft: 10,
     },
     inputLogin: {
-        borderColor: '#000000',
         borderWidth: 1,
         borderRadius: 8,
         paddingLeft: 15,
