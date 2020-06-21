@@ -21,10 +21,10 @@ const Login = props => {
           labelStyle={styles.inputLogin}
           leftIcon={
             <Icon
-              reverse
-              name='ios-american-football'
-              type='ionicon'
-              color='#517fa4'
+              name='mail'
+              size={24}
+              color='black'
+              type='foundation'
             />
           }
         />
@@ -32,7 +32,14 @@ const Login = props => {
           placeholder="Password"
           secureTextEntry={true}
           inputStyle={styles.inputLogin}
-          leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
+          leftIcon={
+            <Icon
+              name='lock'
+              size={24}
+              color='black'
+              type='foundation'
+            />
+          }
         />
         <Button title="Login" onPress={() => dispatch(loginUser(user1))} />
       </View>
@@ -42,7 +49,7 @@ const Login = props => {
       <Text style={styles.connect}>Or Connect With</Text>
       <View style={styles.social}>
         <SocialIcon title="Facebook" button type="facebook" />
-        <SocialIcon title="Google" button type="twitter" />
+        <SocialIcon title="Google" button type="google" />
       </View>
       <Text style={styles.dhaa}>Don't Have an Account</Text>
     </SafeAreaView>
