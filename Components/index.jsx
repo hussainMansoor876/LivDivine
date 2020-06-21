@@ -1,3 +1,5 @@
-import InputButton from './InputButton';
+import LoginForm from './LoginForm';
 
-export {InputButton};
+export {
+    LoginForm
+}

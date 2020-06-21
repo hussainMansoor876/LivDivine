@@ -4,7 +4,8 @@ import {
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
-import { Icon, Input, SocialIcon, Button } from 'react-native-elements'
+import { Icon, Input, SocialIcon } from 'react-native-elements'
+import { LoginForm } from '../Components'
 
 const user1 = { name: 'Mansoor Hussain' };
 
@@ -13,34 +14,7 @@ const Login = (props) => {
   const dispatch = useDispatch();
   return (
     <SafeAreaView style={styles.setFlex}>
-      <View style={styles.loginView}>
-        <Input
-          placeholder="Email"
-          inputContainerStyle={styles.inputLogin}
-          leftIcon={
-            <Icon
-              name='mail'
-              size={24}
-              color='black'
-              type='foundation'
-            />
-          }
-        />
-        <Input
-          placeholder="Password"
-          secureTextEntry={true}
-          inputContainerStyle={styles.inputLogin}
-          leftIcon={
-            <Icon
-              name='lock'
-              size={24}
-              color='black'
-              type='foundation'
-            />
-          }
-        />
-        <Button title="Login" buttonStyle={styles.loginBtn} onPress={() => dispatch(loginUser(user1))} />
-      </View>
+      <LoginForm />
       <TouchableOpacity>
         <Text>I forgot my Password</Text>
       </TouchableOpacity>
