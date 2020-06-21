@@ -18,18 +18,19 @@ const loginStyles = StyleSheet.create({
         fontSize: 24,
     },
     connect: {
-        marginTop: 20,
+        marginTop: 10,
         textAlign: 'center',
         color: 'grey',
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 16,
     },
     dhaa: {
-        marginTop: 20,
+        marginTop: 10,
         textAlign: 'center',
         color: 'orange',
         fontWeight: 'normal',
-        fontSize: 20,
+        fontSize: 16,
+        marginBottom: 10
     },
     social: {
         flexDirection: 'row',
@@ -50,6 +51,13 @@ const loginStyles = StyleSheet.create({
     },
     socialBtn: {
         flex: 1
+    },
+    forgotPas: {
+        textAlign: 'center',
+        paddingTop: 10,
+        paddingBottom: 10,
+        fontSize: 16,
+        color: '#24a0ed'
     }
 })
 

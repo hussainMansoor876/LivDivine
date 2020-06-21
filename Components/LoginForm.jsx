@@ -38,8 +38,8 @@ const LoginForm = (props) => {
                 }
             />
             <Button title="Login" buttonStyle={loginStyles.loginBtn} onPress={() => dispatch(loginUser(user1))} />
-            <TouchableOpacity>
-        <Text>I forgot my Password</Text>
+            <TouchableOpacity >
+        <Text style={loginStyles.forgotPas}>I forgot my Password</Text>
       </TouchableOpacity>
         </View>
     );
