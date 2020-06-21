@@ -13,13 +13,13 @@ const LoginForm = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
     const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [errMsg, setErrMsg] = useState('')
 
     const validate = () => {
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (reg.test(email) === false) {
             setErrMsg('Please input Valid Email!')
-            emailInput.current.shake()
         }
         else {
             console.log("Email is Correct");
@@ -29,7 +29,7 @@ const LoginForm = (props) => {
         <View style={loginStyles.loginView}>
             <Input
                 placeholder="Email"
-                inputContainerStyle={loginStyles.inputLogin}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: errMsg ? 'red' : '#000000' }}
                 onChangeText={e => setEmail(e)}
                 onBlur={validate}
                 onFocus={() => setErrMsg('')}
@@ -48,6 +48,7 @@ const LoginForm = (props) => {
                 placeholder="Password"
                 secureTextEntry={true}
                 inputContainerStyle={loginStyles.inputLogin}
+                onChangeText={e => setPassword(e)}
                 leftIcon={
                     <Icon
                         name='lock'
