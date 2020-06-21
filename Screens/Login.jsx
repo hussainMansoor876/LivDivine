@@ -8,33 +8,35 @@ import {
   Button,
   YellowBox,
 } from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
-import {loginUser, removeUser} from '../Redux/actions/authActions';
-import {InputButton} from '../Components';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginUser, removeUser } from '../Redux/actions/authActions';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Input} from 'react-native-elements';
-import {color} from 'react-native-reanimated';
-import {SocialIcon} from 'react-native-elements';
+import { Input } from 'react-native-elements';
+import { color } from 'react-native-reanimated';
+import { SocialIcon } from 'react-native-elements';
 
-const user1 = {name: 'Mansoor Hussain'};
+const user1 = { name: 'Mansoor Hussain' };
 
 const Login = props => {
   const user = useSelector(state => state.authReducer.user);
   const dispatch = useDispatch();
   return (
-    <SafeAreaView>
-      <Input
-        placeholder="E-mail"
-        leftIcon={{type: 'Font-Awesome', name: 'chevron-left'}}
-      />
-      <Input
-        placeholder="Password"
-        secureTextEntry={true}
-        leftIcon={{type: 'font-awesome', name: 'chevron-left'}}
-      />
-      <Button title="Login" onPress={() => dispatch(loginUser(user1))} />
-      <Text />
-      <Button title="I forgot my Password" type="clear" />
+    <SafeAreaView style={styles.setFlex}>
+      <View style={styles.loginView}>
+        <Input
+          placeholder="E-mail"
+          leftIcon={{ type: 'Font-Awesome', name: 'chevron-left' }}
+        />
+        <Input
+          placeholder="Password"
+          secureTextEntry={true}
+          leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
+        />
+        <Button title="Login" onPress={() => dispatch(loginUser(user1))} />
+      </View>
+      <TouchableOpacity>
+        <Text>I forgot my Password</Text>
+      </TouchableOpacity>
       <Text style={styles.connect}>Or Connect With</Text>
       <View style={styles.social}>
         <SocialIcon title="Facebook" button type="facebook" />
@@ -46,6 +48,14 @@ const Login = props => {
 };
 
 const styles = StyleSheet.create({
+  setFlex: {
+    flex: 1
+  },
+  loginView: {
+    flex: 1,
+    marginRight 10,
+    marginLeft: 10
+  },
   TextStyle: {
     textAlign: 'center',
     fontSize: 24,
