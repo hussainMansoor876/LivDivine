@@ -84,19 +84,6 @@ const styles = StyleSheet.create({
   social: {
     flexDirection: 'row',
   },
-
-  button: {
-    backgroundColor: 'blue',
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 12,
-    color: 'white',
-    fontSize: 15,
-    fontWeight: 'bold',
-    overflow: 'hidden',
-    padding: 10,
-    textAlign: 'center',
-  },
   inputLogin: {
     borderColor: '#000000',
     borderWidth: 1,
