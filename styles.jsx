@@ -32,7 +32,9 @@ const loginStyles = StyleSheet.create({
         fontSize: 20,
     },
     social: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginRight: 10,
+        marginLeft: 10,
     },
     inputLogin: {
         borderColor: '#000000',
@@ -45,6 +47,9 @@ const loginStyles = StyleSheet.create({
         width: '96%',
         marginLeft: '2%',
         height: 46
+    },
+    socialBtn: {
+        flex: 1
     }
 })
 

@@ -12,8 +12,8 @@ const SocialLogin = (props) => {
     const dispatch = useDispatch();
     return (
         <View style={loginStyles.social}>
-            <SocialIcon title="Facebook" button type="facebook" />
-            <SocialIcon title="Google" button type="google" />
+            <SocialIcon style={loginStyles.socialBtn} title="Facebook" button type="facebook" />
+            <SocialIcon style={loginStyles.socialBtn} title="Google" button type="google" />
         </View>
     );
 };
