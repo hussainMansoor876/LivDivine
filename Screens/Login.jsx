@@ -1,18 +1,11 @@
 import React from 'react';
 import {
-  SafeAreaView,
-  TouchableOpacity,
-  StyleSheet,
-  View,
-  Text,
-  Button,
-  YellowBox,
+  SafeAreaView, TouchableOpacity, StyleSheet, View, Text, Button
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Icon } from 'react-native-elements'
 import { Input } from 'react-native-elements';
-import { color } from 'react-native-reanimated';
 import { SocialIcon } from 'react-native-elements';
 
 const user1 = { name: 'Mansoor Hussain' };
@@ -24,12 +17,21 @@ const Login = props => {
     <SafeAreaView style={styles.setFlex}>
       <View style={styles.loginView}>
         <Input
-          placeholder="E-mail"
-          leftIcon={{ type: 'Font-Awesome', name: 'chevron-left' }}
+          placeholder="Email"
+          labelStyle={styles.inputLogin}
+          leftIcon={
+            <Icon
+              reverse
+              name='ios-american-football'
+              type='ionicon'
+              color='#517fa4'
+            />
+          }
         />
         <Input
           placeholder="Password"
           secureTextEntry={true}
+          inputStyle={styles.inputLogin}
           leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
         />
         <Button title="Login" onPress={() => dispatch(loginUser(user1))} />
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
   },
   loginView: {
     flex: 1,
-    marginRight 10,
+    marginRight: 10,
     marginLeft: 10
   },
   TextStyle: {
@@ -90,6 +92,10 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlign: 'center',
   },
+  inputLogin: {
+    borderColor: '#000000',
+    borderWidth: 1,
+  }
 });
 
 export default Login;
