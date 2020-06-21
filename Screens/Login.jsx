@@ -16,7 +16,7 @@ const Login = (props) => {
       <View style={styles.loginView}>
         <Input
           placeholder="Email"
-          labelStyle={styles.inputLogin}
+          inputContainerStyle={styles.inputLogin}
           leftIcon={
             <Icon
               name='mail'
@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
   loginView: {
     flex: 1,
     marginRight: 10,
-    marginLeft: 10
+    marginLeft: 10,
+    marginTop: 20
   },
   TextStyle: {
     textAlign: 'center',
@@ -87,9 +88,13 @@ const styles = StyleSheet.create({
   inputLogin: {
     borderColor: '#000000',
     borderWidth: 1,
+    borderRadius: 8,
+    paddingLeft: 15,
   },
-  loginBtn:{
-    borderRadius: 8
+  loginBtn: {
+    borderRadius: 8,
+    width: '95%',
+    justifyContent: 'center',
   }
 });
 
