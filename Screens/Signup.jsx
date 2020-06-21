@@ -7,17 +7,16 @@ import {
   Text,
   Button,
 } from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
-import {loginUser, removeUser} from '../Redux/actions/authActions';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginUser, removeUser } from '../Redux/actions/authActions';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Input} from 'react-native-elements';
-import {color} from 'react-native-reanimated';
+import { Input } from 'react-native-elements';
 
 const Signup = props => {
   const user = useSelector(state => state.authReducer.user);
   const dispatch = useDispatch();
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <Text style={styles.txt}>Connect With</Text>
       <View style={styles.social}>
         <Button title="Facebook" />
@@ -40,7 +39,7 @@ const Signup = props => {
         />
         <Button title="Create Account" type="outline" />
       </View>
-      <View style={{flex: 4}}>
+      <View style={{ flex: 4 }}>
         <Text style={styles.baseText}>
           You must be at least 18 years old to sign up for Purple Ocean. &nbsp;
           <Text>By signing up you agree to the</Text>

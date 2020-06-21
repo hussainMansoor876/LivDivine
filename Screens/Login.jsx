@@ -1,16 +1,14 @@
 import React from 'react';
 import {
-  SafeAreaView, TouchableOpacity, StyleSheet, View, Text, Button
+  SafeAreaView, TouchableOpacity, StyleSheet, View, Text
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
-import { Icon } from 'react-native-elements'
-import { Input } from 'react-native-elements';
-import { SocialIcon } from 'react-native-elements';
+import { Icon, Input, SocialIcon, Button } from 'react-native-elements'
 
 const user1 = { name: 'Mansoor Hussain' };
 
-const Login = props => {
+const Login = (props) => {
   const user = useSelector(state => state.authReducer.user);
   const dispatch = useDispatch();
   return (
@@ -31,7 +29,7 @@ const Login = props => {
         <Input
           placeholder="Password"
           secureTextEntry={true}
-          inputStyle={styles.inputLogin}
+          inputContainerStyle={styles.inputLogin}
           leftIcon={
             <Icon
               name='lock'
@@ -41,7 +39,7 @@ const Login = props => {
             />
           }
         />
-        <Button title="Login" onPress={() => dispatch(loginUser(user1))} />
+        <Button title="Login" containerStyle={styles.loginBtn} onPress={() => dispatch(loginUser(user1))} />
       </View>
       <TouchableOpacity>
         <Text>I forgot my Password</Text>
@@ -102,6 +100,9 @@ const styles = StyleSheet.create({
   inputLogin: {
     borderColor: '#000000',
     borderWidth: 1,
+  },
+  loginBtn:{
+    borderRadius: 8
   }
 });
 
