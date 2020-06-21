@@ -7,7 +7,7 @@ import { loginStyles } from '../styles'
 
 const user1 = { name: 'Mansoor Hussain' };
 
-const Login = (props) => {
+const LoginForm = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
     return (
@@ -46,4 +46,4 @@ const Login = (props) => {
 };
 
 
-export default Login;
+export default LoginForm;

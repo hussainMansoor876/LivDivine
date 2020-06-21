@@ -5,7 +5,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, SocialIcon } from 'react-native-elements'
-import { LoginForm } from '../Components'
+import { LoginForm, SocialLogin } from '../Components'
 import { loginStyles } from '../styles'
 
 const user1 = { name: 'Mansoor Hussain' };
@@ -17,10 +17,7 @@ const Login = (props) => {
     <SafeAreaView style={loginStyles.setFlex}>
       <LoginForm />
       <Text style={loginStyles.connect}>Or Connect With</Text>
-      <View style={loginStyles.social}>
-        <SocialIcon title="Facebook" button type="facebook" />
-        <SocialIcon title="Google" button type="google" />
-      </View>
+      <SocialLogin />
       <Text style={loginStyles.dhaa}>Don't Have an Account</Text>
     </SafeAreaView>
   );
