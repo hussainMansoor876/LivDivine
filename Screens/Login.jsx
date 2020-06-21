@@ -39,7 +39,7 @@ const Login = (props) => {
             />
           }
         />
-        <Button title="Login" containerStyle={styles.loginBtn} onPress={() => dispatch(loginUser(user1))} />
+        <Button title="Login" buttonStyle={styles.loginBtn} onPress={() => dispatch(loginUser(user1))} />
       </View>
       <TouchableOpacity>
         <Text>I forgot my Password</Text>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 10,
     marginLeft: 10,
-    marginTop: 20
+    paddingTop: 20
   },
   TextStyle: {
     textAlign: 'center',
@@ -93,8 +93,9 @@ const styles = StyleSheet.create({
   },
   loginBtn: {
     borderRadius: 8,
-    width: '95%',
-    justifyContent: 'center',
+    width: '96%',
+    marginLeft: '2%',
+    height: 46
   }
 });
 
