@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  SafeAreaView, TouchableOpacity, StyleSheet, View, Text
+  SafeAreaView, View, Text
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
@@ -16,9 +16,6 @@ const Login = (props) => {
   return (
     <SafeAreaView style={loginStyles.setFlex}>
       <LoginForm />
-      <TouchableOpacity>
-        <Text>I forgot my Password</Text>
-      </TouchableOpacity>
       <Text style={loginStyles.connect}>Or Connect With</Text>
       <View style={loginStyles.social}>
         <SocialIcon title="Facebook" button type="facebook" />

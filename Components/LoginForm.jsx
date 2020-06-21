@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button } from 'react-native-elements'
@@ -38,6 +38,9 @@ const Login = (props) => {
                 }
             />
             <Button title="Login" buttonStyle={loginStyles.loginBtn} onPress={() => dispatch(loginUser(user1))} />
+            <TouchableOpacity>
+        <Text>I forgot my Password</Text>
+      </TouchableOpacity>
         </View>
     );
 };
