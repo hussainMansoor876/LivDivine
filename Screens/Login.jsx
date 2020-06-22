@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  SafeAreaView, View, Text
+  SafeAreaView, ScrollView, Text
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
@@ -15,9 +15,12 @@ const Login = (props) => {
   const dispatch = useDispatch();
   return (
     <SafeAreaView style={loginStyles.setFlex}>
+      <ScrollView style={loginStyles.setFlex}>
+
       <LoginForm />
       <SocialLogin />
       <Text style={loginStyles.dhaa}>Don't Have an Account</Text>
+      </ScrollView>
     </SafeAreaView>
   );
 };
