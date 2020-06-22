@@ -4,7 +4,6 @@ import {
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
-import { Icon, Input, SocialIcon } from 'react-native-elements'
 import { LoginForm, SocialLogin } from '../Components'
 import { loginStyles } from '../styles'
 
