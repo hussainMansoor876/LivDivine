@@ -5,7 +5,7 @@ import {
   StyleSheet,
   View,
   Text,
-  Button,
+  ScrollView,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
@@ -19,26 +19,28 @@ const Signup = (props) => {
   const dispatch = useDispatch();
   return (
     <SafeAreaView style={loginStyles.setFlex}>
-      <View style={{ flex: 4, marginTop: 20 }}>
-        <Text style={styles.txt}>Connect With</Text>
-        <SocialLogin />
-        <SignupForm />
-      </View>
-      <View style={loginStyles.loginView}>
-        <Text style={styles.baseText}>
-          You must be at least 18 years old to sign up for Purple Ocean. &nbsp;
+      <ScrollView style={loginStyles.setFlex}>
+        <View style={{ flex: 4, marginTop: 20 }}>
+          <Text style={styles.txt}>Connect With</Text>
+          <SocialLogin />
+          <SignupForm />
+        </View>
+        <View style={loginStyles.loginView}>
+          <Text style={styles.baseText}>
+            You must be at least 18 years old to sign up for Purple Ocean. &nbsp;
           <Text>By signing up you agree to the</Text>
-          <Text style={styles.innerText}> Privacy Policy&nbsp;</Text>
-          <Text>and</Text>
-          <Text style={styles.innerText}> Terms of</Text>
-          <Text style={styles.service}> Service</Text>
-        </Text>
-        <Text style={styles.baseText}>
-          <Text style={styles.innerText}>
-            <Text>Already have an account?</Text>
+            <Text style={styles.innerText}> Privacy Policy&nbsp;</Text>
+            <Text>and</Text>
+            <Text style={styles.innerText}> Terms of</Text>
+            <Text style={styles.service}> Service</Text>
           </Text>
-        </Text>
-      </View>
+          <Text style={styles.baseText}>
+            <Text style={styles.innerText}>
+              <Text>Already have an account?</Text>
+            </Text>
+          </Text>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
