@@ -11,32 +11,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
-import { SocialLogin } from '../Components'
+import { SocialLogin, SignupForm } from '../Components'
+import { loginStyles } from '../styles';
 
 const Signup = (props) => {
   const user = useSelector(state => state.authReducer.user);
   const dispatch = useDispatch();
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Text style={styles.txt}>Connect With</Text>
-      <SocialLogin />
-      <View>
-        <Text style={styles.txt}>Or Connect With</Text>
-        <Input
-          placeholder="E-mail"
-          leftIcon={<Icon name="user" size={24} color="black" />}
-        />
-        <Input
-          placeholder="Please retype email"
-          leftIcon={<Icon name="user" size={24} color="black" />}
-        />
-        <Input
-          placeholder="Password"
-          leftIcon={<Icon name="user" size={24} color="black" />}
-        />
-        <Button title="Create Account" type="outline" />
+    <SafeAreaView style={loginStyles.setFlex}>
+      <View style={{ flex: 4, marginTop: 20 }}>
+        <Text style={styles.txt}>Connect With</Text>
+        <SocialLogin />
+        <SignupForm />
       </View>
-      <View style={{ flex: 4 }}>
+      <View style={loginStyles.loginView}>
         <Text style={styles.baseText}>
           You must be at least 18 years old to sign up for Purple Ocean. &nbsp;
           <Text>By signing up you agree to the</Text>
