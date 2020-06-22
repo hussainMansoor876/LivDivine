@@ -12,7 +12,7 @@ function MyStack() {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="Signup">
+        initialRouteName="signup">
         <Stack.Screen name="login" component={Login} />
         <Stack.Screen name="signup" component={Signup} />
         <Stack.Screen name="advisors" component={Advisors} />
