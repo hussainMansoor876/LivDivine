@@ -8,7 +8,7 @@ import { LoginForm, SocialLogin } from '../../Components'
 import { loginStyles } from '../../styles'
 
 
-const Setting = (props) => {
+const Settings = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
     return (
@@ -19,4 +19,4 @@ const Setting = (props) => {
     );
 };
 
-export default Setting;
+export default Settings;
