@@ -11,18 +11,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
+import { SocialLogin } from '../Components'
 
-const Signup = props => {
+const Signup = (props) => {
   const user = useSelector(state => state.authReducer.user);
   const dispatch = useDispatch();
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Text style={styles.txt}>Connect With</Text>
-      <View style={styles.social}>
-        <Button title="Facebook" />
-
-        <Button title="Google" />
-      </View>
+      <SocialLogin />
       <View>
         <Text style={styles.txt}>Or Connect With</Text>
         <Input
