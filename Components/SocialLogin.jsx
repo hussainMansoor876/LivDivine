@@ -11,9 +11,12 @@ const SocialLogin = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
     return (
-        <View style={loginStyles.social}>
-            <SocialIcon style={loginStyles.socialBtn} title="Facebook" button type="facebook" />
-            <SocialIcon style={loginStyles.socialBtn} title="Google" button type="google" />
+        <View>
+            <Text style={loginStyles.connect}>Or Connect With:</Text>
+            <View style={loginStyles.social}>
+                <SocialIcon style={loginStyles.socialBtn} title="Facebook" button type="facebook" />
+                <SocialIcon style={loginStyles.socialBtn} title="Google" button type="google" />
+            </View>
         </View>
     );
 };

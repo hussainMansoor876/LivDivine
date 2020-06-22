@@ -16,7 +16,6 @@ const Login = (props) => {
   return (
     <SafeAreaView style={loginStyles.setFlex}>
       <LoginForm />
-      <Text style={loginStyles.connect}>Or Connect With:</Text>
       <SocialLogin />
       <Text style={loginStyles.dhaa}>Don't Have an Account</Text>
     </SafeAreaView>
