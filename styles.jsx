@@ -1,5 +1,6 @@
 import React from 'react';
-import {
+import
+{
     SafeAreaView, TouchableOpacity, StyleSheet, View, Text
 } from 'react-native';
 
@@ -61,6 +62,36 @@ const loginStyles = StyleSheet.create({
     }
 })
 
+const signupStyles = StyleSheet.create({
+    TextStyle: {
+        textAlign: 'center',
+        fontSize: 24,
+    },
+    social: {
+        flex: 1,
+        flexDirection: 'row',
+        textAlign: 'center',
+    },
+    txt: {
+        textAlign: 'center',
+    },
+    baseText: {
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    innerText: {
+        color: 'orange',
+    },
+
+    service: {
+        color: 'orange',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+});
+
 export {
-    loginStyles
-};
+    loginStyles,
+    signupStyles
+}
