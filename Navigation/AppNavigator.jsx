@@ -5,14 +5,15 @@ import { Login, Signup, Advisors, Categories, FavoriteAdvisors, Home, Journey, S
 
 const Stack = createStackNavigator();
 
-function MyStack() {
+function MyStack()
+{
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="signup">
+        initialRouteName="settings">
         <Stack.Screen name="login" component={Login} />
         <Stack.Screen name="signup" component={Signup} />
         <Stack.Screen name="advisors" component={Advisors} />

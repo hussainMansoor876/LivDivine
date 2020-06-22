@@ -3,6 +3,7 @@ import
 {
     SafeAreaView, TouchableOpacity, StyleSheet, View, Text
 } from 'react-native';
+import { Left } from 'native-base';
 
 const loginStyles = StyleSheet.create({
     setFlex: {
@@ -89,9 +90,37 @@ const signupStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     }
-});
+})
+const categories = StyleSheet.create({
+    tiles: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
 
-export {
+
+
+
+    }
+})
+const settings = StyleSheet.create({
+    fields: {
+        marginRight: 10,
+        marginLeft: 10,
+        paddingTop: 20,
+    },
+    fieldsbold: {
+        marginRight: 10,
+        marginLeft: 10,
+        paddingTop: 20,
+        fontWeight: 'bold'
+        
+        }
+})
+export
+{
     loginStyles,
-    signupStyles
+    signupStyles,
+    categories,
+    settings,
 }
