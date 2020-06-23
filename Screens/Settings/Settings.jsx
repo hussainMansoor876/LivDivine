@@ -1,6 +1,5 @@
 import React from 'react';
-import
-{
+import {
     SafeAreaView, ScrollView, Text, Button, View
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,26 +12,24 @@ import { Icon } from 'react-native-elements'
 
 
 
-const Settings = (props) =>
-{
+const Settings = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
     return (
         <SafeAreaView style={loginStyles.setFlex}>
             <ScrollView style={loginStyles.setFlex}>
-                <View style={{ backgroundColor: 'lightgrey' }}><Text h1 style={settings.fieldsbold}>ACCOUNT</Text></View>
+                <View style={{ backgroundColor: 'lightgrey' }}>
+                    <Text h1 style={settings.fieldsbold}>ACCOUNT</Text>
+                </View>
 
-                <Text style={{ backgroundColor: 'lightgrey' }}></Text>
-                <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
+                {/* <Text style={{ backgroundColor: 'lightgrey' }}></Text> */}
+                {/* <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} /> */}
                 <Text style={settings.fields}>Email</Text>
-                <Text></Text>
-                <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
+                {/* <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} /> */}
                 <Text style={settings.fields}>User ID</Text>
-                <Text></Text>
-                <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
+                {/* <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} /> */}
                 <Text style={settings.fields}>Change password</Text>
-                <Text></Text>
-                <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
+                {/* <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} /> */}
                 <Text style={settings.fields}>Retype password</Text>
                 <Text></Text>
                 <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
