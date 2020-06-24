@@ -57,38 +57,20 @@ const Categories = (props) => {
     return (
         <SafeAreaView style={loginStyles.setFlex}>
             <ScrollView style={loginStyles.setFlex}>
-                <View style={CategoriesStyles.titlesView}>
-                    <View style={CategoriesStyles.cardStyle}>
-                        <Text>Hello</Text>
-                    </View>
-                    <View style={CategoriesStyles.cardStyle}>
-                        <Text>Hello</Text>
-                    </View>
-                </View>
-                <View style={CategoriesStyles.titlesView}>
-                    <View style={CategoriesStyles.cardStyle}>
-                        <Text>Hello</Text>
-                    </View>
-                    <View style={CategoriesStyles.cardStyle}>
-                        <Text>Hello</Text>
-                    </View>
-                </View>
-                <View style={CategoriesStyles.titlesView}>
-                    <View style={CategoriesStyles.cardStyle}>
-                        <Text>Hello</Text>
-                    </View>
-                    <View style={CategoriesStyles.cardStyle}>
-                        <Text>Hello</Text>
-                    </View>
-                </View>
-                <View style={CategoriesStyles.titlesView}>
-                    <View style={CategoriesStyles.cardStyle}>
-                        <Text>Hello</Text>
-                    </View>
-                    <View style={CategoriesStyles.cardStyle}>
-                        <Text>Hello</Text>
-                    </View>
-                </View>
+                {categoriesData.map((v, i) => {
+                    console.log('v', v)
+                    return (
+                        <View key={i} style={CategoriesStyles.titlesView}>
+                            {v.map((y, j) => {
+                                return (
+                                    <View key={j} style={CategoriesStyles.cardStyle}>
+                                        <Text>{y.text}</Text>
+                                    </View>
+                                )
+                            })}
+                        </View>
+                    )
+                })}
             </ScrollView>
         </SafeAreaView>
     );
