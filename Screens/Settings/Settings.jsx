@@ -22,31 +22,26 @@ const Settings = (props) => {
                     <Text h1 style={SettingsStyles.fieldsbold}>ACCOUNT</Text>
                     <Text h1 style={SettingsStyles.fieldsbold}>Save</Text>
                 </View>
-
-                <Text style={SettingsStyles.fields}>User Name</Text>
-                <Text style={SettingsStyles.fields}>Email</Text>
-                <Text style={SettingsStyles.fields}>User ID</Text>
-                <Text style={SettingsStyles.fields}>Change password</Text>
-                <Text style={SettingsStyles.fields}>Retype password</Text>
-                <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
-                <View style={{ backgroundColor: 'lightgrey' }}><Text h1 style={SettingsStyles.fieldsbold}>MORE INFORMATION</Text></View>
-                <Text style={{ backgroundColor: 'lightgrey' }}></Text>
-                <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
-                <Text style={SettingsStyles.fields}>Version</Text>
-                <Text></Text>
-                <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
+                <View>
+                    <Text style={SettingsStyles.fields}>User Name</Text>
+                    <Text style={SettingsStyles.fields}>Email</Text>
+                    <Text style={SettingsStyles.fields}>User ID</Text>
+                    <Text style={SettingsStyles.fields}>Change password</Text>
+                    <Text style={SettingsStyles.fields}>Retype password</Text>
+                </View>
+                <View style={{ backgroundColor: 'lightgrey' }}>
+                    <Text h1 style={SettingsStyles.fieldsbold}>MORE INFORMATION</Text>
+                </View>
+                <Text style={SettingsStyles.fields}>
+                    Version
+                    </Text>
                 <Text style={SettingsStyles.fields}>About us</Text>
-                <Text></Text>
                 <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
                 <Text style={SettingsStyles.fields}>Terms of Service</Text>
-                <Text></Text>
                 <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
                 <Text style={SettingsStyles.fields}>Privacy Policy</Text>
-                <Text></Text>
                 <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
                 <Text style={SettingsStyles.fields}>Purple Ocean website</Text>
-                <Text></Text>
-                <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
             </ScrollView>
         </SafeAreaView>
     );
