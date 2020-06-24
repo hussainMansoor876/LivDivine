@@ -18,12 +18,14 @@ const Settings = (props) => {
     return (
         <SafeAreaView style={loginStyles.setFlex}>
             <ScrollView style={loginStyles.setFlex}>
-                <View style={{ backgroundColor: 'lightgrey' }}>
+                <View style={{ backgroundColor: 'lightgrey', flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text h1 style={settings.fieldsbold}>ACCOUNT</Text>
+                    <Text h1 style={settings.fieldsbold}>Save</Text>
                 </View>
 
                 {/* <Text style={{ backgroundColor: 'lightgrey' }}></Text> */}
                 {/* <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} /> */}
+                <Text style={settings.fields}>User Name</Text>
                 <Text style={settings.fields}>Email</Text>
                 {/* <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} /> */}
                 <Text style={settings.fields}>User ID</Text>
