@@ -23,17 +23,11 @@ const Settings = (props) => {
                     <Text h1 style={SettingsStyles.fieldsbold}>Save</Text>
                 </View>
 
-                {/* <Text style={{ backgroundColor: 'lightgrey' }}></Text> */}
-                {/* <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} /> */}
                 <Text style={SettingsStyles.fields}>User Name</Text>
                 <Text style={SettingsStyles.fields}>Email</Text>
-                {/* <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} /> */}
                 <Text style={SettingsStyles.fields}>User ID</Text>
-                {/* <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} /> */}
                 <Text style={SettingsStyles.fields}>Change password</Text>
-                {/* <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} /> */}
                 <Text style={SettingsStyles.fields}>Retype password</Text>
-                <Text></Text>
                 <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
                 <View style={{ backgroundColor: 'lightgrey' }}><Text h1 style={SettingsStyles.fieldsbold}>MORE INFORMATION</Text></View>
                 <Text style={{ backgroundColor: 'lightgrey' }}></Text>
@@ -53,9 +47,6 @@ const Settings = (props) => {
                 <Text style={SettingsStyles.fields}>Purple Ocean website</Text>
                 <Text></Text>
                 <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
-
-
-
             </ScrollView>
         </SafeAreaView>
     );

@@ -97,12 +97,13 @@ const categories = StyleSheet.create({
 })
 const SettingsStyles = StyleSheet.create({
     fields: {
-        marginRight: 10,
-        marginLeft: 10,
-        paddingTop: 20,
+        paddingLeft: 10,
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderTopColor: 'rgba(0, 0, 0, 0.5)',
+        borderTopWidth: 1
     },
     fieldsbold: {
-        marginRight: 10,
         marginLeft: 10,
         paddingTop: 20,
         fontWeight: 'bold'
@@ -112,7 +113,7 @@ const SettingsStyles = StyleSheet.create({
         backgroundColor: 'lightgrey',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 20
+        paddingBottom: 10
     }
 })
 export {
