@@ -1,7 +1,8 @@
 import React from 'react';
-import {
-    SafeAreaView, ScrollView, Text, Button, View
-} from 'react-native';
+import
+    {
+        SafeAreaView, ScrollView, Text, Button, View
+    } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../../Redux/actions/authActions';
 import { LoginForm, SocialLogin } from '../../Components'
@@ -12,7 +13,8 @@ import { Icon } from 'react-native-elements'
 
 
 
-const Settings = (props) => {
+const Settings = (props) =>
+{
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
     return (
@@ -36,11 +38,8 @@ const Settings = (props) => {
                     Version
                     </Text>
                 <Text style={settingsStyles.fields}>About us</Text>
-                <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
                 <Text style={settingsStyles.fields}>Terms of Service</Text>
-                <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
                 <Text style={settingsStyles.fields}>Privacy Policy</Text>
-                <Divider style={{ backgroundColor: 'darkgrey', height: 1.5 }} />
                 <Text style={settingsStyles.fields}>Purple Ocean website</Text>
             </ScrollView>
         </SafeAreaView>

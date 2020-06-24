@@ -58,7 +58,6 @@ const Categories = (props) => {
         <SafeAreaView style={loginStyles.setFlex}>
             <ScrollView style={loginStyles.setFlex}>
                 {categoriesData.map((v, i) => {
-                    console.log('v', v)
                     return (
                         <View key={i} style={categoriesStyles.titlesView}>
                             {v.map((y, j) => {
