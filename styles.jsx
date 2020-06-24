@@ -108,7 +108,6 @@ const CategoriesStyles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: 'rgba(0, 0, 0, 0.5)',
         height: '100%',
-        width: Screen.width / 2
     }
 })
 const SettingsStyles = StyleSheet.create({
