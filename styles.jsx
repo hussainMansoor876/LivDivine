@@ -106,7 +106,8 @@ const CategoriesStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 0.5,
-        borderColor: 'rgba(0, 0, 0, 0.5)'
+        borderColor: 'rgba(0, 0, 0, 0.5)',
+        height: '100%'
     }
 })
 const SettingsStyles = StyleSheet.create({

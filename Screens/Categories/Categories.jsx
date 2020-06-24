@@ -19,14 +19,38 @@ const Categories = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
     return (
-        <SafeAreaView style={{ ...loginStyles.setFlex, backgroundColor: 'blue' }}>
+        <SafeAreaView style={loginStyles.setFlex}>
             <ScrollView style={loginStyles.setFlex}>
-                <View style={{ ...CategoriesStyles.titlesView, backgroundColor: 'green' }}>
-                    <View style={{ ...CategoriesStyles.cardStyle, backgroundColor: 'red', height: '100%' }}>
+                <View style={CategoriesStyles.titlesView}>
+                    <View style={CategoriesStyles.cardStyle}>
                         <Text>Hello</Text>
                     </View>
-                    <View style={loginStyles.setFlex}>
-
+                    <View style={CategoriesStyles.cardStyle}>
+                        <Text>Hello</Text>
+                    </View>
+                </View>
+                <View style={CategoriesStyles.titlesView}>
+                    <View style={CategoriesStyles.cardStyle}>
+                        <Text>Hello</Text>
+                    </View>
+                    <View style={CategoriesStyles.cardStyle}>
+                        <Text>Hello</Text>
+                    </View>
+                </View>
+                <View style={CategoriesStyles.titlesView}>
+                    <View style={CategoriesStyles.cardStyle}>
+                        <Text>Hello</Text>
+                    </View>
+                    <View style={CategoriesStyles.cardStyle}>
+                        <Text>Hello</Text>
+                    </View>
+                </View>
+                <View style={CategoriesStyles.titlesView}>
+                    <View style={CategoriesStyles.cardStyle}>
+                        <Text>Hello</Text>
+                    </View>
+                    <View style={CategoriesStyles.cardStyle}>
+                        <Text>Hello</Text>
                     </View>
                 </View>
             </ScrollView>
