@@ -95,7 +95,7 @@ const categories = StyleSheet.create({
         alignItems: 'center',
     }
 })
-const settings = StyleSheet.create({
+const SettingsStyles = StyleSheet.create({
     fields: {
         marginRight: 10,
         marginLeft: 10,
@@ -106,12 +106,18 @@ const settings = StyleSheet.create({
         marginLeft: 10,
         paddingTop: 20,
         fontWeight: 'bold'
+    },
 
+    header: {
+        backgroundColor: 'lightgrey',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 20
     }
 })
 export {
     loginStyles,
     signupStyles,
     categories,
-    settings,
+    SettingsStyles,
 }
