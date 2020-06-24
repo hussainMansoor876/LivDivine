@@ -92,7 +92,7 @@ const signupStyles = StyleSheet.create({
         alignItems: 'center',
     }
 })
-const CategoriesStyles = StyleSheet.create({
+const categoriesStyles = StyleSheet.create({
     titlesView: {
         flex: 1,
         flexDirection: 'row',
@@ -110,7 +110,7 @@ const CategoriesStyles = StyleSheet.create({
         height: '100%',
     }
 })
-const SettingsStyles = StyleSheet.create({
+const settingsStyles = StyleSheet.create({
     fields: {
         paddingLeft: 10,
         paddingTop: 10,
@@ -134,6 +134,6 @@ const SettingsStyles = StyleSheet.create({
 export {
     loginStyles,
     signupStyles,
-    CategoriesStyles,
-    SettingsStyles,
+    categoriesStyles,
+    settingsStyles,
 }

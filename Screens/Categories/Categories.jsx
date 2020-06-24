@@ -10,7 +10,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../../Redux/actions/authActions';
 import { LoginForm, SocialLogin } from '../../Components'
-import { loginStyles, CategoriesStyles } from '../../styles'
+import { loginStyles, categoriesStyles } from '../../styles'
 import { Tile, Divider } from 'react-native-elements';
 
 
@@ -60,10 +60,10 @@ const Categories = (props) => {
                 {categoriesData.map((v, i) => {
                     console.log('v', v)
                     return (
-                        <View key={i} style={CategoriesStyles.titlesView}>
+                        <View key={i} style={categoriesStyles.titlesView}>
                             {v.map((y, j) => {
                                 return (
-                                    <View key={j} style={CategoriesStyles.cardStyle}>
+                                    <View key={j} style={categoriesStyles.cardStyle}>
                                         <Text>{y.text}</Text>
                                     </View>
                                 )
