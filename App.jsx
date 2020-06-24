@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Provider } from "react-redux";
 import { store, persistor } from "./Redux/store";
 import { PersistGate } from 'redux-persist/integration/react'
 import AppNavigator from './Navigation/AppNavigator'
+import SplashScreen from 'react-native-splash-screen'
 
 
 const App = () => {
+
+  useEffect(() => {
+    SplashScreen.hide();
+  })
+
+
   return (
     <Provider store={store} >
       <PersistGate persistor={persistor}>
         <AppNavigator />
       </PersistGate>
     </Provider>
-    
-    
+
+
 
   )
 };
@@ -32,7 +39,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   }
 });
- 
+
 
 
 export default App;
