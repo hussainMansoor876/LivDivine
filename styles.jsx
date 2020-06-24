@@ -1,5 +1,10 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const Screen = {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
+};
 
 const loginStyles = StyleSheet.create({
     setFlex: {
@@ -91,8 +96,17 @@ const CategoriesStyles = StyleSheet.create({
     titlesView: {
         flex: 1,
         flexDirection: 'row',
-        // justifyContent: 'center',
-        // alignItems: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: Screen.height / 4
+    },
+
+    cardStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 0.5,
+        borderColor: 'rgba(0, 0, 0, 0.5)'
     }
 })
 const SettingsStyles = StyleSheet.create({
