@@ -18,6 +18,42 @@ import { Tile, Divider } from 'react-native-elements';
 const Categories = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
+
+    const categoriesData = [
+        [
+            {
+                text: 'Tarot readings'
+            },
+            {
+                text: 'Psychic readings'
+            }
+        ],
+        [
+            {
+                text: 'Relationship coaching'
+            },
+            {
+                text: 'Palm readings'
+            }
+        ],
+        [
+            {
+                text: 'Astrology & Horoscopes'
+            },
+            {
+                text: 'Oracle guidance'
+            }
+        ],
+        [
+            {
+                text: 'Angel insights'
+            },
+            {
+                text: 'Dream Analysis'
+            }
+        ]
+    ]
+
     return (
         <SafeAreaView style={loginStyles.setFlex}>
             <ScrollView style={loginStyles.setFlex}>
