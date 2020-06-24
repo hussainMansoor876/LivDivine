@@ -87,12 +87,12 @@ const signupStyles = StyleSheet.create({
         alignItems: 'center',
     }
 })
-const categories = StyleSheet.create({
-    tiles: {
+const CategoriesStyles = StyleSheet.create({
+    titlesView: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
+        // justifyContent: 'center',
+        // alignItems: 'center',
     }
 })
 const SettingsStyles = StyleSheet.create({
@@ -119,6 +119,6 @@ const SettingsStyles = StyleSheet.create({
 export {
     loginStyles,
     signupStyles,
-    categories,
+    CategoriesStyles,
     SettingsStyles,
 }

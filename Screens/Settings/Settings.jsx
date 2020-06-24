@@ -20,7 +20,7 @@ const Settings = (props) => {
             <ScrollView style={loginStyles.setFlex}>
                 <View style={SettingsStyles.header}>
                     <Text h1 style={SettingsStyles.fieldsbold}>ACCOUNT</Text>
-                    <Text h1 style={SettingsStyles.fieldsbold}>Save</Text>
+                    <Text h1>Save</Text>
                 </View>
                 <View>
                     <Text style={SettingsStyles.fields}>User Name</Text>
@@ -29,7 +29,7 @@ const Settings = (props) => {
                     <Text style={SettingsStyles.fields}>Change password</Text>
                     <Text style={SettingsStyles.fields}>Retype password</Text>
                 </View>
-                <View style={{ backgroundColor: 'lightgrey' }}>
+                <View style={SettingsStyles.header}>
                     <Text h1 style={SettingsStyles.fieldsbold}>MORE INFORMATION</Text>
                 </View>
                 <Text style={SettingsStyles.fields}>
