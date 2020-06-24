@@ -1,9 +1,5 @@
 import React from 'react';
-import
-{
-    SafeAreaView, TouchableOpacity, StyleSheet, View, Text
-} from 'react-native';
-import { Left } from 'native-base';
+import { StyleSheet } from 'react-native';
 
 const loginStyles = StyleSheet.create({
     setFlex: {
@@ -59,7 +55,7 @@ const loginStyles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         fontSize: 16,
-        color: '#24a0ed'
+        color: '#24a0ed',
     }
 })
 
@@ -97,10 +93,6 @@ const categories = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-
-
-
-
     }
 })
 const settings = StyleSheet.create({
@@ -114,11 +106,10 @@ const settings = StyleSheet.create({
         marginLeft: 10,
         paddingTop: 20,
         fontWeight: 'bold'
-        
-        }
+
+    }
 })
-export
-{
+export {
     loginStyles,
     signupStyles,
     categories,
