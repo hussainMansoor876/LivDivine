@@ -1020,6 +1020,14 @@
     react-is "^16.13.0"
     use-subscription "^1.4.0"
 
+"@react-navigation/drawer@^5.8.3":
+  version "5.8.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.8.3.tgz#091eaf19417f5b8a0bafb155cbd1a7af30a1ad8d"
+  integrity sha512-EszV1g4jlZBPxlA8VLymfpDcsOWJg+0ftN/reByWoonuFBh0hHAXrXYAvvRtAPqGAK9Sm2LRNE63Jy82aIyghg==
+  dependencies:
+    color "^3.1.2"
+    react-native-iphone-x-helper "^1.2.1"
+
 "@react-navigation/native@^3.7.13":
   version "3.7.13"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-3.7.13.tgz#5fdf879d5af40fb5bf751b6d932dd30656c9991e"
@@ -5339,6 +5347,11 @@ react-native@0.62.2:
     stacktrace-parser "^0.1.3"
     use-subscription "^1.0.0"
     whatwg-fetch "^3.0.0"
+
+react-navigation-drawer@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-2.5.0.tgz#6d2940fb6f9ae557b47a717203b4058194ae9665"
+  integrity sha512-wSsIdLYXYdi9wOOXGzaY4Hk/NIXaP8tClEpjlAPl1rhn3kU++gyJFcQ3xLsPWg0yRYq3y8jDPEWFFf81JqfP9Q==
 
 react-navigation@^4.3.9:
   version "4.3.9"
