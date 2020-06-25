@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Provider } from "react-redux";
 import { store, persistor } from "./Redux/store";
 import { PersistGate } from 'redux-persist/integration/react'
-import AppNavigator from './Navigation/AppNavigator'
+import AppNavigator from './Navigation'
 import SplashScreen from 'react-native-splash-screen'
 
 
@@ -20,9 +20,6 @@ const App = () => {
         <AppNavigator />
       </PersistGate>
     </Provider>
-
-
-
   )
 };
 
