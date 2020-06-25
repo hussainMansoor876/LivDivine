@@ -131,9 +131,44 @@ const settingsStyles = StyleSheet.create({
         paddingBottom: 10
     }
 })
+const fvadStyles = StyleSheet.create({
+    titlesView: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: Screen.height / 4,
+        
+    },
+
+    cardStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        // borderWidth: 0.5,
+        // borderColor: 'rgba(0, 0, 0, 0.5)',
+        height: '100%',
+        width: '90%',
+        marginRight :10,
+       
+    },
+    picture: {
+        
+    },
+    rstyle: {
+        marginRight: 10,
+        
+    }
+
+        
+    
+})
+
+    
 export {
     loginStyles,
     signupStyles,
     categoriesStyles,
     settingsStyles,
+    fvadStyles,
+
 }

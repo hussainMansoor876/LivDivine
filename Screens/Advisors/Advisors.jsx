@@ -14,6 +14,7 @@ const Advisors = (props) => {
     return (
         <SafeAreaView style={loginStyles.setFlex}>
             <ScrollView style={loginStyles.setFlex}>
+                
             </ScrollView>
         </SafeAreaView>
     );
