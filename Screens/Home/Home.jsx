@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    SafeAreaView, ScrollView
+    SafeAreaView, ScrollView, Text
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../../Redux/actions/authActions';
@@ -14,6 +14,7 @@ const Home = (props) => {
     return (
         <SafeAreaView style={loginStyles.setFlex}>
             <ScrollView style={loginStyles.setFlex}>
+                <Text>Hello</Text>
             </ScrollView>
         </SafeAreaView>
     );
