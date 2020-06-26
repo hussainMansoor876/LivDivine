@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Dimensions } from 'react-native';
 import { createDrawerNavigator } from 'react-navigation-drawer';
-import { NavigationContainer } from '@react-navigation/native';
 import { Advisors, Categories, FavoriteAdvisors, Home, Journey, Settings } from '../Screens';
 import { createAppContainer } from 'react-navigation'
 import Sidebar from './Sidebar'
