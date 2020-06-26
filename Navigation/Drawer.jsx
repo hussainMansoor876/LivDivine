@@ -19,12 +19,12 @@ const DrawerNavigatorExample = createDrawerNavigator(
     },
     {
       //For the Custom sidebar menu we have to provide our CustomSidebarMenu
-      contentOptions: {
-        activeTintColor: "#e91e63"
-      },
+      // contentOptions: {
+      //   activeTintColor: "#e91e63"
+      // },
       contentComponent: props => <Sidebar {...props} />,
-      //Sidebar width
-      drawerWidth: Dimensions.get('window').width - 130,
+      drawerType: 'slide'
+      // drawerWidth: Dimensions.get('window').width - 130,
     }
   );
 
