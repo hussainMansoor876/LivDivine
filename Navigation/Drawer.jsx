@@ -4,26 +4,26 @@ import { createDrawerNavigator } from 'react-navigation-drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { Advisors, Categories, FavoriteAdvisors, Home, Journey, Settings } from '../Screens';
 import { createAppContainer } from 'react-navigation'
+import Sidebar from './Sidebar'
 
 const DrawerNavigatorExample = createDrawerNavigator(
     {
       //Drawer Optons and indexing
-      NavScreen1: {
-        screen: Home,
-        navigationOptions: {
-          drawerLabel: 'Demo Screen 1',
-        },
-      },
-      NavScreen2: {
-        screen: Settings,
-        navigationOptions: {
-          drawerLabel: 'Demo Screen 2',
-        },
-      }
+      Home: Home,
+      Advisors: Advisors,
+      Categories: Categories,
+      MyOrders: Categories,
+      FavoriteAdvisors: FavoriteAdvisors,
+      BecomeAdvisors: Categories,
+      Settings: Settings,
+
     },
     {
       //For the Custom sidebar menu we have to provide our CustomSidebarMenu
-    //   contentComponent: CustomSidebarMenu,
+      contentOptions: {
+        activeTintColor: "#e91e63"
+      },
+      contentComponent: props => <Sidebar {...props} />,
       //Sidebar width
       drawerWidth: Dimensions.get('window').width - 130,
     }
