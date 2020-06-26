@@ -7,7 +7,6 @@ import Sidebar from './Sidebar'
 
 const DrawerNavigatorExample = createDrawerNavigator(
     {
-      //Drawer Optons and indexing
       Home: Home,
       Advisors: Advisors,
       Categories: Categories,
@@ -18,7 +17,6 @@ const DrawerNavigatorExample = createDrawerNavigator(
 
     },
     {
-      //For the Custom sidebar menu we have to provide our CustomSidebarMenu
       // contentOptions: {
       //   activeTintColor: "#e91e63"
       // },
@@ -27,19 +25,5 @@ const DrawerNavigatorExample = createDrawerNavigator(
       // drawerWidth: Dimensions.get('window').width - 130,
     }
   );
-
-// const DrawerScreen = () => {
-//     return (
-//         <NavigationContainer>
-//             <Drawer.Navigator 
-//             initialRouteName="Home"
-
-//             >
-//                 <Drawer.Screen name="Home" component={Home} />
-//                 <Drawer.Screen name="Settings" component={Settings} />
-//             </Drawer.Navigator>
-//         </NavigationContainer>
-//     );
-// }
 
 export default createAppContainer(DrawerNavigatorExample);
