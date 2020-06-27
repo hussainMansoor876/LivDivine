@@ -5,11 +5,11 @@ import { store, persistor } from "./Redux/store";
 import { PersistGate } from 'redux-persist/integration/react'
 import AppNavigator from './Navigation'
 import SplashScreen from 'react-native-splash-screen'
-import { ApolloClient } from 'apollo-client';
-import { ApolloProvider } from '@apollo/react-hooks';
+// import { ApolloClient } from 'apollo-client';
+// import { ApolloProvider } from '@apollo/react-hooks';
 
 
-const client = new ApolloClient();
+// const client = new ApolloClient();
 
 const App = () => {
 
@@ -21,9 +21,9 @@ const App = () => {
   return (
     <Provider store={store} >
       <PersistGate persistor={persistor}>
-        <ApolloProvider client={client}>
+        {/* <ApolloProvider client={client}> */}
           <AppNavigator />
-        </ApolloProvider>
+        {/* </ApolloProvider> */}
       </PersistGate>
     </Provider>
   )
