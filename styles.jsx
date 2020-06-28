@@ -61,6 +61,12 @@ const loginStyles = StyleSheet.create({
         paddingBottom: 10,
         fontSize: 16,
         color: '#24a0ed',
+    },
+    logoImg: {
+        height: 160,
+        width: 160,
+        resizeMode: 'contain',
+        alignSelf: 'center'
     }
 })
 
@@ -138,7 +144,7 @@ const fvadStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: Screen.height / 4,
-        
+
     },
 
     cardStyle: {
@@ -148,22 +154,22 @@ const fvadStyles = StyleSheet.create({
         // borderColor: 'rgba(0, 0, 0, 0.5)',
         height: '100%',
         width: '90%',
-        marginRight :10,
-       
+        marginRight: 10,
+
     },
     picture: {
-        
+
     },
     rstyle: {
         marginRight: 10,
-        
+
     }
 
-        
-    
+
+
 })
 
-    
+
 export {
     loginStyles,
     signupStyles,

@@ -20,12 +20,7 @@ const Login = (props) => {
       <ScrollView style={loginStyles.setFlex}>
         <Image
           source={logo}
-          style={{
-            height: 160,
-            width: 160,
-            resizeMode: 'contain',
-            alignSelf: 'center'
-          }}
+          style={loginStyles.logoImg}
         />
         <LoginForm />
         <SocialLogin />
