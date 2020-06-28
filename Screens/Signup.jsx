@@ -40,7 +40,7 @@ const Signup = (props) => {
             <Text style={signupStyles.service}> Service</Text>
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={{ ...signupStyles.baseText, ...signupStyles.innerText, marginBottom: 20, marginTop: 10 }}>Already have an account?</Text>
+            <Text style={{ ...signupStyles.baseText, ...signupStyles.innerText, marginBottom: 20, marginTop: 20 }}>Already have an account?</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
