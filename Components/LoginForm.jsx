@@ -11,19 +11,19 @@ const user1 = { name: 'Mansoor Hussain' };
 const LoginForm = (props) => {
     const emailInput = React.createRef();
     const user = useSelector(state => state.authReducer.user);
-    console.log('user', useSelector(state => state))
     const dispatch = useDispatch();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errMsg, setErrMsg] = useState('')
+    const [errPass, setErrPass] = useState('')
 
-    const validate = () => {
+    const validateLogin = () => {
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (reg.test(email) === false) {
-            setErrMsg('Please input Valid Email!')
+            return setErrMsg('Please input Valid Email!')
         }
-        else {
-            console.log("Email is Correct");
+        else if(password.length < 6){
+            return setErrPass('Password must be alteast 6 characters!')
         }
     }
     return (
@@ -32,9 +32,7 @@ const LoginForm = (props) => {
                 placeholder="Email"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: errMsg ? 'red' : '#000000' }}
                 onChangeText={e => setEmail(e)}
-                onBlur={validate}
                 onFocus={() => setErrMsg('')}
-                ref={emailInput}
                 errorMessage={errMsg}
                 leftIcon={
                     <Icon
@@ -48,8 +46,10 @@ const LoginForm = (props) => {
             <Input
                 placeholder="Password"
                 secureTextEntry={true}
-                inputContainerStyle={loginStyles.inputLogin}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: errMsg ? 'red' : '#000000' }}
                 onChangeText={e => setPassword(e)}
+                onFocus={() => setErrPass('')}
+                errorMessage={errPass}
                 leftIcon={
                     <Icon
                         name='lock'
@@ -59,7 +59,7 @@ const LoginForm = (props) => {
                     />
                 }
             />
-            <Button title="Login" buttonStyle={loginStyles.loginBtn} onPress={() => dispatch(loginUser(user1))} />
+            <Button title="Login" buttonStyle={loginStyles.loginBtn} onPress={validateLogin} />
             <TouchableOpacity onPress={() => console.log('Hello')}>
                 <Text style={loginStyles.forgotPas}>I forgot my Password</Text>
             </TouchableOpacity>
