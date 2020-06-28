@@ -93,7 +93,7 @@ const SignupForm = (props) => {
                 name="password"
                 value={state.password}
                 errorMessage={state.passwordErr}
-                onFocus={() => updateField('passwordErr', '')}
+                onFocus={() => updateField({ passwordErr: '' })}
                 leftIcon={
                     <Icon
                         name='lock'
@@ -107,12 +107,12 @@ const SignupForm = (props) => {
                 placeholder="Confirm Password"
                 secureTextEntry={true}
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.confirmPassErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField('confirmPass', e)}
+                onChangeText={e => updateField({ confirmPass: e })}
                 name="confirmPass"
                 errorMessage={errMsg}
                 value={state.confirmPass}
                 errorMessage={state.confirmPassErr}
-                onFocus={() => updateField('confirmPassErr', '')}
+                onFocus={() => updateField({ confirmPassErr: '' })}
                 leftIcon={
                     <Icon
                         name='lock'
