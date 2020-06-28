@@ -5,7 +5,7 @@ import { Login, Signup } from '../Screens';
 
 const Stack = createStackNavigator();
 
-function MyStack() {
+const MyStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
