@@ -30,13 +30,13 @@ const SignupForm = (props) => {
             return updateField('userNameErr', 'Minimum 4 Characters required!')
         }
         else if (reg.test(email) === false) {
-            return setErrMsg('Please input Valid Email!')
+            return updateField('emailErr', 'Invalid Email')
         }
         else if (!password.length || password.length < 6) {
-            return
+            return updateField('passwordErr', 'Password length must be 6 Characters')
         }
         else if (password !== confirmPass) {
-            return
+            return updateField('confirmPassErr', 'Password did not match')
         }
     }
 
