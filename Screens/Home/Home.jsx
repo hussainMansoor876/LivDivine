@@ -14,7 +14,10 @@ const Home = (props) => {
     return (
         <SafeAreaView style={loginStyles.setFlex}>
             <ScrollView style={loginStyles.setFlex}>
-                <Text>Hello</Text>
+                <Text style={{
+                    textAlign: 'center',
+                    fontSize: 24
+                }}>Home</Text>
             </ScrollView>
         </SafeAreaView>
     );
