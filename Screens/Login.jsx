@@ -6,12 +6,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { LoginForm, SocialLogin } from '../Components'
 import { loginStyles } from '../styles'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const logo = require('../assets/logo.png')
 
 const user1 = { name: 'Mansoor Hussain' };
 
 const Login = (props) => {
+  const { navigation } = props
   const user = useSelector(state => state.authReducer.user);
   const dispatch = useDispatch();
 
@@ -28,7 +30,9 @@ const Login = (props) => {
         />
         <LoginForm {...props} />
         <SocialLogin {...props} />
-        <Text style={loginStyles.dhaa}>Don't Have an Account</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+          <Text style={loginStyles.dhaa}>Don't Have an Account</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
