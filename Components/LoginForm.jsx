@@ -11,6 +11,7 @@ const user1 = { name: 'Mansoor Hussain' };
 const LoginForm = (props) => {
     const emailInput = React.createRef();
     const user = useSelector(state => state.authReducer.user);
+    console.log('user', useSelector(state => state))
     const dispatch = useDispatch();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
