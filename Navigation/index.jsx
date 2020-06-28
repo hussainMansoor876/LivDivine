@@ -12,7 +12,7 @@ const Home = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
 
-    if (!user) {
+    if (user) {
         return (
             <Drawer />
         )
