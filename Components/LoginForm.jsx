@@ -10,8 +10,6 @@ const user1 = { name: 'Mansoor Hussain' };
 
 const LoginForm = (props) => {
     const dispatch = useDispatch();
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
     const [errMsg, setErrMsg] = useState('')
     const [errPass, setErrPass] = useState('')
     const [state, setState] = useState({
@@ -20,6 +18,7 @@ const LoginForm = (props) => {
     })
 
     const validateLogin = () => {
+        const { email, password } = state
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (reg.test(email) === false) {
             return setErrMsg('Please input Valid Email!')
