@@ -28,23 +28,24 @@ const SignupForm = (props) => {
         const { userName, email, password, confirmPass } = state
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (!userName.length || userName.length < 4) {
-            return updateField('userNameErr', 'Minimum 4 Characters required!')
+            return updateField({ userNameErr: 'Minimum 4 Characters required!' })
         }
         else if (reg.test(email) === false) {
-            return updateField('emailErr', 'Invalid Email')
+            return updateField({ emailErr: 'Invalid Email!' })
         }
         else if (!password.length || password.length < 6) {
-            return updateField('passwordErr', 'Password length must be 6 Characters')
+            return updateField({ passwordErr: 'Password length must be 6 Characters!' })
         }
         else if (password !== confirmPass) {
-            return updateField('confirmPassErr', 'Password did not match')
+            return updateField({ confirmPassErr: 'Password did not match!' })
         }
+        updateField({ isLoading: true })
     }
 
-    const updateField = (name, value) => {
+    const updateField = (obj) => {
         setState({
             ...state,
-            [name]: value
+            ...obj
         })
     }
     return (
