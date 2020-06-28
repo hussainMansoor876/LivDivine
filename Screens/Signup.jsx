@@ -6,11 +6,14 @@ import {
   View,
   Text,
   ScrollView,
+  Image
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { SocialLogin, SignupForm } from '../Components'
 import { loginStyles, signupStyles } from '../styles';
+
+const logo = require('../assets/logo.png')
 
 const Signup = (props) => {
   const { navigation } = props
@@ -18,7 +21,11 @@ const Signup = (props) => {
   return (
     <SafeAreaView style={loginStyles.setFlex}>
       <ScrollView style={loginStyles.setFlex}>
-        <View style={{ flex: 4, marginTop: 20 }}>
+        <Image
+          source={logo}
+          style={{ ...loginStyles.logoImg, marginTop: 0 }}
+        />
+        <View style={{ flex: 4, marginTop: 5 }}>
           <Text style={signupStyles.txt}>Connect With</Text>
           <SocialLogin {...props} />
           <SignupForm {...props} />
