@@ -46,7 +46,7 @@ const loginStyles = StyleSheet.create({
         borderRadius: 8,
         paddingLeft: 15,
         borderColor: '#000000',
-        marginBottom: -15
+        marginBottom: -5
     },
     loginBtn: {
         borderRadius: 8,

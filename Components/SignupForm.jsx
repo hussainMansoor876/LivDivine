@@ -36,7 +36,6 @@ const SignupForm = (props) => {
 
     const validateSignup = () => {
         const { userName, email, password, confirmPass } = state
-        console.log('***')
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (!userName.length || userName.length < 4) {
             return updateField({ userNameErr: 'Minimum 4 Characters required!' })
@@ -51,6 +50,25 @@ const SignupForm = (props) => {
             return updateField({ confirmPassErr: 'Password did not match!' })
         }
         updateField({ isLoading: true })
+        const mutation = gql`
+            mutation {
+            signUp (
+                email: "babar@gmail.com",
+                userName: "babarkaramat",
+                password: "123123123",
+                isVerified: true
+            ){
+                token
+            }
+        }`
+
+
+        client.mutate({ mutation }).then((resp) => {
+            console.log('resp', resp)
+            updateField({ isLoading: false })
+        }).catch((error) => {
+            console.log(error)
+        });
     }
 
     const updateField = (obj) => {
