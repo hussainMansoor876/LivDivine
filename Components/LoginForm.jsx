@@ -30,10 +30,10 @@ const LoginForm = (props) => {
         dispatch(loginUser(user1))
     }
 
-    const updateField = (name, value) => {
+    const updateField = (obj) => {
         setState({
             ...state,
-            [name]: value
+            ...obj
         })
     }
 
@@ -42,7 +42,7 @@ const LoginForm = (props) => {
             <Input
                 placeholder="Email"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: errMsg ? 'red' : '#000000' }}
-                onChangeText={e => updateField('email', e)}
+                onChangeText={e => updateField({ email: e })}
                 name="email"
                 value={state.email}
                 onFocus={() => setErrMsg('')}
@@ -60,7 +60,7 @@ const LoginForm = (props) => {
                 placeholder="Password"
                 secureTextEntry={true}
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: errPass ? 'red' : '#000000' }}
-                onChangeText={e => updateField('password', e)}
+                onChangeText={e => updateField({ password: e })}
                 name="password"
                 value={state.password}
                 onFocus={() => setErrPass('')}
