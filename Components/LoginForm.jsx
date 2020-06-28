@@ -22,9 +22,11 @@ const LoginForm = (props) => {
         if (reg.test(email) === false) {
             return setErrMsg('Please input Valid Email!')
         }
-        else if(password.length < 6){
+        if (password.length < 6) {
             return setErrPass('Password must be alteast 6 characters!')
         }
+
+        dispatch(loginUser(user1))
     }
     return (
         <View style={loginStyles.loginView}>
@@ -46,7 +48,7 @@ const LoginForm = (props) => {
             <Input
                 placeholder="Password"
                 secureTextEntry={true}
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: errMsg ? 'red' : '#000000' }}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: errPass ? 'red' : '#000000' }}
                 onChangeText={e => setPassword(e)}
                 onFocus={() => setErrPass('')}
                 errorMessage={errPass}
