@@ -14,6 +14,10 @@ const LoginForm = (props) => {
     const [password, setPassword] = useState('')
     const [errMsg, setErrMsg] = useState('')
     const [errPass, setErrPass] = useState('')
+    const [state, setState] = useState({
+        email: '',
+        password: '',
+    })
 
     const validateLogin = () => {
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -26,12 +30,22 @@ const LoginForm = (props) => {
 
         dispatch(loginUser(user1))
     }
+
+    const updateField = (name, value) => {
+        setState({
+            ...state,
+            [name]: value
+        })
+    }
+
     return (
         <View style={loginStyles.loginView}>
             <Input
                 placeholder="Email"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: errMsg ? 'red' : '#000000' }}
-                onChangeText={e => setEmail(e)}
+                onChangeText={e => updateField('email', e)}
+                name="email"
+                value={state.email}
                 onFocus={() => setErrMsg('')}
                 errorMessage={errMsg}
                 leftIcon={
@@ -47,7 +61,9 @@ const LoginForm = (props) => {
                 placeholder="Password"
                 secureTextEntry={true}
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: errPass ? 'red' : '#000000' }}
-                onChangeText={e => setPassword(e)}
+                onChangeText={e => updateField('password', e)}
+                name="password"
+                value={state.password}
                 onFocus={() => setErrPass('')}
                 errorMessage={errPass}
                 leftIcon={
