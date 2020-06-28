@@ -28,7 +28,7 @@ const loginStyles = StyleSheet.create({
         fontSize: 16,
     },
     dhaa: {
-        marginTop: 10,
+        marginTop: 20,
         textAlign: 'center',
         color: 'orange',
         fontWeight: 'normal',
@@ -39,6 +39,7 @@ const loginStyles = StyleSheet.create({
         flexDirection: 'row',
         marginRight: 10,
         marginLeft: 10,
+        marginTop: 20
     },
     inputLogin: {
         borderWidth: 1,
@@ -50,6 +51,8 @@ const loginStyles = StyleSheet.create({
         borderRadius: 8,
         width: '96%',
         marginLeft: '2%',
+        marginTop: 10,
+        marginBottom: 10,
         height: 46
     },
     socialBtn: {
@@ -57,16 +60,16 @@ const loginStyles = StyleSheet.create({
     },
     forgotPas: {
         textAlign: 'center',
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingTop: 20,
         fontSize: 16,
         color: '#24a0ed',
     },
     logoImg: {
-        height: 160,
-        width: 160,
+        height: 180,
+        width: 180,
         resizeMode: 'contain',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginTop: 30
     }
 })
 
