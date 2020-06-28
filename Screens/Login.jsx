@@ -26,8 +26,8 @@ const Login = (props) => {
           source={logo}
           style={loginStyles.logoImg}
         />
-        <LoginForm />
-        <SocialLogin />
+        <LoginForm {...props} />
+        <SocialLogin {...props} />
         <Text style={loginStyles.dhaa}>Don't Have an Account</Text>
       </ScrollView>
     </SafeAreaView>
