@@ -54,11 +54,11 @@ const SignupForm = (props) => {
             <Input
                 placeholder="Full Name"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.userNameErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField('userName', e)}
+                onChangeText={e => updateField({ userName: e })}
                 name="userName"
                 value={state.userName}
                 errorMessage={state.userNameErr}
-                onFocus={() => updateField('userNameErr', '')}
+                onFocus={() => updateField({ userNameErr: '' })}
                 leftIcon={
                     <Icon
                         name='user'
@@ -71,11 +71,11 @@ const SignupForm = (props) => {
             <Input
                 placeholder="Email"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.emailErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField('email', e)}
+                onChangeText={e => updateField({ email: e })}
                 name="email"
                 value={state.email}
                 errorMessage={state.emailErr}
-                onFocus={() => updateField('emailErr', '')}
+                onFocus={() => updateField({ emailErr: '' })}
                 leftIcon={
                     <Icon
                         name='mail'
@@ -89,7 +89,7 @@ const SignupForm = (props) => {
                 placeholder="Password"
                 secureTextEntry={true}
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField('password', e)}
+                onChangeText={e => updateField({ password: e })}
                 name="password"
                 value={state.password}
                 errorMessage={state.passwordErr}
