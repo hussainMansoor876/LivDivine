@@ -1,6 +1,5 @@
 import React from 'react';
-import
-{
+import {
   SafeAreaView,
   TouchableOpacity,
   StyleSheet,
@@ -15,17 +14,16 @@ import { Input } from 'react-native-elements';
 import { SocialLogin, SignupForm } from '../Components'
 import { loginStyles, signupStyles } from '../styles';
 
-const Signup = (props) =>
-{
-  const user = useSelector(state => state.authReducer.user);
+const Signup = (props) => {
+  const { navigation } = props
   const dispatch = useDispatch();
   return (
     <SafeAreaView style={loginStyles.setFlex}>
       <ScrollView style={loginStyles.setFlex}>
         <View style={{ flex: 4, marginTop: 20 }}>
           <Text style={signupStyles.txt}>Connect With</Text>
-          <SocialLogin />
-          <SignupForm />
+          <SocialLogin {...props} />
+          <SignupForm {...props} />
         </View>
         <View style={loginStyles.loginView}>
           <Text style={signupStyles.baseText}>
@@ -36,11 +34,9 @@ const Signup = (props) =>
             <Text style={signupStyles.innerText}> Terms of</Text>
             <Text style={signupStyles.service}> Service</Text>
           </Text>
-          <Text style={signupStyles.baseText}>
-            <Text style={signupStyles.innerText}>
-              <Text>Already have an account?</Text>
-            </Text>
-          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <Text style={{ ...signupStyles.baseText, ...signupStyles.innerText, marginBottom: 20, marginTop: 10 }}>Already have an account?</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
