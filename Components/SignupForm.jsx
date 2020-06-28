@@ -5,7 +5,6 @@ import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button } from 'react-native-elements'
 import { loginStyles } from '../styles'
 import { gql } from "apollo-boost";
-import jwt from 'jsonwebtoken';
 import client from '../Config/apollo'
 
 const createItem = gql`
@@ -21,6 +20,7 @@ mutation{
 const user1 = { name: 'Mansoor Hussain' };
 
 const SignupForm = (props) => {
+    const { navigation } = props
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
     const [state, setState] = useState({
@@ -66,7 +66,6 @@ const SignupForm = (props) => {
 
         client.mutate({ mutation })
             .then((resp) => {
-                console.log(jwt.decode(resp.token))
                 updateField({ isLoading: false })
             })
             .catch((error) => {
