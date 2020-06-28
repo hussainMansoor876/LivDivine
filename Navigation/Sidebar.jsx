@@ -60,7 +60,7 @@ const datas = [
     },
     {
         name: "Logout",
-        route: "NHCard",
+        route: "Logout",
         icon: "keypad",
         bg: "#B89EF5",
         types: "8"

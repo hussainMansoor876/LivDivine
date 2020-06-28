@@ -15,6 +15,10 @@ const Login = (props) => {
   const user = useSelector(state => state.authReducer.user);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(removeUser())
+  }, [])
+
   return (
     <SafeAreaView style={loginStyles.setFlex}>
       <ScrollView style={loginStyles.setFlex}>
