@@ -3,7 +3,11 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button } from 'react-native-elements'
+import { gql } from "apollo-boost";
+// import client from '../Config/apollo'
 import { loginStyles } from '../styles'
+
+
 
 
 const user1 = { name: 'Mansoor Hussain' };
