@@ -27,7 +27,7 @@ const SignupForm = (props) => {
         const { userName, email, password, confirmPass } = state
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (!userName.length || userName.length < 4) {
-            return
+            return updateField('userNameErr', 'Minimum 4 Characters required!')
         }
         else if (reg.test(email) === false) {
             return setErrMsg('Please input Valid Email!')
@@ -51,10 +51,12 @@ const SignupForm = (props) => {
             <Text style={{ textAlign: 'center', fontSize: 16, marginBottom: 20 }}>Or create an account</Text>
             <Input
                 placeholder="Full Name"
-                inputContainerStyle={loginStyles.inputLogin}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.userNameErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField('userName', e)}
                 name="userName"
                 value={state.userName}
+                errorMessage={state.userNameErr}
+                onFocus={() => updateField('userNameErr', '')}
                 leftIcon={
                     <Icon
                         name='user'
@@ -70,8 +72,7 @@ const SignupForm = (props) => {
                 onChangeText={e => updateField('email', e)}
                 name="email"
                 value={state.email}
-                onFocus={() => setErrMsg('')}
-                errorMessage={errMsg}
+                errorMessage={state.emailErr}
                 leftIcon={
                     <Icon
                         name='mail'
@@ -88,6 +89,7 @@ const SignupForm = (props) => {
                 onChangeText={e => updateField('password', e)}
                 name="password"
                 value={state.password}
+                errorMessage={state.passwordErr}
                 leftIcon={
                     <Icon
                         name='lock'
@@ -105,6 +107,7 @@ const SignupForm = (props) => {
                 name="confirmPass"
                 errorMessage={errMsg}
                 value={state.confirmPass}
+                errorMessage={state.confirmPassErr}
                 leftIcon={
                     <Icon
                         name='lock'
@@ -114,7 +117,7 @@ const SignupForm = (props) => {
                     />
                 }
             />
-            <Button title="Register" buttonStyle={loginStyles.loginBtn} onPress={() => console.log('hello')} />
+            <Button title="Register" buttonStyle={loginStyles.loginBtn} onPress={validateSignup} />
             <TouchableOpacity onPress={() => console.log('Hello')}>
                 <Text style={loginStyles.forgotPas}>I forgot my Password</Text>
             </TouchableOpacity>
