@@ -1,10 +1,11 @@
 import React, { useState, createRef } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button } from 'react-native-elements'
 import { loginStyles } from '../styles'
 import { gql } from "apollo-boost";
+import jwt from 'jsonwebtoken';
 import client from '../Config/apollo'
 
 const createItem = gql`
@@ -63,12 +64,16 @@ const SignupForm = (props) => {
         }`
 
 
-        client.mutate({ mutation }).then((resp) => {
-            console.log('resp', resp)
-            updateField({ isLoading: false })
-        }).catch((error) => {
-            console.log(error)
-        });
+        client.mutate({ mutation })
+            .then((resp) => {
+                console.log(jwt.decode(resp.token))
+                updateField({ isLoading: false })
+            })
+            .catch((error) => {
+                console.log('msg', error.message)
+                Alert.alert(error.message)
+                updateField({ isLoading: false })
+            });
     }
 
     const updateField = (obj) => {

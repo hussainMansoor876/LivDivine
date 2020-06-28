@@ -22,6 +22,7 @@
         "apollo-client": "^2.6.10",
         "graphql": "^15.1.0",
         "graphql-tag": "^2.10.3",
+        "jsonwebtoken": "^8.5.1",
         "native-base": "^2.13.12",
         "react": "16.11.0",
         "react-native": "0.62.2",
