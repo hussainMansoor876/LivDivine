@@ -68,11 +68,12 @@ const SignupForm = (props) => {
             />
             <Input
                 placeholder="Email"
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: errMsg ? 'red' : '#000000' }}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.emailErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField('email', e)}
                 name="email"
                 value={state.email}
                 errorMessage={state.emailErr}
+                onFocus={() => updateField('emailErr', '')}
                 leftIcon={
                     <Icon
                         name='mail'
@@ -85,11 +86,12 @@ const SignupForm = (props) => {
             <Input
                 placeholder="Password"
                 secureTextEntry={true}
-                inputContainerStyle={loginStyles.inputLogin}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField('password', e)}
                 name="password"
                 value={state.password}
                 errorMessage={state.passwordErr}
+                onFocus={() => updateField('passwordErr', '')}
                 leftIcon={
                     <Icon
                         name='lock'
@@ -102,12 +104,13 @@ const SignupForm = (props) => {
             <Input
                 placeholder="Confirm Password"
                 secureTextEntry={true}
-                inputContainerStyle={loginStyles.inputLogin}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.confirmPassErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField('confirmPass', e)}
                 name="confirmPass"
                 errorMessage={errMsg}
                 value={state.confirmPass}
                 errorMessage={state.confirmPassErr}
+                onFocus={() => updateField('confirmPassErr', '')}
                 leftIcon={
                     <Icon
                         name='lock'
