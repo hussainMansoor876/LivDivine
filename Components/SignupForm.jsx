@@ -9,7 +9,6 @@ import { loginStyles } from '../styles'
 const user1 = { name: 'Mansoor Hussain' };
 
 const SignupForm = (props) => {
-    const emailInput = React.createRef();
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
     const [email, setEmail] = useState('')
@@ -43,17 +42,16 @@ const SignupForm = (props) => {
             <Text style={{ textAlign: 'center', fontSize: 16, marginBottom: 20 }}>Or create an account</Text>
             <Input
                 placeholder="Full Name"
-                secureTextEntry={true}
                 inputContainerStyle={loginStyles.inputLogin}
                 onChangeText={e => updateField('userName', e)}
                 name="userName"
                 value={state.userName}
                 leftIcon={
                     <Icon
-                        name='lock'
+                        name='user'
                         size={24}
                         color='black'
-                        type='foundation'
+                        type='font-awesome'
                     />
                 }
             />
@@ -64,7 +62,6 @@ const SignupForm = (props) => {
                 name="email"
                 value={state.email}
                 onFocus={() => setErrMsg('')}
-                ref={emailInput}
                 errorMessage={errMsg}
                 leftIcon={
                     <Icon
