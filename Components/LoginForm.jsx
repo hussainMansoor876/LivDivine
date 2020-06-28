@@ -4,11 +4,27 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button } from 'react-native-elements'
 import { gql } from "apollo-boost";
-// import client from '../Config/apollo'
+import client from '../Config/apollo'
 import { loginStyles } from '../styles'
 
 
+const createItem = gql`
+mutation{
+  signUp(
+    email: "babar@gmail.com",
+    userName: "babarkaramat",
+    password: "123123123", isVerified: false){
+    token
+  }
+}`
 
+console.log('createItem', createItem)
+
+// client.mutate({ mutation: createItem }).then((resp) => {
+//   console.log('resp', resp)
+// }).catch((error) => {
+//   console.log(error)
+// });
 
 const user1 = { name: 'Mansoor Hussain' };
 

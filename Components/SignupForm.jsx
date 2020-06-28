@@ -4,14 +4,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button } from 'react-native-elements'
 import { loginStyles } from '../styles'
+import { gql } from "apollo-boost";
+import client from '../Config/apollo'
 
+const createItem = gql`
+mutation{
+  signUp(
+    email: "babar@gmail.com",
+    userName: "babarkaramat",
+    password: "123123123", isVerified: false){
+    token
+  }
+}`
 
 const user1 = { name: 'Mansoor Hussain' };
 
 const SignupForm = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
-    const [errMsg, setErrMsg] = useState('')
     const [state, setState] = useState({
         userName: '',
         email: '',
@@ -26,6 +36,7 @@ const SignupForm = (props) => {
 
     const validateSignup = () => {
         const { userName, email, password, confirmPass } = state
+        console.log('***')
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (!userName.length || userName.length < 4) {
             return updateField({ userNameErr: 'Minimum 4 Characters required!' })
@@ -109,7 +120,7 @@ const SignupForm = (props) => {
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.confirmPassErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField({ confirmPass: e })}
                 name="confirmPass"
-                errorMessage={errMsg}
+                errorMessage={state.confirmPassErr}
                 value={state.confirmPass}
                 errorMessage={state.confirmPassErr}
                 onFocus={() => updateField({ confirmPassErr: '' })}
