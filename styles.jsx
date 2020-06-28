@@ -28,7 +28,7 @@ const loginStyles = StyleSheet.create({
         fontSize: 16,
     },
     dhaa: {
-        marginTop: 20,
+        marginTop: 30,
         textAlign: 'center',
         color: 'orange',
         fontWeight: 'normal',
@@ -39,13 +39,14 @@ const loginStyles = StyleSheet.create({
         flexDirection: 'row',
         marginRight: 10,
         marginLeft: 10,
-        marginTop: 20
+        marginTop: 30
     },
     inputLogin: {
         borderWidth: 1,
         borderRadius: 8,
         paddingLeft: 15,
-        borderColor: '#000000'
+        borderColor: '#000000',
+        marginBottom: -15
     },
     loginBtn: {
         borderRadius: 8,
@@ -69,7 +70,7 @@ const loginStyles = StyleSheet.create({
         width: 180,
         resizeMode: 'contain',
         alignSelf: 'center',
-        marginTop: 30
+        marginTop: 80
     }
 })
 
