@@ -9,8 +9,6 @@ import {
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from 'react-native-elements';
 import { SocialLogin, SignupForm } from '../Components'
 import { loginStyles, signupStyles } from '../styles';
 

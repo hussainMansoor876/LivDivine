@@ -11,8 +11,6 @@ const user1 = { name: 'Mansoor Hussain' };
 const SignupForm = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
     const [errMsg, setErrMsg] = useState('')
     const [state, setState] = useState({
         userName: '',
@@ -22,12 +20,19 @@ const SignupForm = (props) => {
     })
 
     const validateSignup = () => {
+        const { userName, email, password, confirmPass } = state
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (reg.test(email) === false) {
+        if (!userName.length || userName.length < 4) {
+            return
+        }
+        else if (reg.test(email) === false) {
             setErrMsg('Please input Valid Email!')
         }
-        else {
-            console.log("Email is Correct");
+        else if (!password.length || password.length < 6) {
+
+        }
+        else if (password !== confirmPass) {
+            return
         }
     }
 
@@ -94,6 +99,7 @@ const SignupForm = (props) => {
                 inputContainerStyle={loginStyles.inputLogin}
                 onChangeText={e => updateField('confirmPassword', e)}
                 name="confirmPassword"
+                errorMessage={errMsg}
                 value={state.confirmPassword}
                 leftIcon={
                     <Icon
@@ -104,7 +110,7 @@ const SignupForm = (props) => {
                     />
                 }
             />
-            <Button title="Register" buttonStyle={loginStyles.loginBtn} onPress={() => dispatch(loginUser(user1))} />
+            <Button title="Register" buttonStyle={loginStyles.loginBtn} onPress={() => console.log('hello')} />
             <TouchableOpacity onPress={() => console.log('Hello')}>
                 <Text style={loginStyles.forgotPas}>I forgot my Password</Text>
             </TouchableOpacity>
