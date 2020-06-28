@@ -58,13 +58,13 @@ const datas = [
         icon: "arrow-up",
         bg: "#477EEA"
     },
-    // {
-    //     name: "Logout",
-    //     route: "NHCard",
-    //     icon: "keypad",
-    //     bg: "#B89EF5",
-    //     types: "8"
-    // }
+    {
+        name: "Logout",
+        route: "NHCard",
+        icon: "keypad",
+        bg: "#B89EF5",
+        types: "8"
+    }
 ];
 
 const SideBar = (props) => {
@@ -79,12 +79,12 @@ const SideBar = (props) => {
 
                 <List
                     dataArray={datas}
-                    renderRow={(data, key) =>
+                    renderRow={(data, index) =>
                         <ListItem
                             button
                             noBorder
                             onPress={() => props.navigation.navigate(data.route)}
-                            key={key}
+                            key={index.toString()}
                         >
                             <Left>
                                 <Icon
