@@ -20,7 +20,8 @@ const SignupForm = (props) => {
         userNameErr: '',
         emailErr: '',
         passwordErr: '',
-        confirmPassErr: ''
+        confirmPassErr: '',
+        isLoading: false
     })
 
     const validateSignup = () => {
@@ -120,7 +121,12 @@ const SignupForm = (props) => {
                     />
                 }
             />
-            <Button title="Register" buttonStyle={loginStyles.loginBtn} onPress={validateSignup} />
+            <Button
+                title="Register"
+                buttonStyle={loginStyles.loginBtn}
+                onPress={validateSignup}
+                loading={state.isLoading}
+            />
             <TouchableOpacity onPress={() => console.log('Hello')}>
                 <Text style={loginStyles.forgotPas}>I forgot my Password</Text>
             </TouchableOpacity>
