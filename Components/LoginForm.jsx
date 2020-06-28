@@ -8,17 +8,15 @@ import client from '../Config/apollo'
 import { loginStyles } from '../styles'
 
 
-const createItem = gql`
-mutation{
-  signUp(
-    email: "babar@gmail.com",
-    userName: "babarkaramat",
-    password: "123123123", isVerified: false){
-    token
-  }
-}`
-
-console.log('createItem', createItem)
+// const createItem = gql`
+// mutation{
+//   signUp(
+//     email: "babar@gmail.com",
+//     userName: "babarkaramat",
+//     password: "123123123", isVerified: false){
+//     token
+//   }
+// }`
 
 // client.mutate({ mutation: createItem }).then((resp) => {
 //   console.log('resp', resp)
