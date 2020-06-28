@@ -16,7 +16,11 @@ const SignupForm = (props) => {
         userName: '',
         email: '',
         password: '',
-        confirmPass: ''
+        confirmPass: '',
+        userNameErr: '',
+        emailErr: '',
+        passwordErr: '',
+        confirmPassErr: ''
     })
 
     const validateSignup = () => {
@@ -26,10 +30,10 @@ const SignupForm = (props) => {
             return
         }
         else if (reg.test(email) === false) {
-            setErrMsg('Please input Valid Email!')
+            return setErrMsg('Please input Valid Email!')
         }
         else if (!password.length || password.length < 6) {
-
+            return
         }
         else if (password !== confirmPass) {
             return
@@ -97,10 +101,10 @@ const SignupForm = (props) => {
                 placeholder="Confirm Password"
                 secureTextEntry={true}
                 inputContainerStyle={loginStyles.inputLogin}
-                onChangeText={e => updateField('confirmPassword', e)}
-                name="confirmPassword"
+                onChangeText={e => updateField('confirmPass', e)}
+                name="confirmPass"
                 errorMessage={errMsg}
-                value={state.confirmPassword}
+                value={state.confirmPass}
                 leftIcon={
                     <Icon
                         name='lock'
