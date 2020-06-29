@@ -22,7 +22,7 @@ const Settings = (props) =>
             <ScrollView style={loginStyles.setFlex}>
                 <View style={settingsStyles.header}>
                     <Text h1 style={settingsStyles.fieldsbold}>ACCOUNT</Text>
-                    <Text h1>Save</Text>
+                    <Text h1 style={settingsStyles.fieldsbold}>Save</Text>
                 </View>
                 <View>
                     <Text style={settingsStyles.fields}>User Name</Text>

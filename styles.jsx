@@ -108,7 +108,8 @@ const categoriesStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        height: Screen.height / 4
+        height: Screen.height / 4,
+        margin: 3
     },
 
     cardStyle: {
@@ -118,20 +119,23 @@ const categoriesStyles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: 'rgba(0, 0, 0, 0.5)',
         height: '100%',
+        margin: 3
     }
 })
 const settingsStyles = StyleSheet.create({
     fields: {
         paddingLeft: 10,
-        paddingTop: 10,
+        paddingTop: 15,
         paddingBottom: 10,
+        fontSize: 16,
         borderTopColor: 'rgba(0, 0, 0, 0.5)',
         borderTopWidth: 1
     },
     fieldsbold: {
         marginLeft: 10,
         paddingTop: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 18
     },
 
     header: {
@@ -148,14 +152,13 @@ const fvadStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: Screen.height / 4,
-
     },
 
     cardStyle: {
         flex: 1,
         justifyContent: 'center',
-        // borderWidth: 0.5,
-        // borderColor: 'rgba(0, 0, 0, 0.5)',
+        borderWidth: 0.5,
+        borderColor: 'rgba(0, 0, 0, 0.5)',
         height: '100%',
         width: '90%',
         marginRight: 10,
