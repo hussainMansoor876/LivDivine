@@ -15,6 +15,7 @@ import styles from "./style";
 
 const drawerCover = require('../assets/drawer-cover.png');
 const drawerImage = require("../assets/logo-kitchen-sink.png");
+const dummyImage = require('../assets/dummyImage.png')
 const datas = [
     {
         name: "Home",
@@ -75,7 +76,7 @@ const SideBar = (props) => {
                 style={{ flex: 1, backgroundColor: "#fff", top: -1 }}
             >
                 <Image source={drawerCover} style={styles.drawerCover} />
-                <Image square style={styles.drawerImage} source={drawerImage} />
+                <Image style={styles.drawerImage} source={dummyImage} />
 
                 <List
                     dataArray={datas}
