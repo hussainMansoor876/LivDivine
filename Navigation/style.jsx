@@ -1,10 +1,10 @@
-const React = require("react-native");
-const { Platform, Dimensions } = React;
+import React from 'react'
+import { StyleSheet, Dimensions, Platform } from 'react-native'
 
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
 
-export default {
+const styles = StyleSheet.create({
   drawerCover: {
     alignSelf: "stretch",
     height: deviceHeight / 3.5,
@@ -14,11 +14,12 @@ export default {
   },
   drawerImage: {
     position: "absolute",
-    left: 20,
-    top: Platform.OS === "android" ? deviceHeight / 13 : deviceHeight / 12,
+    left: 10,
+    top: Platform.OS === "android" ? deviceHeight / 11 : deviceHeight / 12,
     width: 120,
     height: 120,
-    resizeMode: "cover"
+    resizeMode: "cover",
+    borderRadius: 60
   },
   text: {
     fontWeight: Platform.OS === "ios" ? "500" : "400",
@@ -31,4 +32,6 @@ export default {
     textAlign: "center",
     marginTop: Platform.OS === "android" ? -3 : undefined
   }
-};
+})
+
+export default styles
