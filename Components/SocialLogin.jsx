@@ -15,9 +15,9 @@ const SocialLogin = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
 
-    useEffect(async () => {
+    useEffect(() => {
         try {
-            await GoogleSignin.signOut()
+            GoogleSignin.signOut()
         } catch (error) {
             console.error(error);
         }
