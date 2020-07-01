@@ -15,13 +15,13 @@ const SocialLogin = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
 
-    // useEffect(async () => {
-    //     try {
-    //         await GoogleSignin.signOut()
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }, [])
+    useEffect(async () => {
+        try {
+            await GoogleSignin.signOut()
+        } catch (error) {
+            console.error(error);
+        }
+    }, [])
 
     const facebookLogin = () => {
         LoginManager.logInWithPermissions(['public_profile', 'email'])
