@@ -93,7 +93,12 @@ const LoginForm = (props) => {
                     />
                 }
             />
-            <Button title="Login" buttonStyle={loginStyles.loginBtn} onPress={validateLogin} />
+            <Button
+                title="Login"
+                buttonStyle={loginStyles.loginBtn}
+                onPress={validateLogin}
+                loading={state.isLoading}
+            />
             <TouchableOpacity onPress={() => console.log('Hello')}>
                 <Text style={loginStyles.forgotPas}>I forgot my Password</Text>
             </TouchableOpacity>
