@@ -1,21 +1,25 @@
-import React, { useState, createRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button } from 'react-native-elements'
 import { loginStyles } from '../styles'
-import { gql } from "apollo-boost";
 import client from '../Config/apollo'
+import gql from 'graphql-tag';
 
-const createItem = gql`
-mutation{
-  signUp(
-    email: "babar@gmail.com",
-    userName: "babarkaramat",
-    password: "123123123", isVerified: false){
-    token
-  }
-}`
+const mutation = gql`
+        mutation($email: String!, $userName: String!, $password: String!){
+            signUp(email: $email, userName: $userName, password: $password, isVerified: true) {
+                token,
+                user{
+                    id, userName, email, role, image, isVerified, isLogin,authType,title,advisorImage,
+                     aboutService, aboutMe, categories
+                   },
+                   message,
+                   success
+            }
+          }
+        `;
 
 const user1 = { name: 'Mansoor Hussain' };
 
@@ -24,9 +28,9 @@ const SignupForm = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
     const [state, setState] = useState({
-        userName: '',
-        email: '',
-        password: '',
+        userName: 'hello',
+        email: 'abc@gmai1l.com',
+        password: 'loveme',
         confirmPass: '',
         userNameErr: '',
         emailErr: '',
@@ -34,6 +38,15 @@ const SignupForm = (props) => {
         confirmPassErr: '',
         isLoading: false
     })
+
+    useEffect(() => {
+        const { email, userName, password } = state
+        client.mutate({ variables: { email, userName, password }, mutation })
+            .then((res) => {
+                console.log('mutation', res)
+            })
+            .catch((e) => console.log(e))
+    }, [])
 
     const validateSignup = () => {
         const { userName, email, password, confirmPass } = state
@@ -51,21 +64,37 @@ const SignupForm = (props) => {
             return updateField({ confirmPassErr: 'Password did not match!' })
         }
         updateField({ isLoading: true })
-        const mutation = gql`
-            mutation {
-            signUp (
-                email: ${email},
-                userName: ${userName},
-                password: ${password},
-                isVerified: true
-            ){
+        // const mutation1 = gql`
+        //     mutation {
+        //     signUp (
+        //         email: ${email},
+        //         userName: ${userName},
+        //         password: ${password},
+        //         isVerified: true
+        //     ){
+        //         token
+        //     }
+        // }`
+
+        // const mutation = gql`
+        // mutation($email: String!, $userName: String!, !password: String!){
+        //     signUp(email: $email, userName: $userName, password: $password, isVerified: true) {
+        //         token
+        //     }
+        //   }
+        // `;
+
+        const SIGNUP_MUTATION = gql`
+            mutation signUp($email: String!, $userName: String!, $password: String!) {
+                signup(email: $email, userName: $name, password: $password) {
                 token
+                }
             }
-        }`
+            `
 
-
-        client.mutate({ mutation })
+        client.mutate({ mutation: SIGNUP_MUTATION })
             .then((resp) => {
+                console.log('resp', resp)
                 updateField({ isLoading: false })
             })
             .catch((error) => {
