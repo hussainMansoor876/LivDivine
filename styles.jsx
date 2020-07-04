@@ -70,7 +70,7 @@ const loginStyles = StyleSheet.create({
         width: 180,
         resizeMode: 'contain',
         alignSelf: 'center',
-        marginTop: 80
+        marginTop: 40
     }
 })
 

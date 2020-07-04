@@ -54,9 +54,9 @@ const SignupForm = (props) => {
         const mutation = gql`
             mutation {
             signUp (
-                email: "babar@gmail.com",
-                userName: "babarkaramat",
-                password: "123123123",
+                email: ${email},
+                userName: ${userName},
+                password: ${password},
                 isVerified: true
             ){
                 token
