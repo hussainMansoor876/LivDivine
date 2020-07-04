@@ -6,6 +6,7 @@ import { Icon, Input, Button } from 'react-native-elements'
 import { loginStyles } from '../styles'
 import client from '../Config/apollo'
 import gql from 'graphql-tag';
+import { SIGN_UP } from '../utils'
 
 const SignupForm = (props) => {
     const { navigation } = props
@@ -25,7 +26,7 @@ const SignupForm = (props) => {
 
     useEffect(() => {
         const { email, userName, password } = state
-        client.mutate({ variables: { email, userName, password }, mutation })
+        client.mutate({ variables: { email, userName, password }, mutation: SIGN_UP })
             .then((res) => {
                 console.log('mutation', res)
             })
@@ -59,14 +60,6 @@ const SignupForm = (props) => {
         //         token
         //     }
         // }`
-
-        // const mutation = gql`
-        // mutation($email: String!, $userName: String!, !password: String!){
-        //     signUp(email: $email, userName: $userName, password: $password, isVerified: true) {
-        //         token
-        //     }
-        //   }
-        // `;
 
         const SIGNUP_MUTATION = gql`
             mutation signUp($email: String!, $userName: String!, $password: String!) {
