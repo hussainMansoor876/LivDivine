@@ -7,22 +7,6 @@ import { loginStyles } from '../styles'
 import client from '../Config/apollo'
 import gql from 'graphql-tag';
 
-const mutation = gql`
-        mutation($email: String!, $userName: String!, $password: String!){
-            signUp(email: $email, userName: $userName, password: $password, isVerified: true) {
-                token,
-                user{
-                    id, userName, email, role, image, isVerified, isLogin,authType,title,advisorImage,
-                     aboutService, aboutMe, categories
-                   },
-                   message,
-                   success
-            }
-          }
-        `;
-
-const user1 = { name: 'Mansoor Hussain' };
-
 const SignupForm = (props) => {
     const { navigation } = props
     const user = useSelector(state => state.authReducer.user);
