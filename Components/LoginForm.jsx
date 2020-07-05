@@ -1,30 +1,12 @@
-import React, { useState, createRef } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button } from 'react-native-elements'
-import { gql } from "apollo-boost";
 import client from '../Config/apollo'
 import { loginStyles } from '../styles'
-
-
-// const createItem = gql`
-// mutation{
-//   signUp(
-//     email: "babar@gmail.com",
-//     userName: "babarkaramat",
-//     password: "123123123", isVerified: false){
-//     token
-//   }
-// }`
-
-// client.mutate({ mutation: createItem }).then((resp) => {
-//   console.log('resp', resp)
-// }).catch((error) => {
-//   console.log(error)
-// });
-
-const user1 = { name: 'Mansoor Hussain' };
+import Spinner from 'react-native-loading-spinner-overlay';
+import { LOGIN } from '../utils/authQueries'
 
 const LoginForm = (props) => {
     const dispatch = useDispatch();
@@ -46,7 +28,18 @@ const LoginForm = (props) => {
             return updateField({ passwordErr: 'Password length must be 6 Characters!' })
         }
 
-        dispatch(loginUser(user1))
+        client.mutate({ variables: { email, password }, mutation: LOGIN })
+            .then((res) => {
+                updateField({ isLoading: false })
+                const { signIn } = res.data
+                if (signIn.success) {
+                    dispatch(loginUser(signIn.user))
+                }
+                else {
+                    Alert.alert(signIn.message)
+                }
+            })
+            .catch((e) => console.log(e))
     }
 
     const updateField = (obj) => {
@@ -58,6 +51,11 @@ const LoginForm = (props) => {
 
     return (
         <View style={loginStyles.loginView}>
+            <Spinner
+                visible={state.isLoading}
+                textContent={'Loading...'}
+                textStyle={loginStyles.spinnerTextStyle}
+            />
             <Input
                 placeholder="Email"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.emailErr ? 'red' : '#000000' }}
@@ -97,7 +95,6 @@ const LoginForm = (props) => {
                 title="Login"
                 buttonStyle={loginStyles.loginBtn}
                 onPress={validateLogin}
-                loading={state.isLoading}
             />
             <TouchableOpacity onPress={() => console.log('Hello')}>
                 <Text style={loginStyles.forgotPas}>I forgot my Password</Text>
