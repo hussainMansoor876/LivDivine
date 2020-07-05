@@ -10,6 +10,9 @@ const loginStyles = StyleSheet.create({
     setFlex: {
         flex: 1
     },
+    spinnerTextStyle: {
+        color: '#FFF'
+    },
     loginView: {
         flex: 1,
         marginRight: 10,

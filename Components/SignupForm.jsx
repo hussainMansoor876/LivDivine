@@ -3,9 +3,9 @@ import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button } from 'react-native-elements'
+import Spinner from 'react-native-loading-spinner-overlay';
 import { loginStyles } from '../styles'
 import client from '../Config/apollo'
-import gql from 'graphql-tag';
 import { SIGN_UP } from '../utils/authQueries'
 
 const SignupForm = (props) => {
@@ -23,15 +23,6 @@ const SignupForm = (props) => {
         confirmPassErr: '',
         isLoading: false
     })
-
-    useEffect(() => {
-        const { email, userName, password } = state
-        client.mutate({ variables: { email, userName, password }, mutation: SIGN_UP })
-            .then((res) => {
-                console.log('mutation', res)
-            })
-            .catch((e) => console.log(e))
-    }, [])
 
     const validateSignup = () => {
         const { userName, email, password, confirmPass } = state
@@ -52,7 +43,13 @@ const SignupForm = (props) => {
         client.mutate({ variables: { email, userName, password }, mutation: SIGN_UP })
             .then((res) => {
                 updateField({ isLoading: false })
-                console.log('resp', res)
+                const { signUp } = res.data
+                if (signUp.success) {
+                    dispatch(loginUser(signUp.user))
+                }
+                else {
+                    Alert.alert(signUp.message)
+                }
             })
             .catch((e) => console.log(e))
     }
@@ -65,6 +62,11 @@ const SignupForm = (props) => {
     }
     return (
         <View style={loginStyles.loginView}>
+            <Spinner
+                visible={state.isLoading}
+                textContent={'Loading...'}
+                textStyle={loginStyles.spinnerTextStyle}
+            />
             <Text style={{ textAlign: 'center', fontSize: 16, marginBottom: 20 }}>Or create an account</Text>
             <Input
                 placeholder="Full Name"
@@ -141,7 +143,6 @@ const SignupForm = (props) => {
                 title="Register"
                 buttonStyle={loginStyles.loginBtn}
                 onPress={validateSignup}
-                loading={state.isLoading}
             />
             <TouchableOpacity onPress={() => console.log('Hello')}>
                 <Text style={loginStyles.forgotPas}>I forgot my Password</Text>
