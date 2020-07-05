@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Image } from "react-native";
+import { useSelector, useDispatch } from 'react-redux';
 import {
     Content,
     Text,
@@ -7,9 +8,7 @@ import {
     ListItem,
     Icon,
     Container,
-    Left,
-    Right,
-    Badge
+    Left
 } from "native-base";
 import styles from "./style";
 
@@ -69,6 +68,7 @@ const datas = [
 ];
 
 const SideBar = (props) => {
+    const user = useSelector(state => state.authReducer.user)
     return (
         <Container>
             <Content
@@ -77,7 +77,7 @@ const SideBar = (props) => {
             >
                 <Image source={drawerCover} style={styles.drawerCover} />
                 <Image style={styles.drawerImage} source={dummyImage} />
-
+                <Text style={styles.drawerText} >{user.userName}</Text>
                 <List
                     dataArray={datas}
                     renderRow={(data, index) =>

@@ -21,6 +21,13 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     borderRadius: 60
   },
+  drawerText: {
+    position: "absolute",
+    right: 40,
+    bottom: 480,
+    color: '#fff',
+    fontSize: 24
+  },
   text: {
     fontWeight: Platform.OS === "ios" ? "500" : "400",
     fontSize: 16,

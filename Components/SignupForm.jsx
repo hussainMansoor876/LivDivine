@@ -10,7 +10,7 @@ import { SIGN_UP } from '../utils/authQueries'
 
 const SignupForm = (props) => {
     const { navigation } = props
-    const user = useSelector(state => state.authReducer.user);
+    const user = useSelector(state => state.authReducer.user)
     const dispatch = useDispatch();
     const [state, setState] = useState({
         userName: '',
