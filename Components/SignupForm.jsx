@@ -6,16 +6,16 @@ import { Icon, Input, Button } from 'react-native-elements'
 import { loginStyles } from '../styles'
 import client from '../Config/apollo'
 import gql from 'graphql-tag';
-import { SIGN_UP } from '../utils'
+import { SIGN_UP } from '../utils/authQueries'
 
 const SignupForm = (props) => {
     const { navigation } = props
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
     const [state, setState] = useState({
-        userName: 'hello',
-        email: 'abc@gmai1l.com',
-        password: 'loveme',
+        userName: '',
+        email: '',
+        password: '',
         confirmPass: '',
         userNameErr: '',
         emailErr: '',
@@ -49,36 +49,12 @@ const SignupForm = (props) => {
             return updateField({ confirmPassErr: 'Password did not match!' })
         }
         updateField({ isLoading: true })
-        // const mutation1 = gql`
-        //     mutation {
-        //     signUp (
-        //         email: ${email},
-        //         userName: ${userName},
-        //         password: ${password},
-        //         isVerified: true
-        //     ){
-        //         token
-        //     }
-        // }`
-
-        const SIGNUP_MUTATION = gql`
-            mutation signUp($email: String!, $userName: String!, $password: String!) {
-                signup(email: $email, userName: $name, password: $password) {
-                token
-                }
-            }
-            `
-
-        client.mutate({ mutation: SIGNUP_MUTATION })
-            .then((resp) => {
-                console.log('resp', resp)
+        client.mutate({ variables: { email, userName, password }, mutation: SIGN_UP })
+            .then((res) => {
                 updateField({ isLoading: false })
+                console.log('resp', res)
             })
-            .catch((error) => {
-                console.log('msg', error.message)
-                Alert.alert(error.message)
-                updateField({ isLoading: false })
-            });
+            .catch((e) => console.log(e))
     }
 
     const updateField = (obj) => {
