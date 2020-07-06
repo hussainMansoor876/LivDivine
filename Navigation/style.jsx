@@ -12,21 +12,33 @@ const styles = StyleSheet.create({
     position: "relative",
     marginBottom: 10
   },
+  drawerView: {
+    position: 'absolute',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    top: 65,
+    flex: 1,
+    width: '100%'
+  },
   drawerImage: {
-    position: "absolute",
-    left: 10,
-    top: Platform.OS === "android" ? deviceHeight / 11 : deviceHeight / 12,
+    // position: "absolute",
+    // left: 10,
+    // top: Platform.OS === "android" ? deviceHeight / 11 : deviceHeight / 12,
     width: 120,
     height: 120,
     resizeMode: "cover",
     borderRadius: 60
   },
   drawerText: {
-    position: "absolute",
-    right: 40,
-    bottom: 480,
+    // position: "relative",
+    // right: 40,
+    // bottom: 480,
     color: '#fff',
-    fontSize: 24
+    fontSize: 20,
+    marginTop: 50,
+    flex: 1,
+    marginLeft: 5,
+
   },
   text: {
     fontWeight: Platform.OS === "ios" ? "500" : "400",

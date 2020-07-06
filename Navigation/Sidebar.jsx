@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image } from "react-native";
+import { Image, View, Dimensions } from "react-native";
 import { useSelector } from 'react-redux';
 import {
     Content,
@@ -12,6 +12,7 @@ import {
 import styles from "./style";
 import { Icon } from 'react-native-elements'
 
+const { width, height } = Dimensions.get('window')
 const drawerCover = require('../assets/drawer-cover.png');
 const drawerImage = require("../assets/logo-kitchen-sink.png");
 const dummyImage = require('../assets/dummyImage.png')
@@ -76,8 +77,10 @@ const SideBar = (props) => {
                 style={{ flex: 1, backgroundColor: "#fff", top: -1 }}
             >
                 <Image source={drawerCover} style={styles.drawerCover} />
-                <Image style={styles.drawerImage} source={dummyImage} />
-                <Text style={styles.drawerText} >{user.userName}</Text>
+                <View style={styles.drawerView}>
+                    <Image style={styles.drawerImage} source={dummyImage} />
+                    <Text style={styles.drawerText} >{user.userName}</Text>
+                </View>
                 <List
                     dataArray={datas}
                     renderRow={(data, index) =>
