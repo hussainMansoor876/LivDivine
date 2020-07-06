@@ -31,9 +31,9 @@ const SocialLogin = (props) => {
     }, [])
 
     const facebookLogin = () => {
-        updateField({ isLoading: true })
         LoginManager.logInWithPermissions(['public_profile', 'email'])
             .then((result) => {
+                updateField({ isLoading: true })
                 if (result.isCancelled) {
                     console.log("Login cancelled");
                 }
@@ -53,12 +53,12 @@ const SocialLogin = (props) => {
                                         .then((res) => {
                                             console.log('res', res)
                                             updateField({ isLoading: false })
-                                            const { signIn } = res.data
-                                            if (signIn.success) {
-                                                dispatch(loginUser(signIn.user))
+                                            const { socialSignUp } = res.data
+                                            if (socialSignUp.success) {
+                                                dispatch(loginUser(socialSignUp.user))
                                             }
                                             else {
-                                                Alert.alert(signIn.message)
+                                                Alert.alert(socialSignUp.message)
                                             }
                                         })
                                         .catch((e) => {
