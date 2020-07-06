@@ -26,14 +26,16 @@ mutation($email: String!, $password: String!){
 `
 
 const SOCIAL_LOGIN = gql`
-mutation($email: String, $userName: String!, $authType: String!){
+mutation($email: String, $name: String!, $authType: String!, $id: String!, $image: String){
   socialSignUp(
     email: $email,
-    userName: userName,
-    authType: $authType
-	  isVerified: true){
+    userName: $name,
+    authType: $authType,
+    socialAuthId: $id,
+    image: $image
+    ){
      token, message, success, user{
-     id, userName, email, role, image, isVerified, isLogin,authType,title,advisorImage,
+     id, userName, email, role, image, isVerified, isLogin, authType, title, advisorImage,
       aboutService, aboutMe
     }
   }

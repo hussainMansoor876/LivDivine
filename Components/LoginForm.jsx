@@ -32,6 +32,7 @@ const LoginForm = (props) => {
             .then((res) => {
                 updateField({ isLoading: false })
                 const { signIn } = res.data
+                console.log('signIn', signIn)
                 if (signIn.success) {
                     dispatch(loginUser(signIn.user))
                 }
