@@ -27,7 +27,7 @@ const LoginForm = (props) => {
         else if (!password.length || password.length < 6) {
             return updateField({ passwordErr: 'Password length must be 6 Characters!' })
         }
-
+        updateField({ isLoading: true })
         client.mutate({ variables: { email, password }, mutation: LOGIN })
             .then((res) => {
                 updateField({ isLoading: false })
