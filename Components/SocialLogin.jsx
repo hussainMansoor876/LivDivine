@@ -91,12 +91,36 @@ const SocialLogin = (props) => {
     }
 
 
-    const signIn = async () => {
+    const signIn = () => {
         GoogleSignin.signIn()
             .then((result) => {
-
+                result.authType = 'google'
+                if (result.photo) {
+                    result.image = result.photo
+                }
+                client.mutate({ variables: { ...result }, mutation: SOCIAL_LOGIN })
+                    .then((res) => {
+                        updateField({ isLoading: false })
+                        const { socialSignUp } = res.data
+                        if (socialSignUp.success) {
+                            dispatch(loginUser(socialSignUp.user))
+                        }
+                        else {
+                            Alert.alert(socialSignUp.message)
+                        }
+                    })
+                    .catch((e) => {
+                        updateField({ isLoading: false })
+                        Alert.alert('Oops Something went Wrong!')
+                    })
+            })
+            .catch((e) => {
+                updateField({ isLoading: false })
+                Alert.alert('Oops Something went Wrong!')
             })
     };
+
+
     return (
         <View>
             <Spinner
