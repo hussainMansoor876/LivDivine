@@ -24,6 +24,7 @@ const SocialLogin = (props) => {
 
     useEffect(() => {
         try {
+            LoginManager.logOut()
             GoogleSignin.signOut()
         } catch (error) {
             console.error(error);
@@ -94,11 +95,13 @@ const SocialLogin = (props) => {
     const signIn = () => {
         GoogleSignin.signIn()
             .then((result) => {
-                result.authType = 'google'
-                if (result.photo) {
-                    result.image = result.photo
+                const { user } = result
+                updateField({ isLoading: true })
+                user.authType = 'google'
+                if (user.photo) {
+                    user.image = user.photo
                 }
-                client.mutate({ variables: { ...result }, mutation: SOCIAL_LOGIN })
+                client.mutate({ variables: { ...user }, mutation: SOCIAL_LOGIN })
                     .then((res) => {
                         updateField({ isLoading: false })
                         const { socialSignUp } = res.data
