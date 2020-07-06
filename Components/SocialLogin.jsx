@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, Alert, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { SocialIcon } from 'react-native-elements'
@@ -29,6 +29,13 @@ const SocialLogin = (props) => {
             console.error(error);
         }
     }, [])
+
+    const updateField = (obj) => {
+        setState({
+            ...state,
+            ...obj
+        })
+    }
 
     const facebookLogin = () => {
         LoginManager.logInWithPermissions(['public_profile', 'email'])
@@ -63,7 +70,7 @@ const SocialLogin = (props) => {
                                         })
                                         .catch((e) => {
                                             updateField({ isLoading: false })
-                                            console.log('e', e)
+                                            Alert.alert('Oops Something went Wrong!')
                                         })
                                 }
                             };
@@ -78,34 +85,17 @@ const SocialLogin = (props) => {
             }
             )
             .catch((error) => {
+                Alert.alert('Oops Something went Wrong!')
                 console.log('error', error)
             })
     }
 
-    const updateField = (obj) => {
-        setState({
-            ...state,
-            ...obj
-        })
-    }
-
 
     const signIn = async () => {
-        try {
-            // await GoogleSignin.hasPlayServices();
-            const userInfo = await GoogleSignin.signIn();
-            console.log('userInfo', userInfo)
-        } catch (error) {
-            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-                // user cancelled the login flow
-            } else if (error.code === statusCodes.IN_PROGRESS) {
-                // operation (e.g. sign in) is in progress already
-            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-                // play services not available or outdated
-            } else {
-                // some other error happened
-            }
-        }
+        GoogleSignin.signIn()
+            .then((result) => {
+
+            })
     };
     return (
         <View>
