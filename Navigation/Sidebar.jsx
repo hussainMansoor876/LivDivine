@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Image } from "react-native";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
     Content,
     Text,
     List,
     ListItem,
-    Icon,
     Container,
     Left
 } from "native-base";
 import styles from "./style";
+import { Icon } from 'react-native-elements'
 
 const drawerCover = require('../assets/drawer-cover.png');
 const drawerImage = require("../assets/logo-kitchen-sink.png");
@@ -19,49 +19,49 @@ const datas = [
     {
         name: "Home",
         route: "Home",
-        icon: "phone-portrait",
+        icon: "home",
         bg: "#C5F442"
     },
     {
         name: "All advisors",
         route: "Advisors",
-        icon: "arrow-down",
+        icon: "user",
         bg: "#DA4437"
     },
     {
         name: "Categories",
         route: "Categories",
-        icon: "repeat",
+        icon: "th-large",
         bg: "#C5F442"
     },
     {
         name: "My Orders",
         route: "MyOrders",
-        icon: "easel",
+        icon: "shopping-cart",
         bg: "#C5F442"
     },
     {
         name: "Favorite Advisors",
         route: "FavoriteAdvisors",
-        icon: "notifications",
+        icon: "heart",
         bg: "#4DCAE0"
     },
     {
         name: "Become Advisors",
         route: "BecomeAdvisors",
-        icon: "radio-button-off",
+        icon: "user-plus",
         bg: "#1EBC7C"
     },
     {
         name: "Settings",
         route: "Settings",
-        icon: "arrow-up",
+        icon: "cog",
         bg: "#477EEA"
     },
     {
         name: "Logout",
         route: "Logout",
-        icon: "keypad",
+        icon: "arrow-up",
         bg: "#B89EF5",
         types: "8"
     }
@@ -91,6 +91,7 @@ const SideBar = (props) => {
                                 <Icon
                                     active
                                     name={data.icon}
+                                    type="font-awesome"
                                     style={{ color: "#777", fontSize: 26, width: 30 }}
                                 />
                                 <Text style={styles.text}>

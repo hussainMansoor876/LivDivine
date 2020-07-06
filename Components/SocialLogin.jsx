@@ -43,6 +43,7 @@ const SocialLogin = (props) => {
             .then((result) => {
                 updateField({ isLoading: true })
                 if (result.isCancelled) {
+                    updateField({ isLoading: false })
                     console.log("Login cancelled");
                 }
                 else {

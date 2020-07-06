@@ -30,6 +30,7 @@ const LoginForm = (props) => {
         updateField({ isLoading: true })
         client.mutate({ variables: { email, password }, mutation: LOGIN })
             .then((res) => {
+                console.log('res', res)
                 updateField({ isLoading: false })
                 const { signIn } = res.data
                 console.log('signIn', signIn)
