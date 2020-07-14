@@ -1,11 +1,8 @@
 import React from 'react';
-import
-    {
-        SafeAreaView, ScrollView, Text, Button, View
-    } from 'react-native';
+import { SafeAreaView, ScrollView, Text, Button, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../../Redux/actions/authActions';
-import { LoginForm, SocialLogin } from '../../Components'
+import { LoginForm, SocialLogin, SettingsForm } from '../../Components'
 import { loginStyles, settingsStyles } from '../../styles'
 import { Divider } from 'react-native-elements'
 import { Icon } from 'react-native-elements'
@@ -13,8 +10,7 @@ import { Icon } from 'react-native-elements'
 
 
 
-const Settings = (props) =>
-{
+const Settings = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
     return (
@@ -22,9 +18,9 @@ const Settings = (props) =>
             <ScrollView style={loginStyles.setFlex}>
                 <View style={settingsStyles.header}>
                     <Text h1 style={settingsStyles.fieldsbold}>ACCOUNT</Text>
-                    <Text h1 style={settingsStyles.fieldsbold}>Save</Text>
                 </View>
-                <View>
+                <SettingsForm {...props} />
+                {/* <View>
                     <Text style={settingsStyles.fields}>User Name</Text>
                     <Text style={settingsStyles.fields}>Email</Text>
                     <Text style={settingsStyles.fields}>User ID</Text>
@@ -40,7 +36,7 @@ const Settings = (props) =>
                 <Text style={settingsStyles.fields}>About us</Text>
                 <Text style={settingsStyles.fields}>Terms of Service</Text>
                 <Text style={settingsStyles.fields}>Privacy Policy</Text>
-                <Text style={settingsStyles.fields}>Purple Ocean website</Text>
+                <Text style={settingsStyles.fields}>Purple Ocean website</Text> */}
             </ScrollView>
         </SafeAreaView>
     );

@@ -72,7 +72,7 @@ const SettingsForm = (props) => {
                 onFocus={() => updateField({ emailErr: '' })}
                 leftIcon={
                     <Icon
-                        name='mail'
+                        name='user'
                         size={24}
                         color='black'
                         type='foundation'
@@ -82,11 +82,9 @@ const SettingsForm = (props) => {
             <Input
                 placeholder="Email"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.emailErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField({ email: e })}
                 name="email"
                 value={state.email}
                 errorMessage={state.emailErr}
-                onFocus={() => updateField({ emailErr: '' })}
                 leftIcon={
                     <Icon
                         name='mail'
@@ -97,17 +95,12 @@ const SettingsForm = (props) => {
                 }
             />
             <Input
-                placeholder="Password"
-                secureTextEntry={true}
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField({ password: e })}
-                name="password"
+                placeholder="Uer ID"
+                inputContainerStyle={{ ...loginStyles.inputLogin }}
                 value={state.password}
-                errorMessage={state.passwordErr}
-                onFocus={() => updateField({ passwordErr: '' })}
                 leftIcon={
                     <Icon
-                        name='lock'
+                        name='number'
                         size={24}
                         color='black'
                         type='foundation'
