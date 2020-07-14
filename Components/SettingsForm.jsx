@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
-import { Icon, Input, Button } from 'react-native-elements'
+import { Input, Button, Icon } from 'react-native-elements'
 import client from '../Config/apollo'
 import { loginStyles, settingsStyles } from '../styles'
 import Spinner from 'react-native-loading-spinner-overlay';
 import { LOGIN } from '../utils/authQueries'
+import FontIcon from 'react-native-vector-icons/FontAwesome';
 
 const SettingsForm = (props) => {
     const dispatch = useDispatch();
@@ -72,11 +73,10 @@ const SettingsForm = (props) => {
                 errorMessage={state.emailErr}
                 onFocus={() => updateField({ emailErr: '' })}
                 leftIcon={
-                    <Icon
+                    <FontIcon
                         name='user'
                         size={24}
                         color='black'
-                        type='foundation'
                     />
                 }
             />
@@ -96,26 +96,22 @@ const SettingsForm = (props) => {
                 }
             />
             <Input
-                placeholder="Uer ID"
+                placeholder="User ID"
                 inputContainerStyle={{ ...loginStyles.inputLogin }}
                 value={state.password}
                 leftIcon={
-                    <Icon
-                        name='number'
+                    <FontIcon
+                        name='slack'
                         size={24}
                         color='black'
-                        type='foundation'
                     />
                 }
             />
             <Button
-                title="Login"
+                title="UPDATE SETTING"
                 buttonStyle={loginStyles.loginBtn}
                 onPress={validateLogin}
             />
-            <TouchableOpacity onPress={() => console.log('Hello')}>
-                <Text style={loginStyles.forgotPas}>I forgot my Password</Text>
-            </TouchableOpacity>
         </View>
     );
 };
