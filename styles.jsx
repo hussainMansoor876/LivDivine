@@ -140,12 +140,16 @@ const settingsStyles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18
     },
-
     header: {
         backgroundColor: 'lightgrey',
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingBottom: 10
+    },
+    textStyle:{
+        fontSize: 18,
+        marginLeft: 15,
+        marginBottom: 5
     }
 })
 const fvadStyles = StyleSheet.create({
@@ -174,9 +178,6 @@ const fvadStyles = StyleSheet.create({
         marginRight: 10,
 
     }
-
-
-
 })
 
 

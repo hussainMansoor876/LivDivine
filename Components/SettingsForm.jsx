@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button } from 'react-native-elements'
 import client from '../Config/apollo'
-import { loginStyles } from '../styles'
+import { loginStyles, settingsStyles } from '../styles'
 import Spinner from 'react-native-loading-spinner-overlay';
 import { LOGIN } from '../utils/authQueries'
 
@@ -62,6 +62,7 @@ const SettingsForm = (props) => {
                 textContent={'Loading...'}
                 textStyle={loginStyles.spinnerTextStyle}
             />
+            <Text style={settingsStyles.textStyle}>Profile Setting</Text>
             <Input
                 placeholder="User Name"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.emailErr ? 'red' : '#000000' }}
