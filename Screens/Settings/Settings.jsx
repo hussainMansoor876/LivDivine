@@ -2,7 +2,7 @@ import React from 'react';
 import { SafeAreaView, ScrollView, Text, Button, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../../Redux/actions/authActions';
-import { LoginForm, SocialLogin, SettingsForm } from '../../Components'
+import { LoginForm, SocialLogin, SettingsForm, ChangePassword } from '../../Components'
 import { loginStyles, settingsStyles } from '../../styles'
 import { Divider } from 'react-native-elements'
 import { Icon } from 'react-native-elements'
@@ -20,6 +20,7 @@ const Settings = (props) => {
                     <Text h1 style={settingsStyles.fieldsbold}>ACCOUNT</Text>
                 </View>
                 <SettingsForm {...props} />
+                <ChangePassword {...props} />
                 {/* <View>
                     <Text style={settingsStyles.fields}>User Name</Text>
                     <Text style={settingsStyles.fields}>Email</Text>

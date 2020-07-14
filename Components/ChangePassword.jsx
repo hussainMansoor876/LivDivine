@@ -57,38 +57,25 @@ const SettingsForm = (props) => {
     }
 
     return (
-        <View style={settingsStyles.settingsView}>
+        <View style={{ ...settingsStyles.settingsView, marginBottom: 30 }}>
             <Spinner
                 visible={state.isLoading}
                 textContent={'Loading...'}
                 textStyle={loginStyles.spinnerTextStyle}
             />
-            <Text style={settingsStyles.textStyle}>Profile Setting</Text>
+            <Text style={settingsStyles.textStyle}>Change Password</Text>
             <Input
-                placeholder="User Name"
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.emailErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField({ email: e })}
-                name="email"
-                value={state.email}
-                errorMessage={state.emailErr}
-                onFocus={() => updateField({ emailErr: '' })}
-                leftIcon={
-                    <FontIcon
-                        name='user'
-                        size={24}
-                        color='black'
-                    />
-                }
-            />
-            <Input
-                placeholder="Email"
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.emailErr ? 'red' : '#000000' }}
-                name="email"
-                value={state.email}
-                errorMessage={state.emailErr}
+                placeholder="Current Password"
+                secureTextEntry={true}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
+                onChangeText={e => updateField({ password: e })}
+                name="password"
+                value={state.password}
+                errorMessage={state.passwordErr}
+                onFocus={() => updateField({ passwordErr: '' })}
                 leftIcon={
                     <Icon
-                        name='mail'
+                        name='lock'
                         size={24}
                         color='black'
                         type='foundation'
@@ -96,19 +83,45 @@ const SettingsForm = (props) => {
                 }
             />
             <Input
-                placeholder="User ID"
-                inputContainerStyle={{ ...loginStyles.inputLogin }}
-                value={state.password}
+                placeholder="New Password"
+                secureTextEntry={true}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.confirmPassErr ? 'red' : '#000000' }}
+                onChangeText={e => updateField({ confirmPass: e })}
+                name="confirmPass"
+                errorMessage={state.confirmPassErr}
+                value={state.confirmPass}
+                errorMessage={state.confirmPassErr}
+                onFocus={() => updateField({ confirmPassErr: '' })}
                 leftIcon={
-                    <FontIcon
-                        name='slack'
+                    <Icon
+                        name='lock'
                         size={24}
                         color='black'
+                        type='foundation'
+                    />
+                }
+            />
+            <Input
+                placeholder="Retype Password"
+                secureTextEntry={true}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.confirmPassErr ? 'red' : '#000000' }}
+                onChangeText={e => updateField({ confirmPass: e })}
+                name="confirmPass"
+                errorMessage={state.confirmPassErr}
+                value={state.confirmPass}
+                errorMessage={state.confirmPassErr}
+                onFocus={() => updateField({ confirmPassErr: '' })}
+                leftIcon={
+                    <Icon
+                        name='lock'
+                        size={24}
+                        color='black'
+                        type='foundation'
                     />
                 }
             />
             <Button
-                title="UPDATE SETTING"
+                title="UPDATE PASSWORD"
                 buttonStyle={loginStyles.loginBtn}
                 onPress={validateLogin}
             />
