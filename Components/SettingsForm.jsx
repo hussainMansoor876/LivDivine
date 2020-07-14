@@ -57,7 +57,7 @@ const SettingsForm = (props) => {
     }
 
     return (
-        <View style={loginStyles.loginView}>
+        <View style={settingsStyles.settingsView}>
             <Spinner
                 visible={state.isLoading}
                 textContent={'Loading...'}
