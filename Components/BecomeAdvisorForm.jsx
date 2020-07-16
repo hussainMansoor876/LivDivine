@@ -67,12 +67,11 @@ const BecomeAdvisorForm = (props) => {
                 textContent={'Loading...'}
                 textStyle={loginStyles.spinnerTextStyle}
             />
-            <Text style={{ textAlign: 'center', fontSize: 16, marginBottom: 20 }}>Become Advisor</Text>
+            <Text style={{ textAlign: 'center', fontSize: 24, marginBottom: 20, marginTop: -20, textDecorationLine: 'underline' }}>Become Advisor</Text>
             <Input
                 placeholder="Full Name"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.userNameErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField({ userName: e })}
-                name="userName"
+                onChangeText={updateField}
                 value={state.userName}
                 errorMessage={state.userNameErr}
                 onFocus={() => updateField({ userNameErr: '' })}
@@ -86,28 +85,10 @@ const BecomeAdvisorForm = (props) => {
                 }
             />
             <Input
-                placeholder="Email"
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.emailErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField({ email: e })}
-                name="email"
-                value={state.email}
-                errorMessage={state.emailErr}
-                onFocus={() => updateField({ emailErr: '' })}
-                leftIcon={
-                    <Icon
-                        name='mail'
-                        size={24}
-                        color='black'
-                        type='foundation'
-                    />
-                }
-            />
-            <Input
-                placeholder="Password"
+                placeholder="Title"
                 secureTextEntry={true}
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField({ password: e })}
-                name="password"
                 value={state.password}
                 errorMessage={state.passwordErr}
                 onFocus={() => updateField({ passwordErr: '' })}
@@ -125,7 +106,6 @@ const BecomeAdvisorForm = (props) => {
                 secureTextEntry={true}
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.confirmPassErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField({ confirmPass: e })}
-                name="confirmPass"
                 errorMessage={state.confirmPassErr}
                 value={state.confirmPass}
                 errorMessage={state.confirmPassErr}

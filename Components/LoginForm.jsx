@@ -62,7 +62,6 @@ const LoginForm = (props) => {
                 placeholder="Email"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.emailErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField({ email: e })}
-                name="email"
                 value={state.email}
                 errorMessage={state.emailErr}
                 onFocus={() => updateField({ emailErr: '' })}
@@ -80,7 +79,6 @@ const LoginForm = (props) => {
                 secureTextEntry={true}
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField({ password: e })}
-                name="password"
                 value={state.password}
                 errorMessage={state.passwordErr}
                 onFocus={() => updateField({ passwordErr: '' })}

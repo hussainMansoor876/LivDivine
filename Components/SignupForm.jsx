@@ -72,7 +72,6 @@ const SignupForm = (props) => {
                 placeholder="Full Name"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.userNameErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField({ userName: e })}
-                name="userName"
                 value={state.userName}
                 errorMessage={state.userNameErr}
                 onFocus={() => updateField({ userNameErr: '' })}
@@ -89,7 +88,6 @@ const SignupForm = (props) => {
                 placeholder="Email"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.emailErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField({ email: e })}
-                name="email"
                 value={state.email}
                 errorMessage={state.emailErr}
                 onFocus={() => updateField({ emailErr: '' })}
@@ -107,7 +105,6 @@ const SignupForm = (props) => {
                 secureTextEntry={true}
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField({ password: e })}
-                name="password"
                 value={state.password}
                 errorMessage={state.passwordErr}
                 onFocus={() => updateField({ passwordErr: '' })}
@@ -125,7 +122,6 @@ const SignupForm = (props) => {
                 secureTextEntry={true}
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.confirmPassErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField({ confirmPass: e })}
-                name="confirmPass"
                 errorMessage={state.confirmPassErr}
                 value={state.confirmPass}
                 errorMessage={state.confirmPassErr}
