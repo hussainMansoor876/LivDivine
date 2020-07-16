@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  SafeAreaView, ScrollView, Text, Image
-} from 'react-native';
+import { SafeAreaView, ScrollView, Text, Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { LoginForm, SocialLogin } from '../Components'

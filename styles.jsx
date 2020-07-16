@@ -74,6 +74,13 @@ const loginStyles = StyleSheet.create({
         resizeMode: 'contain',
         alignSelf: 'center',
         marginTop: 40
+    },
+    AdvisorLogoImg: {
+        height: 120,
+        width: 120,
+        resizeMode: 'contain',
+        alignSelf: 'center',
+        marginTop: 20
     }
 })
 
