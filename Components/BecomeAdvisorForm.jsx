@@ -102,8 +102,8 @@ const BecomeAdvisorForm = (props) => {
                     />
                 }
             />
-            <View style={{ ...loginStyles.inputLogin, marginRight: 10, marginLeft: 10, marginBottom: 10 }}>
-                <Text style={{ fontSize: 20, margin: 20, marginBottom: 5 }}>Select Categories</Text>
+            <View style={{ ...loginStyles.inputLogin, marginRight: 10, marginLeft: 10, marginBottom: 10, paddingTop: 20, paddingBottom: 20 }}>
+                <Text style={{ fontSize: 20, marginLeft: 20, marginBottom: 5 }}>Select Categories</Text>
                 {categoriesData.map((v, i) => {
                     return (
                         <View key={i} style={{ flexDirection: 'row', flex: 1 }}>
