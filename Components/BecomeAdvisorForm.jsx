@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
-import { Icon, Input, Button } from 'react-native-elements'
+import { Icon, Input, Button, CheckBox } from 'react-native-elements'
 import Spinner from 'react-native-loading-spinner-overlay';
-import { loginStyles } from '../styles'
+import { loginStyles, categoriesStyles } from '../styles'
 import client from '../Config/apollo'
 import { SIGN_UP } from '../utils/authQueries'
+import categoriesData from '../utils/categoriesData'
 
 const BecomeAdvisorForm = (props) => {
     const { navigation } = props
@@ -101,32 +102,28 @@ const BecomeAdvisorForm = (props) => {
                     />
                 }
             />
-            <Input
-                placeholder="Confirm Password"
-                secureTextEntry={true}
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.confirmPassErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField({ confirmPass: e })}
-                errorMessage={state.confirmPassErr}
-                value={state.confirmPass}
-                errorMessage={state.confirmPassErr}
-                onFocus={() => updateField({ confirmPassErr: '' })}
-                leftIcon={
-                    <Icon
-                        name='lock'
-                        size={24}
-                        color='black'
-                        type='foundation'
-                    />
-                }
-            />
+            <View style={{ ...loginStyles.inputLogin, marginRight: 10, marginLeft: 10, marginBottom: 10 }}>
+                <Text style={{ fontSize: 20, margin: 20 }}>Select Categories</Text>
+                {categoriesData.map((v, i) => {
+                    return (
+                        <View key={i} style={categoriesStyles.titlesView}>
+                            {v.map((y, j) => {
+                                return (
+                                    <CheckBox
+                                        title='Click Here'
+                                        key={i}
+                                    />
+                                )
+                            })}
+                        </View>
+                    )
+                })}
+            </View>
             <Button
                 title="Register"
                 buttonStyle={loginStyles.loginBtn}
                 onPress={validateSignup}
             />
-            <TouchableOpacity onPress={() => console.log('Hello')}>
-                <Text style={loginStyles.forgotPas}>I forgot my Password</Text>
-            </TouchableOpacity>
         </View>
     );
 };
