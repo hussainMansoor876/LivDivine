@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "@apollo/react-hooks": "^3.1.5",
+        "@monterosa/react-native-parallax-scroll": "^1.8.0",
         "@react-native-community/async-storage": "^1.11.0",
         "@react-native-community/google-signin": "^4.0.3",
         "@react-native-community/masked-view": "^0.1.10",
@@ -32,6 +33,7 @@
         "react-native-reanimated": "^1.9.0",
         "react-native-safe-area-context": "^3.0.5",
         "react-native-screens": "^2.8.0",
+        "react-native-select-multiple": "^2.1.0",
         "react-native-splash-screen": "^3.2.0",
         "react-native-vector-icons": "^6.6.0",
         "react-navigation": "^4.3.9",
