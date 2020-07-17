@@ -106,12 +106,13 @@ const BecomeAdvisorForm = (props) => {
                 <Text style={{ fontSize: 20, margin: 20 }}>Select Categories</Text>
                 {categoriesData.map((v, i) => {
                     return (
-                        <View key={i} style={categoriesStyles.titlesView}>
+                        <View key={i} style={{ flexDirection: 'row', flex: 1 }}>
                             {v.map((y, j) => {
                                 return (
                                     <CheckBox
-                                        title='Click Here'
-                                        key={i}
+                                        title={y.text}
+                                        key={j}
+                                        containerStyle={{ flex: 1, margin: 0, paddingLeft: 0 }}
                                     />
                                 )
                             })}
