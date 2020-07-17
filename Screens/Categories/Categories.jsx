@@ -11,48 +11,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../../Redux/actions/authActions';
 import { LoginForm, SocialLogin } from '../../Components'
 import { loginStyles, categoriesStyles } from '../../styles'
-import { Tile, Divider } from 'react-native-elements';
+import categoriesData from '../../utils/categoriesData'
 
 
 
 const Categories = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
-
-    const categoriesData = [
-        [
-            {
-                text: 'Tarot readings'
-            },
-            {
-                text: 'Psychic readings'
-            }
-        ],
-        [
-            {
-                text: 'Relationship coaching'
-            },
-            {
-                text: 'Palm readings'
-            }
-        ],
-        [
-            {
-                text: 'Astrology & Horoscopes'
-            },
-            {
-                text: 'Oracle guidance'
-            }
-        ],
-        [
-            {
-                text: 'Angel insights'
-            },
-            {
-                text: 'Dream Analysis'
-            }
-        ]
-    ]
 
     return (
         <SafeAreaView style={loginStyles.setFlex}>
