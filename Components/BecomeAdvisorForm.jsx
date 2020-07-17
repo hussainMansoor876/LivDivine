@@ -103,7 +103,7 @@ const BecomeAdvisorForm = (props) => {
                 }
             />
             <View style={{ ...loginStyles.inputLogin, marginRight: 10, marginLeft: 10, marginBottom: 10 }}>
-                <Text style={{ fontSize: 20, margin: 20 }}>Select Categories</Text>
+                <Text style={{ fontSize: 20, margin: 20, marginBottom: 5 }}>Select Categories</Text>
                 {categoriesData.map((v, i) => {
                     return (
                         <View key={i} style={{ flexDirection: 'row', flex: 1 }}>
@@ -112,7 +112,7 @@ const BecomeAdvisorForm = (props) => {
                                     <CheckBox
                                         title={y.text}
                                         key={j}
-                                        containerStyle={{ flex: 1, margin: 0, paddingLeft: 0 }}
+                                        containerStyle={{ flex: 1, margin: 0, paddingLeft: 5, paddingBottom: 10, paddingTop: 5, marginLeft: -5 }}
                                     />
                                 )
                             })}
