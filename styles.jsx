@@ -193,6 +193,16 @@ const fvadStyles = StyleSheet.create({
     }
 })
 
+const AdvisorStyles = StyleSheet.create({
+    checkBox: {
+        flex: 1,
+        margin: 0,
+        paddingLeft: 5,
+        paddingBottom: 10,
+        paddingTop: 5,
+        marginLeft: -5
+    }
+})
 
 export {
     loginStyles,
@@ -200,5 +210,5 @@ export {
     categoriesStyles,
     settingsStyles,
     fvadStyles,
-
+    AdvisorStyles
 }

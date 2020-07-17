@@ -4,10 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button, CheckBox } from 'react-native-elements'
 import Spinner from 'react-native-loading-spinner-overlay';
-import { loginStyles, categoriesStyles } from '../styles'
+import { loginStyles, AdvisorStyles } from '../styles'
 import client from '../Config/apollo'
 import { SIGN_UP } from '../utils/authQueries'
 import categoriesData from '../utils/categoriesData'
+import FontIcon from 'react-native-vector-icons/FontAwesome';
 
 const BecomeAdvisorForm = (props) => {
     const { navigation } = props
@@ -94,11 +95,42 @@ const BecomeAdvisorForm = (props) => {
                 errorMessage={state.passwordErr}
                 onFocus={() => updateField({ passwordErr: '' })}
                 leftIcon={
-                    <Icon
-                        name='lock'
+                    <FontIcon
+                        name='slack'
                         size={24}
                         color='black'
-                        type='foundation'
+                    />
+                }
+            />
+            <Input
+                placeholder="About my services"
+                secureTextEntry={true}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
+                onChangeText={e => updateField({ password: e })}
+                value={state.password}
+                errorMessage={state.passwordErr}
+                onFocus={() => updateField({ passwordErr: '' })}
+                leftIcon={
+                    <FontIcon
+                        name='slack'
+                        size={24}
+                        color='black'
+                    />
+                }
+            />
+            <Input
+                placeholder="Aboutme"
+                secureTextEntry={true}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
+                onChangeText={e => updateField({ password: e })}
+                value={state.password}
+                errorMessage={state.passwordErr}
+                onFocus={() => updateField({ passwordErr: '' })}
+                leftIcon={
+                    <FontIcon
+                        name='slack'
+                        size={24}
+                        color='black'
                     />
                 }
             />
@@ -112,7 +144,7 @@ const BecomeAdvisorForm = (props) => {
                                     <CheckBox
                                         title={y.text}
                                         key={j}
-                                        containerStyle={{ flex: 1, margin: 0, paddingLeft: 5, paddingBottom: 10, paddingTop: 5, marginLeft: -5 }}
+                                        containerStyle={AdvisorStyles.checkBox}
                                     />
                                 )
                             })}
