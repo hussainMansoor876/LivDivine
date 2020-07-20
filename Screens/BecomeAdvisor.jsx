@@ -17,10 +17,10 @@ const BecomeAdvisor = (props) => {
     return (
         <SafeAreaView style={loginStyles.setFlex}>
             <ScrollView style={loginStyles.setFlex}>
-                <Image
+                {/* <Image
                     source={logo}
                     style={loginStyles.AdvisorLogoImg}
-                />
+                /> */}
                 <BecomeAdvisorForm />
             </ScrollView>
         </SafeAreaView>

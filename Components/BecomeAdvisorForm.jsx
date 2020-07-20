@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Text, Alert } from 'react-native';
+import { View, Image, Text, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button, CheckBox } from 'react-native-elements'
@@ -9,11 +9,40 @@ import client from '../Config/apollo'
 import { SIGN_UP } from '../utils/authQueries'
 import categoriesData from '../utils/categoriesData'
 import FontIcon from 'react-native-vector-icons/FontAwesome';
+import StepIndicator from 'react-native-step-indicator';
+import ImagePicker from 'react-native-image-picker';
+
+
+const labels = ["Cart", "Delivery Address", "Order Summary", "Payment Method", "Track"];
+const customStyles = {
+    stepIndicatorSize: 25,
+    currentStepIndicatorSize: 30,
+    separatorStrokeWidth: 2,
+    currentStepStrokeWidth: 3,
+    stepStrokeCurrentColor: '#fe7013',
+    stepStrokeWidth: 3,
+    stepStrokeFinishedColor: '#fe7013',
+    stepStrokeUnFinishedColor: '#aaaaaa',
+    separatorFinishedColor: '#fe7013',
+    separatorUnFinishedColor: '#aaaaaa',
+    stepIndicatorFinishedColor: '#fe7013',
+    stepIndicatorUnFinishedColor: '#ffffff',
+    stepIndicatorCurrentColor: '#ffffff',
+    stepIndicatorLabelFontSize: 13,
+    currentStepIndicatorLabelFontSize: 13,
+    stepIndicatorLabelCurrentColor: '#fe7013',
+    stepIndicatorLabelFinishedColor: '#ffffff',
+    stepIndicatorLabelUnFinishedColor: '#aaaaaa',
+    labelColor: '#999999',
+    labelSize: 13,
+    currentStepLabelColor: '#fe7013'
+}
 
 const BecomeAdvisorForm = (props) => {
     const { navigation } = props
     const user = useSelector(state => state.authReducer.user)
     const dispatch = useDispatch();
+    const [photo, setPhoto] = useState(null)
     const [state, setState] = useState({
         userName: '',
         email: '',
@@ -25,6 +54,18 @@ const BecomeAdvisorForm = (props) => {
         confirmPassErr: '',
         isLoading: false
     })
+
+    const handleChoosePhoto = () => {
+        const options = {
+            noData: true,
+        }
+        ImagePicker.showImagePicker(options, response => {
+            if (response.uri) {
+                console.log('response.uri', response.uri)
+                setPhoto(response)
+            }
+        })
+    }
 
     const validateSignup = () => {
         const { userName, email, password, confirmPass } = state
@@ -69,7 +110,12 @@ const BecomeAdvisorForm = (props) => {
                 textContent={'Loading...'}
                 textStyle={loginStyles.spinnerTextStyle}
             />
-            <Text style={{ textAlign: 'center', fontSize: 24, marginBottom: 20, marginTop: -20, textDecorationLine: 'underline' }}>Become Advisor</Text>
+            <Text style={{ textAlign: 'center', fontSize: 24, marginBottom: 20, marginTop: 20, textDecorationLine: 'underline' }}>Become Advisor</Text>
+            <StepIndicator
+                customStyles={customStyles}
+                currentPosition={0}
+                labels={labels}
+            />
             <Input
                 placeholder="Full Name"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.userNameErr ? 'red' : '#000000' }}
@@ -102,7 +148,36 @@ const BecomeAdvisorForm = (props) => {
                     />
                 }
             />
-            <Input
+
+            {photo && (
+                <Image
+                    source={{ uri: photo.uri }}
+                    style={{ width: 150, height: 150, marginRight: 10, marginLeft: 10, borderRadius: 250 }}
+                />
+            )}
+            <Button title="Choose Photo" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChoosePhoto} />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
+                <Button icon={
+                    <FontIcon
+                        name='arrow-left'
+                        size={24}
+                        color='#fff'
+                    />
+                }
+                    buttonStyle={{ width: 150 }}
+                    disabled
+                />
+                <Button icon={
+                    <FontIcon
+                        name='arrow-right'
+                        size={24}
+                        color='#fff'
+                    />
+                }
+                    buttonStyle={{ width: 150 }}
+                />
+            </View>
+            {/* <Input
                 placeholder="About my services"
                 secureTextEntry={true}
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
@@ -156,7 +231,7 @@ const BecomeAdvisorForm = (props) => {
                 title="Register"
                 buttonStyle={loginStyles.loginBtn}
                 onPress={validateSignup}
-            />
+            /> */}
         </View>
     );
 };
