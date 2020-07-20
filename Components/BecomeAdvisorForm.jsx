@@ -13,7 +13,7 @@ import StepIndicator from 'react-native-step-indicator';
 import ImagePicker from 'react-native-image-picker';
 
 
-const labels = ["Cart", "Delivery Address", "Order Summary", "Payment Method", "Track"];
+const labels = ["General Info", "Profile Info", "Ordering Instructions", "Profile Video", "Categories"];
 const customStyles = {
     stepIndicatorSize: 25,
     currentStepIndicatorSize: 30,
@@ -52,7 +52,8 @@ const BecomeAdvisorForm = (props) => {
         emailErr: '',
         passwordErr: '',
         confirmPassErr: '',
-        isLoading: false
+        isLoading: false,
+        currentPosition: 0
     })
 
     const handleChoosePhoto = () => {
@@ -113,7 +114,7 @@ const BecomeAdvisorForm = (props) => {
             <Text style={{ textAlign: 'center', fontSize: 24, marginBottom: 20, marginTop: 20, textDecorationLine: 'underline' }}>Become Advisor</Text>
             <StepIndicator
                 customStyles={customStyles}
-                currentPosition={0}
+                currentPosition={state.currentPosition}
                 labels={labels}
             />
             <Input
@@ -165,7 +166,8 @@ const BecomeAdvisorForm = (props) => {
                     />
                 }
                     buttonStyle={{ width: 150 }}
-                    disabled
+                    disabled={!state.currentPosition}
+                    onPress={() => updateField({ currentPosition: state.currentPosition - 1 })}
                 />
                 <Button icon={
                     <FontIcon
@@ -175,6 +177,8 @@ const BecomeAdvisorForm = (props) => {
                     />
                 }
                     buttonStyle={{ width: 150 }}
+                    onPress={() => updateField({ currentPosition: state.currentPosition + 1 })}
+                    disabled={state.currentPosition === 5}
                 />
             </View>
             {/* <Input
