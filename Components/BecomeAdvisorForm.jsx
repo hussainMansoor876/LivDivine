@@ -117,54 +117,48 @@ const BecomeAdvisorForm = (props) => {
                 currentPosition={state.currentPosition}
                 labels={labels}
             />
-            <Input
-                placeholder="Full Name"
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.userNameErr ? 'red' : '#000000' }}
-                onChangeText={updateField}
-                value={state.userName}
-                errorMessage={state.userNameErr}
-                onFocus={() => updateField({ userNameErr: '' })}
-                leftIcon={
-                    <Icon
-                        name='user'
-                        size={24}
-                        color='black'
-                        type='font-awesome'
-                    />
-                }
-            />
-            <Input
-                placeholder="Title"
-                secureTextEntry={true}
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField({ password: e })}
-                value={state.password}
-                errorMessage={state.passwordErr}
-                onFocus={() => updateField({ passwordErr: '' })}
-                leftIcon={
-                    <FontIcon
-                        name='slack'
-                        size={24}
-                        color='black'
-                    />
-                }
-            />
-
-            {photo && (
-                <Image
-                    source={{ uri: photo.uri }}
-                    style={{ width: 150, height: 150, marginRight: 10, marginLeft: 10, borderRadius: 250 }}
+            {state.currentPosition === 0 ? <View>
+                <Input
+                    placeholder="Full Name"
+                    inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.userNameErr ? 'red' : '#000000' }}
+                    onChangeText={updateField}
+                    value={state.userName}
+                    errorMessage={state.userNameErr}
+                    onFocus={() => updateField({ userNameErr: '' })}
+                    leftIcon={
+                        <Icon
+                            name='user'
+                            size={24}
+                            color='black'
+                            type='font-awesome'
+                        />
+                    }
                 />
-            )}
-            <Button title="Choose Photo" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChoosePhoto} />
+                <Input
+                    placeholder="Title"
+                    secureTextEntry={true}
+                    inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
+                    onChangeText={e => updateField({ password: e })}
+                    value={state.password}
+                    errorMessage={state.passwordErr}
+                    onFocus={() => updateField({ passwordErr: '' })}
+                    leftIcon={
+                        <FontIcon
+                            name='slack'
+                            size={24}
+                            color='black'
+                        />
+                    }
+                />
 
-            <Video source={{ uri: 'https://www.example.com/video.mp4' }}   // Can be a URL or a local file.
-            // ref={(ref) => {
-            //     player = ref
-            // }}                                      // Store reference
-            // onBuffer={this.onBuffer}                // Callback when remote video is buffering
-            // onError={this.videoError}               // Callback when video cannot be loaded
-            />
+                {photo && (
+                    <Image
+                        source={{ uri: photo.uri }}
+                        style={{ width: 150, height: 150, marginRight: 10, marginLeft: 10, borderRadius: 250 }}
+                    />
+                )}
+                <Button title="Choose Photo" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChoosePhoto} />
+            </View> : null}
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
                 <Button icon={
                     <FontIcon
