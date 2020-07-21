@@ -11,9 +11,9 @@ import categoriesData from '../utils/categoriesData'
 import FontIcon from 'react-native-vector-icons/FontAwesome';
 import StepIndicator from 'react-native-step-indicator';
 import ImagePicker from 'react-native-image-picker';
+import Video from 'react-native-video';
 
-
-const labels = ["General Info", "Profile Info", "Ordering Instructions", "Profile Video", "Categories"];
+const labels = ["General", "Profile", "Instructions", "Intro", "Categories"];
 const customStyles = {
     stepIndicatorSize: 25,
     currentStepIndicatorSize: 30,
@@ -157,6 +157,14 @@ const BecomeAdvisorForm = (props) => {
                 />
             )}
             <Button title="Choose Photo" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChoosePhoto} />
+
+            <Video source={{ uri: 'https://www.example.com/video.mp4' }}   // Can be a URL or a local file.
+            // ref={(ref) => {
+            //     player = ref
+            // }}                                      // Store reference
+            // onBuffer={this.onBuffer}                // Callback when remote video is buffering
+            // onError={this.videoError}               // Callback when video cannot be loaded
+            />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
                 <Button icon={
                     <FontIcon
