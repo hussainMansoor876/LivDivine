@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
 import { createDrawerNavigator } from 'react-navigation-drawer';
-import { Advisors, Categories, FavoriteAdvisors, Home, Journey, Settings, Login } from '../Screens';
+import { Advisors, Categories, FavoriteAdvisors, Home, Journey, Settings, Login, BecomeAdvisor } from '../Screens';
 import { createAppContainer } from 'react-navigation'
 import Sidebar from './Sidebar'
 
@@ -12,7 +12,7 @@ const DrawerNavigatorExample = createDrawerNavigator(
     Categories: Categories,
     MyOrders: Categories,
     FavoriteAdvisors: FavoriteAdvisors,
-    BecomeAdvisors: Categories,
+    BecomeAdvisor: BecomeAdvisor,
     Settings: Settings,
     Logout: Login
   },

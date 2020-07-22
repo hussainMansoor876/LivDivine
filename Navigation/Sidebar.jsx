@@ -48,8 +48,8 @@ const datas = [
         bg: "#4DCAE0"
     },
     {
-        name: "Become Advisors",
-        route: "BecomeAdvisors",
+        name: "Become Advisor",
+        route: "BecomeAdvisor",
         icon: "user-plus",
         bg: "#1EBC7C"
     },
