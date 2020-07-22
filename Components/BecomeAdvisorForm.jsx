@@ -92,30 +92,30 @@ const BecomeAdvisorForm = (props) => {
 
     const handleChooseVideo = () => {
         ImagePicker.showImagePicker(videoOptions, response => {
-            const path = response.path; // for android
-            const maxTime = 180000;
-            RNThumbnail.get(response.path)
-                .then((result) => {
-                    console.log(result.path); // thumbnail path
-                })
-            console.log(response)
-            MediaMeta.get(path)
-                .then((metadata) => {
-                    if (metadata.duration > maxTime) {
-                        Alert.alert(
-                            'Sorry',
-                            'Video duration must be less then 3 minutes',
-                            [
-                                { text: 'OK', onPress: () => console.log('OK Pressed') }
-                            ],
-                            { cancelable: false }
-                        );
-                    } else {
-                        // Upload or do something else
-                    }
-                }).catch(err => console.error(err));
             if (response.uri) {
-                setUploadVideo(response)
+                const path = response.path
+                const maxTime = 180000;
+                MediaMeta.get(path)
+                    .then((metadata) => {
+                        if (metadata.duration > maxTime) {
+                            Alert.alert(
+                                'Sorry',
+                                'Video duration must be less then 3 minutes',
+                                [
+                                    { text: 'OK', onPress: () => console.log('OK Pressed') }
+                                ],
+                                { cancelable: false }
+                            );
+                        } else {
+                            setUploadVideo(response)
+                            RNThumbnail.get(response.path)
+                                .then((result) => {
+                                    setPhoto(result.path)
+                                })
+                        }
+                    }).catch(err => console.error(err));
+            }
+            if (response.uri) {
             }
         })
     }
@@ -243,7 +243,13 @@ const BecomeAdvisorForm = (props) => {
                         paused={true}
                         thu
                     /> : null}
-                    <Button title="Choose Video" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChooseVideo} />
+                    {photo && (
+                        <Image
+                            source={{ uri: photo }}
+                            style={{ width: 150, height: 150, marginRight: 10, marginLeft: 10, borderRadius: 250 }}
+                        />
+                    )}
+                    <Button title="Record or Choose Video" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChooseVideo} />
                     <Text>Briefly tell potential clients about your service. Make sure that the video and the audio clear and give it your best effort</Text>
                 </View> : state.currentPosition === 4 ? <View>
 
