@@ -91,6 +91,8 @@ target 'PurpleOccean' do
 
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
+  pod 'RNThumbnail', :path => '../node_modules/react-native-thumbnail'
+
   target 'PurpleOcceanTests' do
     inherit! :complete
     # Pods for testing

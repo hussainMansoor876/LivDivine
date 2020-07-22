@@ -12,6 +12,8 @@ import FontIcon from 'react-native-vector-icons/FontAwesome';
 import StepIndicator from 'react-native-step-indicator';
 import ImagePicker from 'react-native-image-picker';
 import Video from 'react-native-video';
+import MediaMeta from 'react-native-media-meta';
+import RNThumbnail from 'react-native-thumbnail';
 
 const Screen = {
     width: Dimensions.get("window").width,
@@ -47,6 +49,10 @@ const videoOptions = {
     title: 'Select Video',
     mediaType: 'video',
     takePhotoButtonTitle: 'Record Video',
+    durationLimit: 180,
+    allowsEditing: true,
+    thumbnail: true,
+    videoQuality: 'low',
     storageOptions: {
         skipBackup: true,
         path: 'videos'
@@ -86,6 +92,28 @@ const BecomeAdvisorForm = (props) => {
 
     const handleChooseVideo = () => {
         ImagePicker.showImagePicker(videoOptions, response => {
+            const path = response.path; // for android
+            const maxTime = 180000;
+            RNThumbnail.get(response.path)
+                .then((result) => {
+                    console.log(result.path); // thumbnail path
+                })
+            console.log(response)
+            MediaMeta.get(path)
+                .then((metadata) => {
+                    if (metadata.duration > maxTime) {
+                        Alert.alert(
+                            'Sorry',
+                            'Video duration must be less then 3 minutes',
+                            [
+                                { text: 'OK', onPress: () => console.log('OK Pressed') }
+                            ],
+                            { cancelable: false }
+                        );
+                    } else {
+                        // Upload or do something else
+                    }
+                }).catch(err => console.error(err));
             if (response.uri) {
                 setUploadVideo(response)
             }
@@ -141,80 +169,86 @@ const BecomeAdvisorForm = (props) => {
                 currentPosition={state.currentPosition}
                 labels={labels}
             />
-            {state.currentPosition === 0 ? <View>
-                <Input
-                    placeholder="Full Name"
-                    inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.userNameErr ? 'red' : '#000000' }}
-                    onChangeText={updateField}
-                    value={state.userName}
-                    errorMessage={state.userNameErr}
-                    onFocus={() => updateField({ userNameErr: '' })}
-                    leftIcon={
-                        <Icon
-                            name='user'
-                            size={24}
-                            color='black'
-                            type='font-awesome'
-                        />
-                    }
-                />
-                <Input
-                    placeholder="Title"
-                    secureTextEntry={true}
-                    inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
-                    onChangeText={e => updateField({ password: e })}
-                    value={state.password}
-                    errorMessage={state.passwordErr}
-                    onFocus={() => updateField({ passwordErr: '' })}
-                    leftIcon={
-                        <FontIcon
-                            name='slack'
-                            size={24}
-                            color='black'
-                        />
-                    }
-                />
-
-                {photo && (
-                    <Image
-                        source={{ uri: photo.uri }}
-                        style={{ width: 150, height: 150, marginRight: 10, marginLeft: 10, borderRadius: 250 }}
+            <View style={{ marginTop: 30 }}>
+                {state.currentPosition === 0 ? <View>
+                    <Input
+                        placeholder="Full Name"
+                        inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.userNameErr ? 'red' : '#000000' }}
+                        onChangeText={updateField}
+                        value={state.userName}
+                        errorMessage={state.userNameErr}
+                        onFocus={() => updateField({ userNameErr: '' })}
+                        leftIcon={
+                            <Icon
+                                name='user'
+                                size={24}
+                                color='black'
+                                type='font-awesome'
+                            />
+                        }
                     />
-                )}
-                <Button title="Choose Photo" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChoosePhoto} />
-            </View> : state.currentPosition === 1 ? <View>
-                <Input
-                    placeholder="About my services"
-                    multiline={true}
-                    numberOfLines={4}
-                    inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
-                    onChangeText={e => updateField({ password: e })}
-                    value={state.password}
-                    errorMessage={state.passwordErr}
-                    onFocus={() => updateField({ passwordErr: '' })}
-                />
-                <Input
-                    placeholder="Aboutme"
-                    multiline={true}
-                    numberOfLines={4}
-                    inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
-                    onChangeText={e => updateField({ password: e })}
-                    value={state.password}
-                    errorMessage={state.passwordErr}
-                    onFocus={() => updateField({ passwordErr: '' })}
-                />
-            </View> : state.currentPosition === 2 ? <View>
+                    <Input
+                        placeholder="Title"
+                        secureTextEntry={true}
+                        inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
+                        onChangeText={e => updateField({ password: e })}
+                        value={state.password}
+                        errorMessage={state.passwordErr}
+                        onFocus={() => updateField({ passwordErr: '' })}
+                        leftIcon={
+                            <FontIcon
+                                name='slack'
+                                size={24}
+                                color='black'
+                            />
+                        }
+                    />
 
-            </View> : state.currentPosition === 3 ? <View>
-                {uploadVideo ? <Video
-                    source={{ uri: uploadVideo.uri }}
-                    style={{ height: Screen.height / 3 }}
-                    resizeMode="contain"
-                /> : null}
-                <Button title="Choose Video" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChooseVideo} />
-            </View> : state.currentPosition === 4 ? <View>
+                    {photo && (
+                        <Image
+                            source={{ uri: photo.uri }}
+                            style={{ width: 150, height: 150, marginRight: 10, marginLeft: 10, borderRadius: 250 }}
+                        />
+                    )}
+                    <Button title="Choose Photo" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChoosePhoto} />
+                </View> : state.currentPosition === 1 ? <View>
+                    <Input
+                        placeholder="About my services"
+                        multiline={true}
+                        numberOfLines={4}
+                        inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
+                        onChangeText={e => updateField({ password: e })}
+                        value={state.password}
+                        errorMessage={state.passwordErr}
+                        onFocus={() => updateField({ passwordErr: '' })}
+                    />
+                    <Input
+                        placeholder="Aboutme"
+                        multiline={true}
+                        numberOfLines={4}
+                        inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
+                        onChangeText={e => updateField({ password: e })}
+                        value={state.password}
+                        errorMessage={state.passwordErr}
+                        onFocus={() => updateField({ passwordErr: '' })}
+                    />
+                </View> : state.currentPosition === 2 ? <View>
 
-            </View> : null}
+                </View> : state.currentPosition === 3 ? <View>
+                    {uploadVideo ? <Video
+                        source={{ uri: uploadVideo.uri }}
+                        style={{ height: Screen.height / 3 }}
+                        resizeMode="contain"
+                        controls={true}
+                        paused={true}
+                        thu
+                    /> : null}
+                    <Button title="Choose Video" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChooseVideo} />
+                    <Text>Briefly tell potential clients about your service. Make sure that the video and the audio clear and give it your best effort</Text>
+                </View> : state.currentPosition === 4 ? <View>
+
+                </View> : null}
+            </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
                 <Button icon={
                     <FontIcon
