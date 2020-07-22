@@ -158,6 +158,27 @@ const BecomeAdvisorForm = (props) => {
                     />
                 )}
                 <Button title="Choose Photo" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChoosePhoto} />
+            </View> : state.currentPosition === 1 ? <View>
+                <Input
+                    placeholder="About my services"
+                    multiline={true}
+                    numberOfLines={4}
+                    inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
+                    onChangeText={e => updateField({ password: e })}
+                    value={state.password}
+                    errorMessage={state.passwordErr}
+                    onFocus={() => updateField({ passwordErr: '' })}
+                />
+                <Input
+                    placeholder="Aboutme"
+                    multiline={true}
+                    numberOfLines={4}
+                    inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
+                    onChangeText={e => updateField({ password: e })}
+                    value={state.password}
+                    errorMessage={state.passwordErr}
+                    onFocus={() => updateField({ passwordErr: '' })}
+                />
             </View> : null}
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
                 <Button icon={
