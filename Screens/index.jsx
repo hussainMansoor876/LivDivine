@@ -6,7 +6,7 @@ import FavoriteAdvisors from './FavoriteAdvisors/FavoriteAdvisors'
 import Home from './Home/Home'
 import Journey from './Journey/Journey'
 import Settings from './Settings/Settings'
-import BecomeAdvisor from './BecomeAdvisor'
+import BecomeAdvisor from './BecomeAdvisor/BecomeAdvisor'
 
 export {
     Login,
