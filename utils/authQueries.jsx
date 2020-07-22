@@ -31,11 +31,11 @@ mutation($email: String, $name: String!, $authType: String!, $id: String!, $imag
     email: $email,
     userName: $name,
     authType: $authType,
-    socialAuthId: $id,
+    authId: $id,
     image: $image
     ){
      token, message, success, user{
-     id, userName, email, role, image, isVerified, isLogin, authType, title, advisorImage,
+     id, userName, email, role, image, isVerified, isLogin, authType, title,
       aboutService, aboutMe
     }
   }
@@ -45,7 +45,7 @@ const UPDATE_PASSWORD = gql`
 mutation($email: String!, $pasword: String!){
   updatePassword(email: $email, password: $pasword){
     token, message, success,user {
-       id, userName, email, role, image, isVerified, isLogin, authType, title, advisorImage,
+       id, userName, email, role, image, isVerified, isLogin, authType, title,
       aboutService, aboutMe
     }
   }
