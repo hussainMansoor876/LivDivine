@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image, Text, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, Image, Text, Alert, Dimensions } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button, CheckBox } from 'react-native-elements'
@@ -12,6 +12,11 @@ import FontIcon from 'react-native-vector-icons/FontAwesome';
 import StepIndicator from 'react-native-step-indicator';
 import ImagePicker from 'react-native-image-picker';
 import Video from 'react-native-video';
+
+const Screen = {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
+};
 
 const labels = ["General", "Profile", "Instructions", "Intro", "Categories"];
 const customStyles = {
@@ -38,11 +43,22 @@ const customStyles = {
     currentStepLabelColor: '#fe7013'
 }
 
+const videoOptions = {
+    title: 'Select Video',
+    mediaType: 'video',
+    takePhotoButtonTitle: 'Record Video',
+    storageOptions: {
+        skipBackup: true,
+        path: 'videos'
+    }
+};
+
 const BecomeAdvisorForm = (props) => {
     const { navigation } = props
     const user = useSelector(state => state.authReducer.user)
     const dispatch = useDispatch();
     const [photo, setPhoto] = useState(null)
+    const [uploadVideo, setUploadVideo] = useState(null)
     const [state, setState] = useState({
         userName: '',
         email: '',
@@ -64,6 +80,14 @@ const BecomeAdvisorForm = (props) => {
             if (response.uri) {
                 console.log('response.uri', response.uri)
                 setPhoto(response)
+            }
+        })
+    }
+
+    const handleChooseVideo = () => {
+        ImagePicker.showImagePicker(videoOptions, response => {
+            if (response.uri) {
+                setUploadVideo(response)
             }
         })
     }
@@ -182,7 +206,12 @@ const BecomeAdvisorForm = (props) => {
             </View> : state.currentPosition === 2 ? <View>
 
             </View> : state.currentPosition === 3 ? <View>
-
+                {uploadVideo ? <Video
+                    source={{ uri: uploadVideo.uri }}
+                    style={{ height: Screen.height / 3 }}
+                    resizeMode="contain"
+                /> : null}
+                <Button title="Choose Video" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChooseVideo} />
             </View> : state.currentPosition === 4 ? <View>
 
             </View> : null}

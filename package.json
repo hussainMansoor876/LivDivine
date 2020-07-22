@@ -36,6 +36,7 @@
         "react-native-screens": "^2.8.0",
         "react-native-splash-screen": "^3.2.0",
         "react-native-step-indicator": "^1.0.3",
+        "react-native-thumbnail-video": "^0.1.2",
         "react-native-vector-icons": "^6.6.0",
         "react-native-video": "^4.4.5",
         "react-navigation": "^4.3.9",
