@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Image, View, Dimensions } from "react-native";
 import { useSelector } from 'react-redux';
 import {
@@ -7,7 +7,8 @@ import {
     List,
     ListItem,
     Container,
-    Left
+    Left,
+    Right
 } from "native-base";
 import styles from "./style";
 import { Icon } from 'react-native-elements'
@@ -78,32 +79,14 @@ const advisorData = [
     {
         name: "Revenues",
         route: "Advisors",
-        icon: "user",
+        icon: "bitcoin",
         bg: "#DA4437"
     },
     {
-        name: "Categories",
+        name: "Journeys",
         route: "Categories",
         icon: "th-large",
         bg: "#C5F442"
-    },
-    {
-        name: "My Orders",
-        route: "MyOrders",
-        icon: "shopping-cart",
-        bg: "#C5F442"
-    },
-    {
-        name: "Favorite Advisors",
-        route: "FavoriteAdvisors",
-        icon: "heart",
-        bg: "#4DCAE0"
-    },
-    {
-        name: "Become Advisor",
-        route: "BecomeAdvisor",
-        icon: "user-plus",
-        bg: "#1EBC7C"
     },
     {
         name: "Settings",
@@ -122,6 +105,7 @@ const advisorData = [
 
 const SideBar = (props) => {
     const user = useSelector(state => state.authReducer.user)
+    const [isAdvisor, setAdvisor] = useState(false)
     return (
         <Container>
             <Content
@@ -134,7 +118,7 @@ const SideBar = (props) => {
                     <Text style={styles.drawerText} >{user.userName}</Text>
                 </View>
                 <List
-                    dataArray={datas}
+                    dataArray={advisorData}
                     renderRow={(data, index) =>
                         <ListItem
                             button
