@@ -179,6 +179,12 @@ const BecomeAdvisorForm = (props) => {
                     errorMessage={state.passwordErr}
                     onFocus={() => updateField({ passwordErr: '' })}
                 />
+            </View> : state.currentPosition === 2 ? <View>
+
+            </View> : state.currentPosition === 3 ? <View>
+
+            </View> : state.currentPosition === 4 ? <View>
+
             </View> : null}
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
                 <Button icon={
@@ -204,61 +210,6 @@ const BecomeAdvisorForm = (props) => {
                     disabled={state.currentPosition === 5}
                 />
             </View>
-            {/* <Input
-                placeholder="About my services"
-                secureTextEntry={true}
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField({ password: e })}
-                value={state.password}
-                errorMessage={state.passwordErr}
-                onFocus={() => updateField({ passwordErr: '' })}
-                leftIcon={
-                    <FontIcon
-                        name='slack'
-                        size={24}
-                        color='black'
-                    />
-                }
-            />
-            <Input
-                placeholder="Aboutme"
-                secureTextEntry={true}
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField({ password: e })}
-                value={state.password}
-                errorMessage={state.passwordErr}
-                onFocus={() => updateField({ passwordErr: '' })}
-                leftIcon={
-                    <FontIcon
-                        name='slack'
-                        size={24}
-                        color='black'
-                    />
-                }
-            />
-            <View style={{ ...loginStyles.inputLogin, marginRight: 10, marginLeft: 10, marginBottom: 10, paddingTop: 20, paddingBottom: 20 }}>
-                <Text style={{ fontSize: 20, marginLeft: 20, marginBottom: 5 }}>Select Categories</Text>
-                {categoriesData.map((v, i) => {
-                    return (
-                        <View key={i} style={{ flexDirection: 'row', flex: 1 }}>
-                            {v.map((y, j) => {
-                                return (
-                                    <CheckBox
-                                        title={y.text}
-                                        key={j}
-                                        containerStyle={AdvisorStyles.checkBox}
-                                    />
-                                )
-                            })}
-                        </View>
-                    )
-                })}
-            </View>
-            <Button
-                title="Register"
-                buttonStyle={loginStyles.loginBtn}
-                onPress={validateSignup}
-            /> */}
         </View>
     );
 };
