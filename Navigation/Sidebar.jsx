@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import { Image, View, Dimensions } from "react-native";
 import { useSelector } from 'react-redux';
-import {
-    Content,
-    Text,
-    List,
-    ListItem,
-    Container,
-    Left,
-    Right
-} from "native-base";
+import { Content, Text, List, ListItem, Container, Left } from "native-base";
 import styles from "./style";
 import { Icon } from 'react-native-elements'
+import ToggleSwitch from 'toggle-switch-react-native'
 
 const { width, height } = Dimensions.get('window')
 const drawerCover = require('../assets/drawer-cover.png');
@@ -107,37 +100,45 @@ const SideBar = (props) => {
     const user = useSelector(state => state.authReducer.user)
     const [isAdvisor, setAdvisor] = useState(false)
     return (
-        <Container>
+        <Container style={{ flex: 1 }}>
             <Content
                 bounces={false}
                 style={{ flex: 1, backgroundColor: "#fff", top: -1 }}
             >
-                <Image source={drawerCover} style={styles.drawerCover} />
-                <View style={styles.drawerView}>
-                    <Image style={styles.drawerImage} source={dummyImage} />
-                    <Text style={styles.drawerText} >{user.userName}</Text>
+                <View style={{ height: height - 50 }}>
+                    <Image source={drawerCover} style={styles.drawerCover} />
+                    <View style={styles.drawerView}>
+                        <Image style={styles.drawerImage} source={dummyImage} />
+                        <Text style={styles.drawerText} >{user.userName}</Text>
+                    </View>
+                    <List
+                        dataArray={isAdvisor ? advisorData : datas}
+                        renderRow={(data, index) =>
+                            <ListItem
+                                button
+                                onPress={() => props.navigation.navigate(data.route)}
+                                key={index.toString()}
+                            >
+                                <Left>
+                                    <Icon
+                                        active
+                                        name={data.icon}
+                                        type="font-awesome"
+                                        style={{ color: "#777", fontSize: 26, width: 30 }}
+                                    />
+                                    <Text style={styles.text}>
+                                        {data.name}
+                                    </Text>
+                                </Left>
+                            </ListItem>}
+                    />
                 </View>
-                <List
-                    dataArray={advisorData}
-                    renderRow={(data, index) =>
-                        <ListItem
-                            button
-                            onPress={() => props.navigation.navigate(data.route)}
-                            key={index.toString()}
-                        >
-                            <Left>
-                                <Icon
-                                    active
-                                    name={data.icon}
-                                    type="font-awesome"
-                                    style={{ color: "#777", fontSize: 26, width: 30 }}
-                                />
-                                <Text style={styles.text}>
-                                    {data.name}
-                                </Text>
-                            </Left>
-                        </ListItem>}
-                />
+                <View style={{ height: 50, alignItems: 'center' }}>
+                    <ToggleSwitch
+                        isOn={isAdvisor}
+                        onToggle={isOn => setAdvisor(isOn)}
+                    />
+                </View>
             </Content>
         </Container>
     );
