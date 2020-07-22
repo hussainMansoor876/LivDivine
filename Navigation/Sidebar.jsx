@@ -68,6 +68,58 @@ const datas = [
     }
 ];
 
+const advisorData = [
+    {
+        name: "My Jobs",
+        route: "Home",
+        icon: "home",
+        bg: "#C5F442"
+    },
+    {
+        name: "Revenues",
+        route: "Advisors",
+        icon: "user",
+        bg: "#DA4437"
+    },
+    {
+        name: "Categories",
+        route: "Categories",
+        icon: "th-large",
+        bg: "#C5F442"
+    },
+    {
+        name: "My Orders",
+        route: "MyOrders",
+        icon: "shopping-cart",
+        bg: "#C5F442"
+    },
+    {
+        name: "Favorite Advisors",
+        route: "FavoriteAdvisors",
+        icon: "heart",
+        bg: "#4DCAE0"
+    },
+    {
+        name: "Become Advisor",
+        route: "BecomeAdvisor",
+        icon: "user-plus",
+        bg: "#1EBC7C"
+    },
+    {
+        name: "Settings",
+        route: "Settings",
+        icon: "cog",
+        bg: "#477EEA"
+    },
+    {
+        name: "Logout",
+        route: "Logout",
+        icon: "arrow-up",
+        bg: "#B89EF5",
+        types: "8"
+    }
+];
+
 const SideBar = (props) => {
     const user = useSelector(state => state.authReducer.user)
     return (
@@ -86,7 +138,6 @@ const SideBar = (props) => {
                     renderRow={(data, index) =>
                         <ListItem
                             button
-                            noBorder
                             onPress={() => props.navigation.navigate(data.route)}
                             key={index.toString()}
                         >
