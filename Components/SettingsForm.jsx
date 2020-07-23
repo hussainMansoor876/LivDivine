@@ -6,7 +6,7 @@ import { Input, Button, Icon } from 'react-native-elements'
 import client from '../Config/apollo'
 import { loginStyles, settingsStyles } from '../styles'
 import Spinner from 'react-native-loading-spinner-overlay';
-import { LOGIN } from '../utils/authQueries'
+import { UPDATE_USER } from '../utils/authQueries'
 import FontIcon from 'react-native-vector-icons/FontAwesome';
 
 const SettingsForm = (props) => {
@@ -18,31 +18,26 @@ const SettingsForm = (props) => {
         isLoading: false
     })
 
-    console.log('user', user)
 
     const validateLogin = () => {
-        const { email, password } = state
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (reg.test(email) === false) {
-            return updateField({ emailErr: 'Invalid Email!' })
-        }
-        else if (!password.length || password.length < 6) {
-            return updateField({ passwordErr: 'Password length must be 6 Characters!' })
+        const { userName } = state
+        const { id } = user
+        if (!userName.length || userName.length < 4) {
+            return updateField({ userNameErr: 'Minimum 4 Characters required!' })
         }
         updateField({ isLoading: true })
-        client.mutate({ variables: { email, password }, mutation: LOGIN })
+        client.mutate({ variables: { id, userName }, mutation: UPDATE_USER })
             .then((res) => {
                 updateField({ isLoading: false })
-                const { signIn } = res.data
-                console.log('signIn', signIn)
-                if (signIn.success) {
-                    dispatch(loginUser(signIn.user))
+                const { updateUser } = res.data
+                if (updateUser.success) {
+                    dispatch(loginUser(updateUser.user))
                 }
                 else {
-                    Alert.alert(signIn.message)
+                    Alert.alert('Oops Something Went Wrong!')
                 }
             })
-            .catch((e) => console.log(e))
+            .catch((e) => Alert.alert('Oops Something Went Wrong!'))
     }
 
     const updateField = (obj) => {
@@ -64,7 +59,6 @@ const SettingsForm = (props) => {
                 placeholder="User Name"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.userNameErr ? 'red' : '#000000' }}
                 onChangeText={e => updateField({ userName: e })}
-                name="email"
                 value={state.userName}
                 errorMessage={state.userNameErr}
                 onFocus={() => updateField({ emailErr: '' })}
@@ -79,7 +73,6 @@ const SettingsForm = (props) => {
             {user.email ? <Input
                 placeholder="Email"
                 inputContainerStyle={loginStyles.inputLogin}
-                name="email"
                 value={user.email}
                 disabled
                 leftIcon={
