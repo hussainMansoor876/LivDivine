@@ -10,18 +10,15 @@ import { LOGIN } from '../utils/authQueries'
 import FontIcon from 'react-native-vector-icons/FontAwesome';
 
 const SettingsForm = (props) => {
+    const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
     const [state, setState] = useState({
-        userName: '',
-        email: '',
-        password: '',
-        confirmPass: '',
+        userName: user.userName,
         userNameErr: '',
-        emailErr: '',
-        passwordErr: '',
-        confirmPassErr: '',
         isLoading: false
     })
+
+    console.log('user', user)
 
     const validateLogin = () => {
         const { email, password } = state
@@ -35,7 +32,6 @@ const SettingsForm = (props) => {
         updateField({ isLoading: true })
         client.mutate({ variables: { email, password }, mutation: LOGIN })
             .then((res) => {
-                console.log('res', res)
                 updateField({ isLoading: false })
                 const { signIn } = res.data
                 console.log('signIn', signIn)
@@ -66,11 +62,11 @@ const SettingsForm = (props) => {
             <Text style={settingsStyles.textStyle}>Profile Setting</Text>
             <Input
                 placeholder="User Name"
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.emailErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField({ email: e })}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.userNameErr ? 'red' : '#000000' }}
+                onChangeText={e => updateField({ userName: e })}
                 name="email"
-                value={state.email}
-                errorMessage={state.emailErr}
+                value={state.userName}
+                errorMessage={state.userNameErr}
                 onFocus={() => updateField({ emailErr: '' })}
                 leftIcon={
                     <FontIcon
@@ -80,12 +76,12 @@ const SettingsForm = (props) => {
                     />
                 }
             />
-            <Input
+            {user.email ? <Input
                 placeholder="Email"
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.emailErr ? 'red' : '#000000' }}
+                inputContainerStyle={loginStyles.inputLogin}
                 name="email"
-                value={state.email}
-                errorMessage={state.emailErr}
+                value={user.email}
+                disabled
                 leftIcon={
                     <Icon
                         name='mail'
@@ -94,11 +90,12 @@ const SettingsForm = (props) => {
                         type='foundation'
                     />
                 }
-            />
+            /> : null}
             <Input
                 placeholder="User ID"
                 inputContainerStyle={{ ...loginStyles.inputLogin }}
-                value={state.password}
+                value={user.id?.slice(0, 25)}
+                disabled
                 leftIcon={
                     <FontIcon
                         name='slack'
