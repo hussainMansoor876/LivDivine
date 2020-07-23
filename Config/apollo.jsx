@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-boost';
 
 const client = new ApolloClient({
-  uri: 'http://192.168.8.101:8000',
+  uri: 'http://192.168.43.235:8000',
 });
 
 // const client = new ApolloClient({

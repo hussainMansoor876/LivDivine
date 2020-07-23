@@ -8,6 +8,8 @@ import { loginStyles, settingsStyles } from '../styles'
 import Spinner from 'react-native-loading-spinner-overlay';
 import { UPDATE_USER } from '../utils/authQueries'
 import FontIcon from 'react-native-vector-icons/FontAwesome';
+import ImagePicker from 'react-native-image-picker';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 const SettingsForm = (props) => {
     const user = useSelector(state => state.authReducer.user);
@@ -40,6 +42,51 @@ const SettingsForm = (props) => {
             .catch((e) => Alert.alert('Oops Something Went Wrong!'))
     }
 
+    const handleChoosePhoto = async () => {
+        const options = {
+            noData: true,
+            quality: 0.5
+        }
+        ImagePicker.showImagePicker(options, response => {
+            if (response.uri) {
+                uploadFile(response)
+                    .then(response => response.json())
+                    .then((result) => {
+                        console.log('result', result)
+                    })
+                    .catch((e) => console.log('e', e.message))
+            }
+        })
+    }
+
+    const uploadFile = (file) => {
+        console.log('file', file)
+        return RNFetchBlob.fetch('POST', 'https://api.cloudinary.com/v1_1/dzkbtggax/image/upload?upload_preset=livdivine', {
+            'Content-Type': 'multipart/form-data'
+        }, [
+            { name: 'file', filename: file.fileName, data: RNFetchBlob.wrap(file.uri) }
+        ])
+    }
+
+    const handleUpload = (image) => {
+        const data = new FormData()
+        data.append('file', image)
+        data.append('upload_preset', 'livdivine')
+        data.append("cloud_name", "dzkbtggax")
+        fetch("https://api.cloudinary.com/v1_1/dzkbtggax/upload", {
+            method: "post",
+            body: data
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('data', data)
+            })
+            .catch(err => {
+                console.log('err', err)
+                Alert.alert("An Error Occured While Uploading")
+            })
+    }
+
     const updateField = (obj) => {
         setState({
             ...state,
@@ -55,6 +102,7 @@ const SettingsForm = (props) => {
                 textStyle={loginStyles.spinnerTextStyle}
             />
             <Text style={settingsStyles.textStyle}>Profile Setting</Text>
+            <Button title="Choose Photo" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChoosePhoto} />
             <Input
                 placeholder="User Name"
                 inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.userNameErr ? 'red' : '#000000' }}
