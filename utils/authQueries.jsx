@@ -6,7 +6,7 @@ const SIGN_UP = gql`
             signUp(email: $email, userName: $userName, password: $password, isVerified: true) {
                 token, message, success, user{
                   id, userName, email, role, image, isVerified, isLogin, authType, title, image,
-                  aboutService, aboutMe
+                  aboutService, aboutMe, isApproved
                    }
             }
           }

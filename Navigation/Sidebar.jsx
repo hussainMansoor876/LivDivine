@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Image, View, Dimensions } from "react-native";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Content, Text, List, ListItem, Container, Left } from "native-base";
 import styles from "./style";
 import { Icon } from 'react-native-elements'
@@ -98,6 +98,7 @@ const advisorData = [
 
 const SideBar = (props) => {
     const user = useSelector(state => state.authReducer.user)
+    const dispatch = useDispatch();
     const [isAdvisor, setAdvisor] = useState(false)
     return (
         <Container style={{ flex: 1 }}>
@@ -134,10 +135,10 @@ const SideBar = (props) => {
                     />
                 </View>
                 <View style={{ height: 50, alignItems: 'center' }}>
-                    <ToggleSwitch
+                    {user.isApproved ? <ToggleSwitch
                         isOn={isAdvisor}
                         onToggle={isOn => setAdvisor(isOn)}
-                    />
+                    /> : null}
                 </View>
             </Content>
         </Container>

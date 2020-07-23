@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     resizeMode: "cover",
+    marginLeft: 10,
     borderRadius: 60
   },
   drawerText: {
