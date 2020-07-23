@@ -5,8 +5,8 @@ const SIGN_UP = gql`
         mutation($email: String!, $userName: String!, $password: String!){
             signUp(email: $email, userName: $userName, password: $password, isVerified: true) {
                 token, message, success, user{
-                    id, userName, email, role, image, isVerified, isLogin,authType,title,advisorImage,
-                     aboutService, aboutMe, categories
+                  id, userName, email, role, image, isVerified, isLogin, authType, title, image,
+                  aboutService, aboutMe
                    }
             }
           }
@@ -16,8 +16,8 @@ const LOGIN = gql`
 mutation($email: String!, $password: String!){
     signIn(login: $email, password: $password){
       token, message, success,user {
-         id, userName, email, role, image, isVerified, isLogin,authType,title,advisorImage,
-        aboutService, aboutMe, messages{
+         id, userName, email, role, image, isVerified, isLogin, authType, title, advisorImage,
+        aboutService, aboutMe, isAdvisor, isApproved, messages{
           text
         }
       }
