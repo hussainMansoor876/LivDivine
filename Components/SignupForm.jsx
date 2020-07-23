@@ -40,7 +40,7 @@ const SignupForm = (props) => {
             return updateField({ confirmPassErr: 'Password did not match!' })
         }
         updateField({ isLoading: true })
-        client.mutate({ variables: { email, userName, password }, mutation: SIGN_UP })
+        client.mutate({ variables: { email: email.toLocaleLowerCase(), userName, password }, mutation: SIGN_UP })
             .then((res) => {
                 updateField({ isLoading: false })
                 const { signUp } = res.data

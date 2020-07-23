@@ -28,9 +28,8 @@ const LoginForm = (props) => {
             return updateField({ passwordErr: 'Password length must be 6 Characters!' })
         }
         updateField({ isLoading: true })
-        client.mutate({ variables: { email, password }, mutation: LOGIN })
+        client.mutate({ variables: { email: email.toLocaleLowerCase(), password }, mutation: LOGIN })
             .then((res) => {
-                console.log('res', res)
                 updateField({ isLoading: false })
                 const { signIn } = res.data
                 console.log('signIn', signIn)

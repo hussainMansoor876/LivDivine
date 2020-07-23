@@ -16,10 +16,8 @@ const LOGIN = gql`
 mutation($email: String!, $password: String!){
     signIn(login: $email, password: $password){
       token, message, success,user {
-         id, userName, email, role, image, isVerified, isLogin, authType, title, advisorImage,
-        aboutService, aboutMe, isAdvisor, isApproved, messages{
-          text
-        }
+         id, userName, email, role, image, isVerified, isLogin, authType, title,
+        aboutService, aboutMe, isAdvisor, isApproved
       }
     }
   }
