@@ -1,10 +1,6 @@
 import React from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
-
-const Screen = {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
-};
+import { StyleSheet } from 'react-native'
+import Screen from './utils/ScreenDimensions'
 
 const loginStyles = StyleSheet.create({
     setFlex: {

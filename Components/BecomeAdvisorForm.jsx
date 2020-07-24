@@ -14,11 +14,7 @@ import ImagePicker from 'react-native-image-picker';
 import Video from 'react-native-video';
 import MediaMeta from 'react-native-media-meta';
 import RNThumbnail from 'react-native-thumbnail';
-
-const Screen = {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
-};
+import Screen from '../utils/ScreenDimensions'
 
 const labels = ["General", "Profile", "Instructions", "Intro", "Categories"];
 const customStyles = {
