@@ -26,12 +26,12 @@ const BecomeAdvisorForm = (props) => {
     const [state, setState] = useState({
         userName: user.userName,
         title: '',
-        password: '',
-        confirmPass: '',
+        aboutService: '',
+        aboutMe: '',
         userNameErr: '',
         titleErr: '',
-        passwordErr: '',
-        confirmPassErr: '',
+        aboutServiceErr: '',
+        aboutMeErr: '',
         isLoading: false,
         currentPosition: 0
     })
@@ -79,7 +79,9 @@ const BecomeAdvisorForm = (props) => {
 
     const updateFieldSteps = (e) => {
         const { currentPosition, userName, title } = state
-
+        if (e === 'left') {
+            return updateField({ currentPosition: currentPosition - 1 })
+        }
         if (currentPosition === 0) {
             if (!userName.length || userName.length < 4) {
                 return updateField({ userNameErr: 'Minimum 4 Characters required!' })
@@ -91,7 +93,17 @@ const BecomeAdvisorForm = (props) => {
                 return Alert.alert('Please upload an image')
             }
         }
-
+        else if (currentPosition === 1) {
+            if (!userName.length || userName.length < 4) {
+                return updateField({ userNameErr: 'Minimum 4 Characters required!' })
+            }
+            else if (!title.length || title.length < 4) {
+                return updateField({ titleErr: 'Minimum 4 Characters required!' })
+            }
+        }
+        if (e === 'right') {
+            updateField({ currentPosition: currentPosition + 1 })
+        }
     }
 
     const validateSignup = () => {
@@ -189,21 +201,21 @@ const BecomeAdvisorForm = (props) => {
                         placeholder="About my services"
                         multiline={true}
                         numberOfLines={4}
-                        inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
-                        onChangeText={e => updateField({ password: e })}
-                        value={state.password}
-                        errorMessage={state.passwordErr}
-                        onFocus={() => updateField({ passwordErr: '' })}
+                        inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.aboutService ? 'red' : '#000000' }}
+                        onChangeText={e => updateField({ aboutService: e })}
+                        value={state.aboutService}
+                        errorMessage={state.aboutServiceErr}
+                        onFocus={() => updateField({ aboutServiceErr: '' })}
                     />
                     <Input
                         placeholder="Aboutme"
                         multiline={true}
                         numberOfLines={4}
-                        inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
-                        onChangeText={e => updateField({ password: e })}
-                        value={state.password}
-                        errorMessage={state.passwordErr}
-                        onFocus={() => updateField({ passwordErr: '' })}
+                        inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.aboutMe ? 'red' : '#000000' }}
+                        onChangeText={e => updateField({ aboutMe: e })}
+                        value={state.aboutMe}
+                        errorMessage={state.aboutMeErr}
+                        onFocus={() => updateField({ aboutMeErr: '' })}
                     />
                 </View> : state.currentPosition === 2 ? <View>
 
