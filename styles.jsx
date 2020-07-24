@@ -201,6 +201,21 @@ const AdvisorStyles = StyleSheet.create({
         paddingBottom: 10,
         paddingTop: 5,
         marginLeft: -5
+    },
+    profileImage: {
+        width: 60,
+        height: 60,
+        marginRight: 10,
+        borderRadius: 50,
+    },
+    setFlex: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+    viewProfile: {
+        marginRight: 10,
+        marginLeft: 10,
+        marginTop: 10
     }
 })
 
