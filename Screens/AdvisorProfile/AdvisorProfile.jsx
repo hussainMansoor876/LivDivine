@@ -31,8 +31,8 @@ const AdvisorProfile = (props) => {
 
     return (
         <SafeAreaView style={loginStyles.setFlex}>
-            <View style={{ height: Screen.height, backgroundColor: '#000' }}>
-                <TouchableOpacity style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', position: 'absolute', width: 60, height: 60 }}>
+            {showVideo ? <View style={{ height: Screen.height, backgroundColor: '#000' }}>
+                <TouchableOpacity onPress={() => setShowVideo(false)} style={AdvisorStyles.leftIcon}>
                     <Icon
                         type="font-awesome"
                         color="#fff"
@@ -47,8 +47,6 @@ const AdvisorProfile = (props) => {
                         style={AdvisorStyles.ActivityIndicatorStyle}
                     />
                 </View> : null}
-
-
                 <Video
                     source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
                     style={{ marginTop: Screen.height / 4, height: Screen.height / 2, width: Screen.width }}
@@ -56,25 +54,25 @@ const AdvisorProfile = (props) => {
                     resizeMode="stretch"
                     onProgress={updateLoading}
                 />
-            </View>
-            <ScrollView style={loginStyles.setFlex}>
-                <TouchableOpacity onPress={() => setShowVideo(true)} style={{ height: 230, width: Screen.width }}>
-                    <Image
-                        source={{ uri: 'https://res.cloudinary.com/dhspait8a/image/upload/v1595100989/cwbwopm3ys9hpkjaajw1.jpg' }}
-                        style={{ height: 230, width: Screen.width, resizeMode: 'cover' }}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setShowVideo(true)} style={AdvisorStyles.playButton}>
-                    <MaterialIcon style={{ color: '#fff' }} name="play-arrow" size={42} />
-                </TouchableOpacity>
-                <View style={{ ...AdvisorStyles.setFlex, ...AdvisorStyles.viewProfile }}>
-                    <Image
-                        source={{ uri: 'https://res.cloudinary.com/dhspait8a/image/upload/v1595100989/cwbwopm3ys9hpkjaajw1.jpg' }}
-                        style={AdvisorStyles.profileImage}
-                    />
-                    <Text>Mansoor</Text>
-                </View>
-            </ScrollView>
+            </View> :
+                <ScrollView style={loginStyles.setFlex}>
+                    <TouchableOpacity onPress={() => setShowVideo(true)} style={{ height: 230, width: Screen.width }}>
+                        <Image
+                            source={{ uri: 'https://res.cloudinary.com/dhspait8a/image/upload/v1595100989/cwbwopm3ys9hpkjaajw1.jpg' }}
+                            style={{ height: 230, width: Screen.width, resizeMode: 'cover' }}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => setShowVideo(true)} style={AdvisorStyles.playButton}>
+                        <MaterialIcon style={{ color: '#fff' }} name="play-arrow" size={42} />
+                    </TouchableOpacity>
+                    <View style={{ ...AdvisorStyles.setFlex, ...AdvisorStyles.viewProfile }}>
+                        <Image
+                            source={{ uri: 'https://res.cloudinary.com/dhspait8a/image/upload/v1595100989/cwbwopm3ys9hpkjaajw1.jpg' }}
+                            style={AdvisorStyles.profileImage}
+                        />
+                        <Text>Mansoor</Text>
+                    </View>
+                </ScrollView>}
         </SafeAreaView>
     );
 };

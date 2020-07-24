@@ -230,6 +230,15 @@ const AdvisorStyles = StyleSheet.create({
         alignSelf: 'center',
         position: 'absolute',
         marginTop: 80
+    },
+    leftIcon: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        width: 60,
+        height: 60
     }
 })
 
