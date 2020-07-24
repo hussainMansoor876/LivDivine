@@ -16,6 +16,7 @@ const AdvisorProfile = (props) => {
     const dispatch = useDispatch()
     const [isLoading, setLoading] = useState(false)
     const [currentTime, setCurretTime] = useState(0)
+    const [showVideo, setShowVideo] = useState(false)
 
     const updateLoading = (e) => {
         if (currentTime === e.currentTime) {
@@ -30,15 +31,15 @@ const AdvisorProfile = (props) => {
 
     return (
         <SafeAreaView style={loginStyles.setFlex}>
-            {/* <View style={{ height: Screen.height, backgroundColor: '#000' }}>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', position: 'absolute', width: 60, height: 60 }}>
+            <View style={{ height: Screen.height, backgroundColor: '#000' }}>
+                <TouchableOpacity style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', position: 'absolute', width: 60, height: 60 }}>
                     <Icon
                         type="font-awesome"
                         color="#fff"
                         name="chevron-left"
                         iconStyle={{ zIndex: 9999 }}
                     />
-                </View>
+                </TouchableOpacity>
                 {isLoading ? <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height: Screen.height, position: 'absolute' }}>
                     <ActivityIndicator
                         color="#fff"
@@ -55,24 +56,24 @@ const AdvisorProfile = (props) => {
                     resizeMode="stretch"
                     onProgress={updateLoading}
                 />
-            </View> */}
+            </View>
             <ScrollView style={loginStyles.setFlex}>
-                <TouchableOpacity onPress={() => console.log('hello')} style={{ height: 230, width: Screen.width }}>
+                <TouchableOpacity onPress={() => setShowVideo(true)} style={{ height: 230, width: Screen.width }}>
                     <Image
                         source={{ uri: 'https://res.cloudinary.com/dhspait8a/image/upload/v1595100989/cwbwopm3ys9hpkjaajw1.jpg' }}
                         style={{ height: 230, width: Screen.width, resizeMode: 'cover' }}
                     />
                 </TouchableOpacity>
-                <View style={AdvisorStyles.playButton}>
+                <TouchableOpacity onPress={() => setShowVideo(true)} style={AdvisorStyles.playButton}>
                     <MaterialIcon style={{ color: '#fff' }} name="play-arrow" size={42} />
-                </View>
-                {/* <View style={{ ...AdvisorStyles.setFlex, ...AdvisorStyles.viewProfile }}>
+                </TouchableOpacity>
+                <View style={{ ...AdvisorStyles.setFlex, ...AdvisorStyles.viewProfile }}>
                     <Image
                         source={{ uri: 'https://res.cloudinary.com/dhspait8a/image/upload/v1595100989/cwbwopm3ys9hpkjaajw1.jpg' }}
                         style={AdvisorStyles.profileImage}
                     />
                     <Text>Mansoor</Text>
-                </View> */}
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
