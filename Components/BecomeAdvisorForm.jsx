@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Image, Text, Alert, Dimensions } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
-import { Icon, Input, Button, CheckBox } from 'react-native-elements'
+import { Icon, Input, Button, CheckBox, Tile } from 'react-native-elements'
 import Spinner from 'react-native-loading-spinner-overlay';
 import { loginStyles, AdvisorStyles } from '../styles'
 import client from '../Config/apollo'
@@ -15,45 +15,7 @@ import Video from 'react-native-video';
 import MediaMeta from 'react-native-media-meta';
 import RNThumbnail from 'react-native-thumbnail';
 import Screen from '../utils/ScreenDimensions'
-
-const labels = ["General", "Profile", "Instructions", "Intro", "Categories"];
-const customStyles = {
-    stepIndicatorSize: 25,
-    currentStepIndicatorSize: 30,
-    separatorStrokeWidth: 2,
-    currentStepStrokeWidth: 3,
-    stepStrokeCurrentColor: '#fe7013',
-    stepStrokeWidth: 3,
-    stepStrokeFinishedColor: '#fe7013',
-    stepStrokeUnFinishedColor: '#aaaaaa',
-    separatorFinishedColor: '#fe7013',
-    separatorUnFinishedColor: '#aaaaaa',
-    stepIndicatorFinishedColor: '#fe7013',
-    stepIndicatorUnFinishedColor: '#ffffff',
-    stepIndicatorCurrentColor: '#ffffff',
-    stepIndicatorLabelFontSize: 13,
-    currentStepIndicatorLabelFontSize: 13,
-    stepIndicatorLabelCurrentColor: '#fe7013',
-    stepIndicatorLabelFinishedColor: '#ffffff',
-    stepIndicatorLabelUnFinishedColor: '#aaaaaa',
-    labelColor: '#999999',
-    labelSize: 13,
-    currentStepLabelColor: '#fe7013'
-}
-
-const videoOptions = {
-    title: 'Select Video',
-    mediaType: 'video',
-    takePhotoButtonTitle: 'Record Video',
-    durationLimit: 180,
-    allowsEditing: true,
-    thumbnail: true,
-    videoQuality: 'low',
-    storageOptions: {
-        skipBackup: true,
-        path: 'videos'
-    }
-};
+import { customStyles, labels, videoOptions } from '../utils/constant'
 
 const BecomeAdvisorForm = (props) => {
     const { navigation } = props
@@ -62,12 +24,12 @@ const BecomeAdvisorForm = (props) => {
     const [photo, setPhoto] = useState(null)
     const [uploadVideo, setUploadVideo] = useState(null)
     const [state, setState] = useState({
-        userName: '',
-        email: '',
+        userName: user.userName,
+        title: '',
         password: '',
         confirmPass: '',
         userNameErr: '',
-        emailErr: '',
+        titleErr: '',
         passwordErr: '',
         confirmPassErr: '',
         isLoading: false,
@@ -80,7 +42,6 @@ const BecomeAdvisorForm = (props) => {
         }
         ImagePicker.showImagePicker(options, response => {
             if (response.uri) {
-                console.log('response.uri', response.uri)
                 setPhoto(response)
             }
         })
@@ -114,6 +75,23 @@ const BecomeAdvisorForm = (props) => {
             if (response.uri) {
             }
         })
+    }
+
+    const updateFieldSteps = (e) => {
+        const { currentPosition, userName, title } = state
+
+        if (currentPosition === 0) {
+            if (!userName.length || userName.length < 4) {
+                return updateField({ userNameErr: 'Minimum 4 Characters required!' })
+            }
+            else if (!title.length || title.length < 4) {
+                return updateField({ titleErr: 'Minimum 4 Characters required!' })
+            }
+            else if (photo === null) {
+                return Alert.alert('Please upload an image')
+            }
+        }
+
     }
 
     const validateSignup = () => {
@@ -170,7 +148,7 @@ const BecomeAdvisorForm = (props) => {
                     <Input
                         placeholder="Full Name"
                         inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.userNameErr ? 'red' : '#000000' }}
-                        onChangeText={updateField}
+                        onChangeText={e => updateField({ userName: e })}
                         value={state.userName}
                         errorMessage={state.userNameErr}
                         onFocus={() => updateField({ userNameErr: '' })}
@@ -185,12 +163,11 @@ const BecomeAdvisorForm = (props) => {
                     />
                     <Input
                         placeholder="Title"
-                        secureTextEntry={true}
-                        inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
-                        onChangeText={e => updateField({ password: e })}
-                        value={state.password}
-                        errorMessage={state.passwordErr}
-                        onFocus={() => updateField({ passwordErr: '' })}
+                        inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.titleErr ? 'red' : '#000000' }}
+                        onChangeText={e => updateField({ title: e })}
+                        value={state.title}
+                        errorMessage={state.titleErr}
+                        onFocus={() => updateField({ titleErr: '' })}
                         leftIcon={
                             <FontIcon
                                 name='slack'
@@ -261,7 +238,7 @@ const BecomeAdvisorForm = (props) => {
                 }
                     buttonStyle={{ width: 150 }}
                     disabled={!state.currentPosition}
-                    onPress={() => updateField({ currentPosition: state.currentPosition - 1 })}
+                    onPress={() => updateFieldSteps('left')}
                 />
                 <Button icon={
                     <FontIcon
@@ -271,7 +248,7 @@ const BecomeAdvisorForm = (props) => {
                     />
                 }
                     buttonStyle={{ width: 150 }}
-                    onPress={() => updateField({ currentPosition: state.currentPosition + 1 })}
+                    onPress={() => updateFieldSteps('right')}
                     disabled={state.currentPosition === 5}
                 />
             </View>
