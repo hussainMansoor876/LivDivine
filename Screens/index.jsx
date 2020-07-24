@@ -7,6 +7,7 @@ import Home from './Home/Home'
 import Journey from './Journey/Journey'
 import Settings from './Settings/Settings'
 import BecomeAdvisor from './BecomeAdvisor/BecomeAdvisor'
+import AdvisorProfile from './AdvisorProfile/AdvisorProfile'
 
 export {
     Login,
@@ -17,5 +18,6 @@ export {
     Home,
     Journey,
     Settings,
-    BecomeAdvisor
+    BecomeAdvisor,
+    AdvisorProfile
 }

@@ -69,7 +69,7 @@ const SettingsForm = (props) => {
     }
 
     const handleUpload = (image) => {
-        const data = new FormData()
+        const data = new FormData() 
         data.append('file', image)
         data.append('upload_preset', 'livdivine')
         data.append("cloud_name", "dzkbtggax")
