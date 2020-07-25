@@ -39,7 +39,8 @@ const BecomeAdvisorForm = (props) => {
         aboutServiceErr: '',
         aboutMeErr: '',
         isLoading: false,
-        currentPosition: 0
+        currentPosition: 0,
+        thumbnail: null
     })
 
     const handleChoosePhoto = () => {
@@ -84,10 +85,11 @@ const BecomeAdvisorForm = (props) => {
                             setUploadVideo(response)
                             RNThumbnail.get(response.path)
                                 .then((result) => {
-                                    setPhoto(result.path)
+                                    console.log('result', result)
                                 })
                         }
-                    }).catch(err => console.error(err));
+                    })
+                    .catch(err => console.error(err));
             }
             if (response.uri) {
             }
