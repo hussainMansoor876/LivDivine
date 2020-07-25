@@ -18,6 +18,8 @@ import Screen from '../utils/ScreenDimensions'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { customStyles, labels, videoOptions } from '../utils/constant'
 import { SafeAreaView } from 'react-native-safe-area-context';
+import RNFetchBlob from 'react-native-fetch-blob'
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const BecomeAdvisorForm = (props) => {
@@ -43,6 +45,15 @@ const BecomeAdvisorForm = (props) => {
         thumbnail: null
     })
 
+    const uploadFile = (file) => {
+        console.log('file', file)
+        return RNFetchBlob.fetch('POST', 'https://api.cloudinary.com/v1_1/dzkbtggax/image/upload?upload_preset=livdivine', {
+            'Content-Type': 'multipart/form-data'
+        }, [
+            { name: 'file', filename: file.fileName, data: RNFetchBlob.wrap(file.uri) }
+        ])
+    }
+
     const handleChoosePhoto = () => {
         const options = {
             noData: true,
@@ -50,6 +61,7 @@ const BecomeAdvisorForm = (props) => {
         ImagePicker.showImagePicker(options, response => {
             if (response.uri) {
                 setPhoto(response)
+                console.log('response', response)
             }
         })
     }
@@ -84,8 +96,17 @@ const BecomeAdvisorForm = (props) => {
                         } else {
                             setUploadVideo(response)
                             RNThumbnail.get(response.path)
-                                .then((result) => {
-                                    console.log('result', result)
+                                .then((res) => {
+                                    var updatedData = {
+                                        uri: res.path,
+                                        fileName: res.path
+                                    }
+                                    uploadFile(updatedData)
+                                        .then(response => response.json())
+                                        .then((result) => {
+                                            console.log('result', result)
+                                        })
+                                        .catch((e) => console.log('e', e.message))
                                 })
                         }
                     })
@@ -192,7 +213,7 @@ const BecomeAdvisorForm = (props) => {
                     onProgress={updateLoading}
                 />
             </View> :
-                <View style={loginStyles.loginView}>
+                <ScrollView style={loginStyles.loginView}>
                     <Spinner
                         visible={state.isLoading}
                         textContent={'Loading...'}
@@ -320,7 +341,7 @@ const BecomeAdvisorForm = (props) => {
                             disabled={state.currentPosition === 5}
                         />
                     </View>
-                </View>}
+                </ScrollView>}
         </SafeAreaView>
     );
 };
