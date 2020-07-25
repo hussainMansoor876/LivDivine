@@ -101,12 +101,13 @@ const BecomeAdvisorForm = (props) => {
                                         uri: res.path,
                                         fileName: res.path
                                     }
-                                    uploadFile(updatedData)
-                                        .then(response => response.json())
-                                        .then((result) => {
-                                            console.log('result', result)
-                                        })
-                                        .catch((e) => console.log('e', e.message))
+                                    updateField({ thumbnail: updatedData })
+                                    // uploadFile(updatedData)
+                                    //     .then(response => response.json())
+                                    //     .then((result) => {
+                                    //         console.log('result', result)
+                                    //     })
+                                    //     .catch((e) => console.log('e', e.message))
                                 })
                         }
                     })
@@ -206,7 +207,7 @@ const BecomeAdvisorForm = (props) => {
                     />
                 </View> : null}
                 <Video
-                    source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
+                    source={{ uri: uploadVideo.uri }}
                     style={{ marginTop: Screen.height / 4, height: Screen.height / 2, width: Screen.width }}
                     controls
                     resizeMode="stretch"
@@ -290,19 +291,11 @@ const BecomeAdvisorForm = (props) => {
                         </View> : state.currentPosition === 2 ? <View>
 
                         </View> : state.currentPosition === 3 ? <View>
-                            {uploadVideo ? <Video
-                                source={{ uri: uploadVideo.uri }}
-                                style={{ height: Screen.height / 3 }}
-                                resizeMode="contain"
-                                controls={true}
-                                paused={true}
-                                thu
-                            /> : null}
-                            {!photo && (
+                            {state.thumbnail && (
                                 <View style={{ justifyContent: 'center' }}>
                                     <TouchableOpacity onPress={() => setShowVideo(true)} style={{ height: 230, width: Screen.width }}>
                                         <Image
-                                            source={{ uri: 'https://res.cloudinary.com/dhspait8a/image/upload/v1595100989/cwbwopm3ys9hpkjaajw1.jpg' }}
+                                            source={{ uri: state.thumbnail.uri }}
                                             style={{ height: 230, width: Screen.width, resizeMode: 'cover' }}
                                         />
                                     </TouchableOpacity>
