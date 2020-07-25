@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, Text, Alert, Dimensions } from 'react-native';
+import { View, Image, Text, Alert, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Icon, Input, Button, CheckBox, Tile } from 'react-native-elements'
@@ -15,7 +15,9 @@ import Video from 'react-native-video';
 import MediaMeta from 'react-native-media-meta';
 import RNThumbnail from 'react-native-thumbnail';
 import Screen from '../utils/ScreenDimensions'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { customStyles, labels, videoOptions } from '../utils/constant'
+
 
 const BecomeAdvisorForm = (props) => {
     const { navigation } = props
@@ -82,25 +84,25 @@ const BecomeAdvisorForm = (props) => {
         if (e === 'left') {
             return updateField({ currentPosition: currentPosition - 1 })
         }
-        if (currentPosition === 0) {
-            if (!userName.length || userName.length < 4) {
-                return updateField({ userNameErr: 'Minimum 4 Characters required!' })
-            }
-            else if (!title.length || title.length < 4) {
-                return updateField({ titleErr: 'Minimum 4 Characters required!' })
-            }
-            else if (photo === null) {
-                return Alert.alert('Please upload an image')
-            }
-        }
-        else if (currentPosition === 1) {
-            if (!userName.length || userName.length < 4) {
-                return updateField({ userNameErr: 'Minimum 4 Characters required!' })
-            }
-            else if (!title.length || title.length < 4) {
-                return updateField({ titleErr: 'Minimum 4 Characters required!' })
-            }
-        }
+        // if (currentPosition === 0) {
+        //     if (!userName.length || userName.length < 4) {
+        //         return updateField({ userNameErr: 'Minimum 4 Characters required!' })
+        //     }
+        //     else if (!title.length || title.length < 4) {
+        //         return updateField({ titleErr: 'Minimum 4 Characters required!' })
+        //     }
+        //     else if (photo === null) {
+        //         return Alert.alert('Please upload an image')
+        //     }
+        // }
+        // else if (currentPosition === 1) {
+        //     if (!userName.length || userName.length < 4) {
+        //         return updateField({ userNameErr: 'Minimum 4 Characters required!' })
+        //     }
+        //     else if (!title.length || title.length < 4) {
+        //         return updateField({ titleErr: 'Minimum 4 Characters required!' })
+        //     }
+        // }
         if (e === 'right') {
             updateField({ currentPosition: currentPosition + 1 })
         }
@@ -228,11 +230,18 @@ const BecomeAdvisorForm = (props) => {
                         paused={true}
                         thu
                     /> : null}
-                    {photo && (
-                        <Image
-                            source={{ uri: photo }}
-                            style={{ width: 150, height: 150, marginRight: 10, marginLeft: 10, borderRadius: 250 }}
-                        />
+                    {!photo && (
+                        <View style={{ justifyContent: 'center' }}>
+                            <TouchableOpacity onPress={() => setShowVideo(true)} style={{ height: 230, width: Screen.width }}>
+                                <Image
+                                    source={{ uri: 'https://res.cloudinary.com/dhspait8a/image/upload/v1595100989/cwbwopm3ys9hpkjaajw1.jpg' }}
+                                    style={{ height: 230, width: Screen.width, resizeMode: 'cover' }}
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => setShowVideo(true)} style={AdvisorStyles.playButton}>
+                                <MaterialIcon style={{ color: '#fff' }} name="play-arrow" size={42} />
+                            </TouchableOpacity>
+                        </View>
                     )}
                     <Button title="Record or Choose Video" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChooseVideo} />
                     <Text>Briefly tell potential clients about your service. Make sure that the video and the audio clear and give it your best effort</Text>

@@ -6,7 +6,6 @@ import { LoginForm, SocialLogin, SettingsForm, ChangePassword } from '../../Comp
 import { loginStyles, AdvisorStyles } from '../../styles'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { Icon } from 'react-native-elements'
-import VideoPlayer from 'react-native-video-player'
 import Video from 'react-native-video';
 import Screen from '../../utils/ScreenDimensions'
 
