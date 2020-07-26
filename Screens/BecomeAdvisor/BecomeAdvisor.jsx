@@ -21,7 +21,7 @@ const BecomeAdvisor = (props) => {
                     source={logo}
                     style={loginStyles.AdvisorLogoImg}
                 /> */}
-                <BecomeAdvisorForm />
+                <BecomeAdvisorForm {...props} />
             </ScrollView>
         </SafeAreaView>
     );

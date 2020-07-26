@@ -6,7 +6,7 @@ import { Icon, Input, Button, ListItem, Image } from 'react-native-elements'
 import Spinner from 'react-native-loading-spinner-overlay';
 import { loginStyles, AdvisorStyles } from '../styles'
 import client from '../Config/apollo'
-import { SIGN_UP } from '../utils/authQueries'
+import { BECOME_ADVISOR } from '../utils/authQueries'
 import { categoriesArray } from '../utils/constant'
 import FontIcon from 'react-native-vector-icons/FontAwesome';
 import StepIndicator from 'react-native-step-indicator';
@@ -25,6 +25,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const BecomeAdvisorForm = (props) => {
     const { navigation } = props
+    // console.log('navigation', navigation.navigate('Home'))
     const user = useSelector(state => state.authReducer.user)
     const dispatch = useDispatch();
     const [photo, setPhoto] = useState(user.image === null ? null : user.image)
@@ -47,6 +48,22 @@ const BecomeAdvisorForm = (props) => {
         currentPosition: 0,
         thumbnail: null
     })
+
+    const updateServer = (obj) => {
+        client.mutate({ variables: obj, mutation: BECOME_ADVISOR })
+            .then((res) => {
+                updateField({ isLoading: false })
+                const { becomeAdvisor } = res.data
+                if (becomeAdvisor.success) {
+                    dispatch(loginUser(becomeAdvisor.user))
+                    Alert.alert('Successfully Update Settings!')
+                }
+                else {
+                    Alert.alert(becomeAdvisor.message)
+                }
+            })
+            .catch((e) => Alert.alert('Oops Something Went Wrong!'))
+    }
 
 
     const uploadFile = (file) => {

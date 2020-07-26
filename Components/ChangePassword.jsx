@@ -27,10 +27,9 @@ const SettingsForm = (props) => {
             .then((res) => {
                 updateField({ isLoading: false })
                 const { updatePassword } = res.data
-                console.log('updatePassword', updatePassword)
                 if (updatePassword.success) {
                     dispatch(loginUser(updatePassword.user))
-                    Alert.alert('Successfully Update Settings!')
+                    Alert.alert('Successfully Update Password!')
                     setState({})
                 }
                 else {

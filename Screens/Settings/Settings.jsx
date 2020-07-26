@@ -13,7 +13,6 @@ import { Icon } from 'react-native-elements'
 const Settings = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch();
-    console.log(user.authType)
     return (
         <SafeAreaView style={loginStyles.setFlex}>
             <ScrollView style={loginStyles.setFlex}>

@@ -64,7 +64,7 @@ mutation($id: String!, $currentPassword: String!, $password: String!){
 
 const BECOME_ADVISOR = gql`
 mutation($id: String, $userName: String!, $title: String!, $image: String!, $thumbnail: String!, $aboutService: String!, $aboutMe: String!) {
-  becomeAdvisor(id: $id, userName: $userName, title: $title, image: $image, aboutService: $aboutService, aboutMe: $aboutMe, isAdvisor: true, isOnline: true, videoThumbnail: $thumbnail){
+  becomeAdvisor(id: $id, userName: $userName, title: $title, image: $image, aboutService: $aboutService, aboutMe: $aboutMe, isAdvisor: true, isOnline: true, videoThumbnail: $thumbnail, isApproved: true){
     token, message, success, user {
       id, userName, email, role, image, isVerified, isOnline, authType, title, image,
         aboutService, aboutMe, isAdvisor, isApproved, videoThumbnail
@@ -78,5 +78,6 @@ export {
   LOGIN,
   SOCIAL_LOGIN,
   UPDATE_USER,
-  UPDATE_PASSWORD
+  UPDATE_PASSWORD,
+  BECOME_ADVISOR
 }
