@@ -16,7 +16,7 @@ import MediaMeta from 'react-native-media-meta';
 import RNThumbnail from 'react-native-thumbnail';
 import Screen from '../utils/ScreenDimensions'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import { customStyles, labels, videoOptions } from '../utils/constant'
+import { customStyles, labels, videoOptions, orderTypes } from '../utils/constant'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import RNFetchBlob from 'react-native-fetch-blob'
 import { ScrollView } from 'react-native-gesture-handler';
@@ -198,6 +198,16 @@ const BecomeAdvisorForm = (props) => {
         setShowVideo(false)
         setLoading(true)
     }
+
+    const viewList = (v) => {
+        return (
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text>{v.subtitle}</Text>
+                <Text>{v.price}</Text>
+            </View>
+        )
+    }
+
     return (
         <SafeAreaView style={loginStyles.setFlex}>
             {showVideo ? <View style={{ height: Screen.height, backgroundColor: '#000' }}>
@@ -299,7 +309,19 @@ const BecomeAdvisorForm = (props) => {
                                 onFocus={() => updateField({ aboutMeErr: '' })}
                             />
                         </View> : state.currentPosition === 2 ? <View>
-
+                            <Text style={{ textAlign: 'center' }}>Select Minimum 1 Order Type</Text>
+                            {orderTypes.map((v, i) => {
+                                return (
+                                    <ListItem
+                                        key={i}
+                                        // leftAvatar={{ source: { uri: l.avatar_url } }}
+                                        title={v.title}
+                                        subtitle={viewList(v)}
+                                        bottomDivider
+                                    // checkmark={categoriesData[v.name.toLocaleLowerCase().replace(' ', '_')]}
+                                    />
+                                )
+                            })}
                         </View> : state.currentPosition === 3 ? <View>
                             {state.thumbnail && (
                                 <View style={{ justifyContent: 'center' }}>
