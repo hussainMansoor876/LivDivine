@@ -12,25 +12,42 @@ import FontIcon from 'react-native-vector-icons/FontAwesome';
 const SettingsForm = (props) => {
     const dispatch = useDispatch();
     const [state, setState] = useState({
-        userName: '',
-        email: '',
+        currentPassword: '',
         password: '',
         confirmPass: '',
-        userNameErr: '',
-        emailErr: '',
+        currentPassErr: '',
         passwordErr: '',
         confirmPassErr: '',
         isLoading: false
     })
 
+    const updateServer = (obj) => {
+        client.mutate({ variables: obj, mutation: UPDATE_USER })
+            .then((res) => {
+                updateField({ isLoading: false })
+                const { updateUser } = res.data
+                if (updateUser.success) {
+                    dispatch(loginUser(updateUser.user))
+                    Alert.alert('Successfully Update Settings!')
+                }
+                else {
+                    Alert.alert('Oops Something Went Wrong!')
+                }
+            })
+            .catch((e) => Alert.alert('Oops Something Went Wrong!'))
+    }
+
     const validateLogin = () => {
         const { email, password } = state
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (reg.test(email) === false) {
-            return updateField({ emailErr: 'Invalid Email!' })
+        if (!currentPassword.length || currentPassword.length < 6) {
+            return updateField({ passwordErr: 'Password length must be 6 Characters!' })
         }
         else if (!password.length || password.length < 6) {
             return updateField({ passwordErr: 'Password length must be 6 Characters!' })
+        }
+        else if (password !== confirmPass) {
+            return updateField({ confirmPassErr: 'Password did not match!' })
         }
         updateField({ isLoading: true })
         client.mutate({ variables: { email, password }, mutation: LOGIN })

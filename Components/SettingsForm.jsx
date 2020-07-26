@@ -21,7 +21,6 @@ const SettingsForm = (props) => {
         photo: user.image ? user.image : null
     })
 
-    console.log('state', state.photo)
 
     const updateServer = (obj) => {
         client.mutate({ variables: obj, mutation: UPDATE_USER })
