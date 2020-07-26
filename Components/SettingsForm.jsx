@@ -80,9 +80,10 @@ const SettingsForm = (props) => {
             width: 300,
             height: 400,
             cropping: true
-        }).then(image => {
-            updateField({ photo: image.path })
-        });
+        })
+            .then(image => {
+                updateField({ photo: image.path })
+            });
         // ImagePicker.showImagePicker(options, response => {
         //     console.log('response', response)
         //     if (response.uri) {

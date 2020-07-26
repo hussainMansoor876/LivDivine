@@ -11,6 +11,7 @@ import { categoriesArray } from '../utils/constant'
 import FontIcon from 'react-native-vector-icons/FontAwesome';
 import StepIndicator from 'react-native-step-indicator';
 import ImagePicker from 'react-native-image-picker';
+import ImageCropPicker from 'react-native-image-crop-picker';
 import Video from 'react-native-video';
 import MediaMeta from 'react-native-media-meta';
 import RNThumbnail from 'react-native-thumbnail';
@@ -60,12 +61,14 @@ const BecomeAdvisorForm = (props) => {
         const options = {
             noData: true,
         }
-        ImagePicker.showImagePicker(options, response => {
-            if (response.uri) {
-                setPhoto(response)
-                console.log('response', response)
-            }
+        ImageCropPicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true
         })
+            .then(image => {
+                setPhoto(image.path)
+            })
     }
 
     const updateLoading = (e) => {
