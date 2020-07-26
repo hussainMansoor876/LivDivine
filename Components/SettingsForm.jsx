@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, Alert } from 'react-native';
+import { View, TouchableOpacity, Text, Alert, Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
 import { Input, Button, Icon } from 'react-native-elements'
@@ -17,18 +17,12 @@ const SettingsForm = (props) => {
     const [state, setState] = useState({
         userName: user.userName,
         userNameErr: '',
-        isLoading: false
+        isLoading: false,
+        photo: null
     })
 
-
-    const validateLogin = () => {
-        const { userName } = state
-        const { id } = user
-        if (!userName.length || userName.length < 4) {
-            return updateField({ userNameErr: 'Minimum 4 Characters required!' })
-        }
-        updateField({ isLoading: true })
-        client.mutate({ variables: { id, userName }, mutation: UPDATE_USER })
+    const updateServer = (obj) => {
+        client.mutate({ variables: obj, mutation: UPDATE_USER })
             .then((res) => {
                 updateField({ isLoading: false })
                 const { updateUser } = res.data
@@ -42,6 +36,38 @@ const SettingsForm = (props) => {
             .catch((e) => Alert.alert('Oops Something Went Wrong!'))
     }
 
+
+    const updateSetting = async () => {
+        const { userName, photo } = state
+        const { id } = user
+        if (!userName.length || userName.length < 4) {
+            return updateField({ userNameErr: 'Minimum 4 Characters required!' })
+        }
+        updateField({ isLoading: true })
+        if (photo) {
+            if (photo.indexOf('https://res.cloudinary.com') === -1) {
+                uploadFile(photo)
+                    .then(response => response.json())
+                    .then((result) => {
+                        updateServer({ id, userName, photo: result.secure_url })
+                        updateField({ photo: result.secure_url, isLoading: false })
+                    })
+                    .catch((e) => {
+                        Alert.alert('Oops Something Went Wrong!')
+                        updateField({ isLoading: false })
+                    })
+            }
+            else {
+                updateServer({ id, userName })
+                updateField({ isLoading: false })
+            }
+
+        }
+        else {
+            updateServer({ id, userName })
+        }
+    }
+
     const handleChoosePhoto = async () => {
         const options = {
             noData: true,
@@ -49,12 +75,7 @@ const SettingsForm = (props) => {
         }
         ImagePicker.showImagePicker(options, response => {
             if (response.uri) {
-                uploadFile(response)
-                    .then(response => response.json())
-                    .then((result) => {
-                        console.log('result', result)
-                    })
-                    .catch((e) => console.log('e', e.message))
+                updateField({ photo: response.uri })
             }
         })
     }
@@ -64,27 +85,8 @@ const SettingsForm = (props) => {
         return RNFetchBlob.fetch('POST', 'https://api.cloudinary.com/v1_1/dzkbtggax/image/upload?upload_preset=livdivine', {
             'Content-Type': 'multipart/form-data'
         }, [
-            { name: 'file', filename: file.fileName, data: RNFetchBlob.wrap(file.uri) }
+            { name: 'file', filename: 'abc', data: RNFetchBlob.wrap(file) }
         ])
-    }
-
-    const handleUpload = (image) => {
-        const data = new FormData() 
-        data.append('file', image)
-        data.append('upload_preset', 'livdivine')
-        data.append("cloud_name", "dzkbtggax")
-        fetch("https://api.cloudinary.com/v1_1/dzkbtggax/upload", {
-            method: "post",
-            body: data
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log('data', data)
-            })
-            .catch(err => {
-                console.log('err', err)
-                Alert.alert("An Error Occured While Uploading")
-            })
     }
 
     const updateField = (obj) => {
@@ -102,6 +104,12 @@ const SettingsForm = (props) => {
                 textStyle={loginStyles.spinnerTextStyle}
             />
             <Text style={settingsStyles.textStyle}>Profile Setting</Text>
+            {state.photo && (
+                <Image
+                    source={{ uri: state.photo }}
+                    style={{ width: 150, height: 150, marginRight: 10, marginLeft: 10, borderRadius: 250 }}
+                />
+            )}
             <Button title="Choose Photo" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChoosePhoto} />
             <Input
                 placeholder="User Name"
@@ -148,7 +156,7 @@ const SettingsForm = (props) => {
             <Button
                 title="UPDATE SETTING"
                 buttonStyle={loginStyles.loginBtn}
-                onPress={validateLogin}
+                onPress={updateSetting}
             />
         </View>
     );

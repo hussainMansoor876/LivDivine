@@ -51,8 +51,8 @@ mutation($email: String!, $pasword: String!){
 `
 
 const UPDATE_USER = gql`
-mutation($id: String!, $userName: String){
-  updateUser(id: $id, userName: $userName){
+mutation($id: String!, $userName: String, $photo: String){
+  updateUser(id: $id, userName: $userName, image: $photo){
     token, message, success, user {
       id, userName, email, role, image, isVerified, isOnline, authType, title, image,
         aboutService, aboutMe, isAdvisor, isApproved
