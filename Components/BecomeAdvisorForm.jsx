@@ -32,6 +32,7 @@ const BecomeAdvisorForm = (props) => {
     const [isLoadingVideo, setLoading] = useState(true)
     const [currentTime, setCurretTime] = useState(0)
     const [categoriesData, setCategories] = useState({})
+    const [ordersData, setOrders] = useState({})
     const [state, setState] = useState({
         userName: user.userName,
         title: '',
@@ -199,10 +200,17 @@ const BecomeAdvisorForm = (props) => {
         setLoading(true)
     }
 
+    const updateOrders = (obj) => {
+        setOrders({
+            ...ordersData,
+            ...obj
+        })
+    }
+
     const viewList = (v) => {
         return (
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text>{v.subtitle}</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: Screen.width - 90 }}>
+                <Text style={{ fontSize: 12 }}>{v.subtitle}</Text>
                 <Text>{v.price}</Text>
             </View>
         )
@@ -312,14 +320,16 @@ const BecomeAdvisorForm = (props) => {
                             <Text style={{ textAlign: 'center' }}>Select Minimum 1 Order Type</Text>
                             {orderTypes.map((v, i) => {
                                 return (
-                                    <ListItem
-                                        key={i}
-                                        // leftAvatar={{ source: { uri: l.avatar_url } }}
-                                        title={v.title}
-                                        subtitle={viewList(v)}
-                                        bottomDivider
-                                    // checkmark={categoriesData[v.name.toLocaleLowerCase().replace(' ', '_')]}
-                                    />
+                                    <TouchableOpacity onPress={() => updateOrders({ [v.title.toLocaleLowerCase().replace(' ', '_')]: !ordersData[v.title.toLocaleLowerCase().replace(' ', '_')] })}>
+                                        <ListItem
+                                            key={i}
+                                            // leftAvatar={{ source: { uri: l.avatar_url } }}
+                                            title={v.title}
+                                            subtitle={viewList(v)}
+                                            bottomDivider
+                                            checkmark={ordersData[v.title.toLocaleLowerCase().replace(' ', '_')]}
+                                        />
+                                    </TouchableOpacity>
                                 )
                             })}
                         </View> : state.currentPosition === 3 ? <View>

@@ -77,17 +77,17 @@ const orderTypes = [
     },
     {
         title: 'Live chat',
-        subtitle: 'Live caht reading - right now, no wait',
+        subtitle: 'Live caht reading - right now',
         price: '$0.99/min'
     },
     {
         title: 'Live video call',
-        subtitle: 'Live video reading - right now, no wait',
+        subtitle: 'Live video reading - right now',
         price: '$3.99/min'
     },
     {
         title: 'Live audio call',
-        subtitle: 'Live audio reading - right now, no wait',
+        subtitle: 'Live audio reading - right now',
         price: '$1.99/min'
     }
 ]
