@@ -38,8 +38,35 @@ const videoOptions = {
     }
 };
 
+const categoriesArray = [
+    {
+        name: 'Tarot readings'
+    },
+    {
+        name: 'Psychic readings'
+    }, {
+        name: 'Relationship coaching'
+    },
+    {
+        name: 'Palm readings'
+    },
+    {
+        name: 'Astrology & Horoscopes'
+    },
+    {
+        name: 'Oracle guidance'
+    },
+    {
+        name: 'Angel insights'
+    },
+    {
+        name: 'Dream Analysis'
+    }
+]
+
 export {
     customStyles,
     labels,
-    videoOptions
+    videoOptions,
+    categoriesArray
 }

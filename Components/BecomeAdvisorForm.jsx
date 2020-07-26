@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { View, Image, Text, Alert, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
-import { Icon, Input, Button, CheckBox, Tile } from 'react-native-elements'
+import { Icon, Input, Button, ListItem, CheckBox } from 'react-native-elements'
 import Spinner from 'react-native-loading-spinner-overlay';
 import { loginStyles, AdvisorStyles } from '../styles'
 import client from '../Config/apollo'
 import { SIGN_UP } from '../utils/authQueries'
-import categoriesData from '../utils/categoriesData'
+import { categoriesArray } from '../utils/constant'
 import FontIcon from 'react-native-vector-icons/FontAwesome';
 import StepIndicator from 'react-native-step-indicator';
 import ImagePicker from 'react-native-image-picker';
@@ -31,6 +31,7 @@ const BecomeAdvisorForm = (props) => {
     const [showVideo, setShowVideo] = useState(false)
     const [isLoadingVideo, setLoading] = useState(true)
     const [currentTime, setCurretTime] = useState(0)
+    const [categoriesData, setCategories] = useState({})
     const [state, setState] = useState({
         userName: user.userName,
         title: '',
@@ -73,7 +74,6 @@ const BecomeAdvisorForm = (props) => {
         else {
             setLoading(false)
         }
-
         setCurretTime(e.currentTime)
     }
 
@@ -184,6 +184,16 @@ const BecomeAdvisorForm = (props) => {
         })
     }
 
+    const updateCategories = (obj) => {
+        if (Object.values(categoriesData).filter(v => v).length >= 3) {
+            return Alert.alert('Maximum 3 categories Allowed!')
+        }
+        setCategories({
+            ...categoriesData,
+            ...obj
+        })
+    }
+
     const goBack = () => {
         setShowVideo(false)
         setLoading(true)
@@ -210,7 +220,7 @@ const BecomeAdvisorForm = (props) => {
                     source={{ uri: uploadVideo.uri }}
                     style={{ marginTop: Screen.height / 4, height: Screen.height / 2, width: Screen.width }}
                     controls
-                    resizeMode="stretch"
+                    resizeMode="contain"
                     onProgress={updateLoading}
                 />
             </View> :
@@ -307,7 +317,20 @@ const BecomeAdvisorForm = (props) => {
                             <Button title="Record or Choose Video" buttonStyle={{ ...loginStyles.loginBtn, width: 150 }} onPress={handleChooseVideo} />
                             <Text>Briefly tell potential clients about your service. Make sure that the video and the audio clear and give it your best effort</Text>
                         </View> : state.currentPosition === 4 ? <View>
-
+                            <Text style={{ textAlign: 'center' }}>Select Categories (3 Max)</Text>
+                            {categoriesArray.map((v, i) => {
+                                return (
+                                    <TouchableOpacity onPress={() => updateCategories({ [v.name.toLocaleLowerCase().replace(' ', '_')]: !categoriesData[v.name.toLocaleLowerCase().replace(' ', '_')] })}>
+                                        <ListItem
+                                            key={i}
+                                            // leftAvatar={{ source: { uri: l.avatar_url } }}
+                                            title={v.name}
+                                            bottomDivider
+                                            checkmark={categoriesData[v.name.toLocaleLowerCase().replace(' ', '_')]}
+                                        />
+                                    </TouchableOpacity>
+                                )
+                            })}
                         </View> : null}
                     </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
