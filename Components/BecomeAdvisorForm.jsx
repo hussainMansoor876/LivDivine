@@ -124,29 +124,43 @@ const BecomeAdvisorForm = (props) => {
         if (e === 'left') {
             return updateField({ currentPosition: currentPosition - 1 })
         }
-        // if (currentPosition === 0) {
-        //     if (!userName.length || userName.length < 4) {
-        //         return updateField({ userNameErr: 'Minimum 4 Characters required!' })
-        //     }
-        //     else if (!title.length || title.length < 4) {
-        //         return updateField({ titleErr: 'Minimum 4 Characters required!' })
-        //     }
-        //     else if (photo === null) {
-        //         return Alert.alert('Please upload an image')
-        //     }
-        // }
-        // else if (currentPosition === 1) {
-        //     if (!userName.length || userName.length < 4) {
-        //         return updateField({ userNameErr: 'Minimum 4 Characters required!' })
-        //     }
-        //     else if (!title.length || title.length < 4) {
-        //         return updateField({ titleErr: 'Minimum 4 Characters required!' })
-        //     }
-        // }
+        if (currentPosition === 0) {
+            if (!userName.length || userName.length < 4) {
+                return updateField({ userNameErr: 'Minimum 4 Characters required!' })
+            }
+            else if (!title.length || title.length < 4) {
+                return updateField({ titleErr: 'Minimum 4 Characters required!' })
+            }
+            else if (photo === null) {
+                return Alert.alert('Please upload an image!')
+            }
+        }
+        else if (currentPosition === 1) {
+            if (!userName.length || userName.length < 4) {
+                return updateField({ userNameErr: 'Minimum 4 Characters required!' })
+            }
+            else if (!title.length || title.length < 4) {
+                return updateField({ titleErr: 'Minimum 4 Characters required!' })
+            }
+        }
+        else if (currentPosition === 2 && !getObjLength(ordersData)) {
+            return Alert.alert('Please select minimum 1 order!')
+        }
+        else if (currentPosition === 3 && !uploadVideo) {
+            return Alert.alert('Please record or upload video!')
+        }
+        else if (currentPosition === 4 && !getObjLength(categoriesData)) {
+            return Alert.alert('Please select minimum 1 category!')
+        }
+        else {
+
+        }
         if (e === 'right') {
             updateField({ currentPosition: currentPosition + 1 })
         }
     }
+
+    const getObjLength = (obj) => Object.values(obj).filter(v => v).length
 
     const validateSignup = () => {
         const { userName, email, password, confirmPass } = state
@@ -186,7 +200,7 @@ const BecomeAdvisorForm = (props) => {
     }
 
     const updateCategories = (obj) => {
-        if (Object.values(categoriesData).filter(v => v).length >= 3) {
+        if (getObjLength(categoriesData) >= 3) {
             return Alert.alert('Maximum 3 categories Allowed!')
         }
         setCategories({
@@ -320,14 +334,14 @@ const BecomeAdvisorForm = (props) => {
                             <Text style={{ textAlign: 'center' }}>Select Minimum 1 Order Type</Text>
                             {orderTypes.map((v, i) => {
                                 return (
-                                    <TouchableOpacity onPress={() => updateOrders({ [v.title.toLocaleLowerCase().replace(' ', '_')]: !ordersData[v.title.toLocaleLowerCase().replace(' ', '_')] })}>
+                                    <TouchableOpacity onPress={() => updateOrders({ [v.title]: !ordersData[v.title] })}>
                                         <ListItem
                                             key={i}
                                             // leftAvatar={{ source: { uri: l.avatar_url } }}
                                             title={v.title}
                                             subtitle={viewList(v)}
                                             bottomDivider
-                                            checkmark={ordersData[v.title.toLocaleLowerCase().replace(' ', '_')]}
+                                            checkmark={ordersData[v.title]}
                                         />
                                     </TouchableOpacity>
                                 )
@@ -352,13 +366,13 @@ const BecomeAdvisorForm = (props) => {
                             <Text style={{ textAlign: 'center' }}>Select Categories (3 Max)</Text>
                             {categoriesArray.map((v, i) => {
                                 return (
-                                    <TouchableOpacity onPress={() => updateCategories({ [v.name.toLocaleLowerCase().replace(' ', '_')]: !categoriesData[v.name.toLocaleLowerCase().replace(' ', '_')] })}>
+                                    <TouchableOpacity onPress={() => updateCategories({ [v.name]: !categoriesData[v.name] })}>
                                         <ListItem
                                             key={i}
                                             // leftAvatar={{ source: { uri: l.avatar_url } }}
                                             title={v.name}
                                             bottomDivider
-                                            checkmark={categoriesData[v.name.toLocaleLowerCase().replace(' ', '_')]}
+                                            checkmark={categoriesData[v.name]}
                                         />
                                     </TouchableOpacity>
                                 )
