@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, Alert, Image } from 'react-native';
+import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
-import { Input, Button, Icon } from 'react-native-elements'
+import { Input, Button, Icon, Image } from 'react-native-elements'
 import client from '../Config/apollo'
 import { loginStyles, settingsStyles } from '../styles'
 import Spinner from 'react-native-loading-spinner-overlay';
 import { UPDATE_USER } from '../utils/authQueries'
 import FontIcon from 'react-native-vector-icons/FontAwesome';
-import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 import RNFetchBlob from 'react-native-fetch-blob'
 
 const SettingsForm = (props) => {
@@ -77,11 +77,19 @@ const SettingsForm = (props) => {
             noData: true,
             quality: 0.5
         }
-        ImagePicker.showImagePicker(options, response => {
-            if (response.uri) {
-                updateField({ photo: response.uri })
-            }
-        })
+        ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true
+        }).then(image => {
+            updateField({ photo: image.path })
+        });
+        // ImagePicker.showImagePicker(options, response => {
+        //     console.log('response', response)
+        //     if (response.uri) {
+        //         updateField({ photo: response.uri })
+        //     }
+        // })
     }
 
     const uploadFile = (file) => {
