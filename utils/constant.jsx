@@ -64,9 +64,38 @@ const categoriesArray = [
     }
 ]
 
+const orderTypes = [
+    {
+        title: 'Video reading',
+        subTitles: 'Recorded & delivered within 24 hours',
+        price: '$10'
+    },
+    {
+        title: 'Rush video reading',
+        subTitles: 'Recorded & delivered within 60 minutes',
+        price: '$15'
+    },
+    {
+        title: 'Live chat',
+        subTitles: 'Live caht reading - right now, no wait',
+        price: '$0.99/min'
+    },
+    {
+        title: 'Live video call',
+        subTitles: 'Live video reading - right now, no wait',
+        price: '$3.99/min'
+    },
+    {
+        title: 'Live audio call',
+        subTitles: 'Live audio reading - right now, no wait',
+        price: '$1.99/min'
+    }
+]
+
 export {
     customStyles,
     labels,
     videoOptions,
-    categoriesArray
+    categoriesArray,
+    orderTypes
 }
