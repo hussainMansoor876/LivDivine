@@ -21,7 +21,7 @@ const DrawerNavigatorExample = createDrawerNavigator(
     //   activeTintColor: "#e91e63"
     // },
     contentComponent: props => <Sidebar {...props} />,
-    drawerType: 'slide'
+    // drawerType: 'slide'
     // drawerWidth: Dimensions.get('window').width - 130,
   }
 );

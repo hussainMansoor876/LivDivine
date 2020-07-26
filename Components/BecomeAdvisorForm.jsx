@@ -47,7 +47,7 @@ const BecomeAdvisorForm = (props) => {
         isLoading: false,
         currentPosition: 0,
         thumbnail: null,
-        loadingText: 'Uploading Photo...'
+        loadingText: 'Loading...'
     })
 
     const updateServer = (obj) => {
@@ -57,13 +57,23 @@ const BecomeAdvisorForm = (props) => {
                 const { becomeAdvisor } = res.data
                 if (becomeAdvisor.success) {
                     dispatch(loginUser(becomeAdvisor.user))
-                    Alert.alert('Successfully Created Advisor!')
+                    Alert.alert(
+                        'Success',
+                        'Successfully Created Advisor',
+                        [
+                            { text: 'OK', onPress: () => navigation.navigate('Home') }
+                        ],
+                        { cancelable: false }
+                    );
                 }
                 else {
                     Alert.alert(becomeAdvisor.message)
                 }
             })
-            .catch((e) => Alert.alert('Oops Something Went Wrong!'))
+            .catch((e) => {
+                updateField({ isLoading: false })
+                Alert.alert('Oops Something Went Wrong!')
+            })
     }
 
 
@@ -201,7 +211,6 @@ const BecomeAdvisorForm = (props) => {
             .then((result) => {
                 updateField({ thumbnail: result.secure_url })
             })
-        updateField({ loadingText: 'Uploading Video...' })
         await uploadVideoFile(uploadVideo)
             .then(response => response.json())
             .then((result) => {
@@ -210,8 +219,7 @@ const BecomeAdvisorForm = (props) => {
     }
 
     const registerAdvisor = async () => {
-        await uploadCloud()
-        updateField({ loadingText: 'Loading...' })
+        // await uploadCloud()
         const { userName, title, aboutMe, aboutService, thumbnail } = state
         const { id } = user
         updateServer({ id, userName, title, image: photo, thumbnail, aboutService, aboutMe, video: uploadVideo })
