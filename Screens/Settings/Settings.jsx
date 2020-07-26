@@ -21,7 +21,7 @@ const Settings = (props) => {
                     <Text h1 style={settingsStyles.fieldsbold}>ACCOUNT</Text>
                 </View>
                 <SettingsForm {...props} />
-                <ChangePassword {...props} />
+                {user.authType === null ? <ChangePassword {...props} /> : null}
             </ScrollView>
         </SafeAreaView>
     );
