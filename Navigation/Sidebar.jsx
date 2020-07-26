@@ -62,7 +62,59 @@ const datas = [
     }
 ];
 
+const userData = [
+    {
+        name: "Home",
+        route: "Home",
+        icon: "home",
+        bg: "#C5F442"
+    },
+    {
+        name: "All advisors",
+        route: "Advisors",
+        icon: "user",
+        bg: "#DA4437"
+    },
+    {
+        name: "Categories",
+        route: "Categories",
+        icon: "th-large",
+        bg: "#C5F442"
+    },
+    {
+        name: "My Orders",
+        route: "MyOrders",
+        icon: "shopping-cart",
+        bg: "#C5F442"
+    },
+    {
+        name: "Favorite Advisors",
+        route: "FavoriteAdvisors",
+        icon: "heart",
+        bg: "#4DCAE0"
+    },
+    {
+        name: "Settings",
+        route: "Settings",
+        icon: "cog",
+        bg: "#477EEA"
+    },
+    {
+        name: "Logout",
+        route: "Logout",
+        icon: "arrow-up",
+        bg: "#B89EF5",
+        types: "8"
+    }
+];
+
 const advisorData = [
+    {
+        name: "My Profile",
+        route: "AdvisorProfile",
+        icon: "user",
+        bg: "#C5F442"
+    },
     {
         name: "My Jobs",
         route: "Home",
@@ -109,11 +161,11 @@ const SideBar = (props) => {
                 <View style={{ height: height - 50 }}>
                     <Image source={drawerCover} style={styles.drawerCover} />
                     <View style={styles.drawerView}>
-                        <Image style={styles.drawerImage} source={user.image === null ? dummyImage : {uri: user.image}} />
+                        <Image style={styles.drawerImage} source={user.image === null ? dummyImage : { uri: user.image }} />
                         <Text style={styles.drawerText} >{user.userName}</Text>
                     </View>
                     <List
-                        dataArray={isAdvisor ? advisorData : datas}
+                        dataArray={isAdvisor ? advisorData : user.role === "ADVISOR" ? userData : datas}
                         renderRow={(data, index) =>
                             <ListItem
                                 button
