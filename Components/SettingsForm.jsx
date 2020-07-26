@@ -18,8 +18,10 @@ const SettingsForm = (props) => {
         userName: user.userName,
         userNameErr: '',
         isLoading: false,
-        photo: null
+        photo: user.image ? user.image : null
     })
+
+    console.log('state', state.photo)
 
     const updateServer = (obj) => {
         client.mutate({ variables: obj, mutation: UPDATE_USER })
@@ -28,6 +30,7 @@ const SettingsForm = (props) => {
                 const { updateUser } = res.data
                 if (updateUser.success) {
                     dispatch(loginUser(updateUser.user))
+                    Alert.alert('Successfully Update Settings!')
                 }
                 else {
                     Alert.alert('Oops Something Went Wrong!')
@@ -49,6 +52,7 @@ const SettingsForm = (props) => {
                 uploadFile(photo)
                     .then(response => response.json())
                     .then((result) => {
+                        console.log('result', result)
                         updateServer({ id, userName, photo: result.secure_url })
                         updateField({ photo: result.secure_url, isLoading: false })
                     })
@@ -81,11 +85,10 @@ const SettingsForm = (props) => {
     }
 
     const uploadFile = (file) => {
-        console.log('file', file)
         return RNFetchBlob.fetch('POST', 'https://api.cloudinary.com/v1_1/dzkbtggax/image/upload?upload_preset=livdivine', {
             'Content-Type': 'multipart/form-data'
         }, [
-            { name: 'file', filename: 'abc', data: RNFetchBlob.wrap(file) }
+            { name: 'file', filename: 'abc.jpg', data: RNFetchBlob.wrap(file), height: 400 }
         ])
     }
 
