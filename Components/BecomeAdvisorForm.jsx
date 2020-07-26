@@ -103,12 +103,12 @@ const BecomeAdvisorForm = (props) => {
                                         fileName: res.path
                                     }
                                     updateField({ thumbnail: updatedData })
-                                    // uploadFile(updatedData)
-                                    //     .then(response => response.json())
-                                    //     .then((result) => {
-                                    //         console.log('result', result)
-                                    //     })
-                                    //     .catch((e) => console.log('e', e.message))
+                                    uploadFile(updatedData)
+                                        .then(response => response.json())
+                                        .then((result) => {
+                                            console.log('result', result)
+                                        })
+                                        .catch((e) => console.log('e', e.message))
                                 })
                         }
                     })
@@ -153,11 +153,19 @@ const BecomeAdvisorForm = (props) => {
             return Alert.alert('Please select minimum 1 category!')
         }
         else {
-
+            registerAdvisor()
         }
         if (e === 'right') {
             updateField({ currentPosition: currentPosition + 1 })
         }
+    }
+
+    const uploadCloud = async () => {
+        console.log(photo)
+    }
+
+    const registerAdvisor = async () => {
+        await uploadCloud()
     }
 
     const getObjLength = (obj) => Object.values(obj).filter(v => v).length
