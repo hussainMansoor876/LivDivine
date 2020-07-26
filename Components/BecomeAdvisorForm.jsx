@@ -57,6 +57,14 @@ const BecomeAdvisorForm = (props) => {
         ])
     }
 
+    const uploadVideoFile = (file) => {
+        return RNFetchBlob.fetch('POST', 'https://api.cloudinary.com/v1_1/dzkbtggax/video/upload?upload_preset=livdivine', {
+            'Content-Type': 'multipart/form-data'
+        }, [
+            { name: 'file', filename: 'abc', data: RNFetchBlob.wrap(file) }
+        ])
+    }
+
     const handleChoosePhoto = () => {
         const options = {
             noData: true,
@@ -161,34 +169,32 @@ const BecomeAdvisorForm = (props) => {
     }
 
     const uploadCloud = async () => {
-        // if (photo.indexOf('https://res.cloudinary.com') === -1) {
-        //     await uploadFile(photo)
-        //         .then(response => response.json())
-        //         .then((result) => {
-        //             console.log('767')
-        //             setPhoto(result.secure_url)
-        //         })
-        //         .catch((e) => {
-        //             Alert.alert('Oops Something Went Wrong!')
-        //         })
-        // }
-        // await uploadFile(state.thumbnail)
-        //     .then(response => response.json())
-        //     .then((result) => {
-        //         updateField({ thumbnail: result.secure_url })
-        //     })
-        console.log('uploadVideo', uploadVideo)
-        await uploadFile(uploadVideo)
+        if (photo.indexOf('https://res.cloudinary.com') === -1) {
+            await uploadFile(photo)
+                .then(response => response.json())
+                .then((result) => {
+                    console.log('767')
+                    setPhoto(result.secure_url)
+                })
+                .catch((e) => {
+                    Alert.alert('Oops Something Went Wrong!')
+                })
+        }
+        await uploadFile(state.thumbnail)
             .then(response => response.json())
             .then((result) => {
-                console.log('res', result)
+                updateField({ thumbnail: result.secure_url })
+            })
+        await uploadVideoFile(uploadVideo)
+            .then(response => response.json())
+            .then((result) => {
+                setUploadVideo(result.secure_url)
             })
     }
 
     const registerAdvisor = async () => {
-        console.log('chal gya')
-        await uploadCloud()
-        console.log('*****')
+        // await uploadCloud()
+        const { userName, title, aboutMe, aboutService, thumbnail } = state
     }
 
     const getObjLength = (obj) => Object.values(obj).filter(v => v).length
