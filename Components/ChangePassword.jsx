@@ -6,11 +6,12 @@ import { Input, Button, Icon } from 'react-native-elements'
 import client from '../Config/apollo'
 import { loginStyles, settingsStyles } from '../styles'
 import Spinner from 'react-native-loading-spinner-overlay';
-import { LOGIN } from '../utils/authQueries'
+import { UPDATE_PASSWORD } from '../utils/authQueries'
 import FontIcon from 'react-native-vector-icons/FontAwesome';
 
 const SettingsForm = (props) => {
     const dispatch = useDispatch();
+    const user = useSelector(state => state.authReducer.user);
     const [state, setState] = useState({
         currentPassword: '',
         password: '',
@@ -22,26 +23,28 @@ const SettingsForm = (props) => {
     })
 
     const updateServer = (obj) => {
-        client.mutate({ variables: obj, mutation: UPDATE_USER })
+        client.mutate({ variables: obj, mutation: UPDATE_PASSWORD })
             .then((res) => {
                 updateField({ isLoading: false })
-                const { updateUser } = res.data
-                if (updateUser.success) {
-                    dispatch(loginUser(updateUser.user))
+                const { updatePassword } = res.data
+                console.log('updatePassword', updatePassword)
+                if (updatePassword.success) {
+                    dispatch(loginUser(updatePassword.user))
                     Alert.alert('Successfully Update Settings!')
+                    setState({})
                 }
                 else {
-                    Alert.alert('Oops Something Went Wrong!')
+                    Alert.alert(updatePassword.message)
                 }
             })
             .catch((e) => Alert.alert('Oops Something Went Wrong!'))
     }
 
-    const validateLogin = () => {
-        const { email, password } = state
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const updatePassword = () => {
+        const { currentPassword, password, confirmPass } = state
+        const { id } = user
         if (!currentPassword.length || currentPassword.length < 6) {
-            return updateField({ passwordErr: 'Password length must be 6 Characters!' })
+            return updateField({ currentPassErr: 'Password length must be 6 Characters!' })
         }
         else if (!password.length || password.length < 6) {
             return updateField({ passwordErr: 'Password length must be 6 Characters!' })
@@ -49,21 +52,10 @@ const SettingsForm = (props) => {
         else if (password !== confirmPass) {
             return updateField({ confirmPassErr: 'Password did not match!' })
         }
-        updateField({ isLoading: true })
-        client.mutate({ variables: { email, password }, mutation: LOGIN })
-            .then((res) => {
-                console.log('res', res)
-                updateField({ isLoading: false })
-                const { signIn } = res.data
-                console.log('signIn', signIn)
-                if (signIn.success) {
-                    dispatch(loginUser(signIn.user))
-                }
-                else {
-                    Alert.alert(signIn.message)
-                }
-            })
-            .catch((e) => console.log(e))
+        else {
+            updateField({ isLoading: true })
+            updateServer({ id, currentPassword, password })
+        }
     }
 
     const updateField = (obj) => {
@@ -84,12 +76,11 @@ const SettingsForm = (props) => {
             <Input
                 placeholder="Current Password"
                 secureTextEntry={true}
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField({ password: e })}
-                name="password"
-                value={state.password}
-                errorMessage={state.passwordErr}
-                onFocus={() => updateField({ passwordErr: '' })}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.currentPassErr ? 'red' : '#000000' }}
+                onChangeText={e => updateField({ currentPassword: e })}
+                value={state.currentPassword}
+                errorMessage={state.currentPassErr}
+                onFocus={() => updateField({ currentPassErr: '' })}
                 leftIcon={
                     <Icon
                         name='lock'
@@ -102,13 +93,11 @@ const SettingsForm = (props) => {
             <Input
                 placeholder="New Password"
                 secureTextEntry={true}
-                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.confirmPassErr ? 'red' : '#000000' }}
-                onChangeText={e => updateField({ confirmPass: e })}
-                name="confirmPass"
-                errorMessage={state.confirmPassErr}
-                value={state.confirmPass}
-                errorMessage={state.confirmPassErr}
-                onFocus={() => updateField({ confirmPassErr: '' })}
+                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.passwordErr ? 'red' : '#000000' }}
+                onChangeText={e => updateField({ password: e })}
+                errorMessage={state.passwordErr}
+                value={state.password}
+                onFocus={() => updateField({ passwordErr: '' })}
                 leftIcon={
                     <Icon
                         name='lock'
@@ -126,7 +115,6 @@ const SettingsForm = (props) => {
                 name="confirmPass"
                 errorMessage={state.confirmPassErr}
                 value={state.confirmPass}
-                errorMessage={state.confirmPassErr}
                 onFocus={() => updateField({ confirmPassErr: '' })}
                 leftIcon={
                     <Icon
@@ -140,7 +128,7 @@ const SettingsForm = (props) => {
             <Button
                 title="UPDATE PASSWORD"
                 buttonStyle={loginStyles.loginBtn}
-                onPress={validateLogin}
+                onPress={updatePassword}
             />
         </View>
     );

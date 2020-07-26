@@ -53,7 +53,7 @@ mutation($id: String!, $userName: String, $photo: String){
 
 const UPDATE_PASSWORD = gql`
 mutation($id: String!, $currentPassword: String!, $password: String!){
-  updatePassword(id: String!,currentPassword: $currentPassword, password: $password) {
+  updatePassword(id: $id,currentPassword: $currentPassword, password: $password) {
     token, message, success, user {
       id, userName, email, role, image, isVerified, isOnline, authType, title, image,
         aboutService, aboutMe, isAdvisor, isApproved
