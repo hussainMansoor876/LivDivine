@@ -56,7 +56,7 @@ const BecomeAdvisorForm = (props) => {
                 const { becomeAdvisor } = res.data
                 if (becomeAdvisor.success) {
                     dispatch(loginUser(becomeAdvisor.user))
-                    Alert.alert('Successfully Update Settings!')
+                    Alert.alert('Successfully Created Advisor!')
                 }
                 else {
                     Alert.alert(becomeAdvisor.message)
@@ -212,6 +212,8 @@ const BecomeAdvisorForm = (props) => {
     const registerAdvisor = async () => {
         // await uploadCloud()
         const { userName, title, aboutMe, aboutService, thumbnail } = state
+        const { id } = user
+        updateServer({ id, userName, title, image: photo, thumbnail, aboutService, aboutMe })
     }
 
     const getObjLength = (obj) => Object.values(obj).filter(v => v).length
