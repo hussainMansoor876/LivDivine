@@ -109,7 +109,7 @@ const SideBar = (props) => {
                 <View style={{ height: height - 50 }}>
                     <Image source={drawerCover} style={styles.drawerCover} />
                     <View style={styles.drawerView}>
-                        <Image style={styles.drawerImage} source={dummyImage} />
+                        <Image style={styles.drawerImage} source={user.image === null ? dummyImage : {uri: user.image}} />
                         <Text style={styles.drawerText} >{user.userName}</Text>
                     </View>
                     <List
