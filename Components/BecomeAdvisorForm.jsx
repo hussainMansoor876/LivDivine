@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Image, Text, Alert, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, Alert, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, removeUser } from '../Redux/actions/authActions';
-import { Icon, Input, Button, ListItem, CheckBox } from 'react-native-elements'
+import { Icon, Input, Button, ListItem, Image } from 'react-native-elements'
 import Spinner from 'react-native-loading-spinner-overlay';
 import { loginStyles, AdvisorStyles } from '../styles'
 import client from '../Config/apollo'
@@ -27,7 +27,7 @@ const BecomeAdvisorForm = (props) => {
     const { navigation } = props
     const user = useSelector(state => state.authReducer.user)
     const dispatch = useDispatch();
-    const [photo, setPhoto] = useState(null)
+    const [photo, setPhoto] = useState(user.image === null ? null : user.image)
     const [uploadVideo, setUploadVideo] = useState(null)
     const [showVideo, setShowVideo] = useState(false)
     const [isLoadingVideo, setLoading] = useState(true)
@@ -48,12 +48,12 @@ const BecomeAdvisorForm = (props) => {
         thumbnail: null
     })
 
+
     const uploadFile = (file) => {
-        console.log('file', file)
         return RNFetchBlob.fetch('POST', 'https://api.cloudinary.com/v1_1/dzkbtggax/image/upload?upload_preset=livdivine', {
             'Content-Type': 'multipart/form-data'
         }, [
-            { name: 'file', filename: file.fileName, data: RNFetchBlob.wrap(file.uri) }
+            { name: 'file', filename: 'abc', data: RNFetchBlob.wrap(file) }
         ])
     }
 
@@ -98,32 +98,20 @@ const BecomeAdvisorForm = (props) => {
                                 { cancelable: false }
                             );
                         } else {
-                            setUploadVideo(response)
+                            setUploadVideo(response.uri)
                             RNThumbnail.get(response.path)
                                 .then((res) => {
-                                    var updatedData = {
-                                        uri: res.path,
-                                        fileName: res.path
-                                    }
-                                    updateField({ thumbnail: updatedData })
-                                    uploadFile(updatedData)
-                                        .then(response => response.json())
-                                        .then((result) => {
-                                            console.log('result', result)
-                                        })
-                                        .catch((e) => console.log('e', e.message))
+                                    updateField({ thumbnail: res.path })
                                 })
                         }
                     })
                     .catch(err => console.error(err));
             }
-            if (response.uri) {
-            }
         })
     }
 
     const updateFieldSteps = (e) => {
-        const { currentPosition, userName, title } = state
+        const { currentPosition, userName, title, aboutMe, aboutService } = state
         if (e === 'left') {
             return updateField({ currentPosition: currentPosition - 1 })
         }
@@ -139,24 +127,33 @@ const BecomeAdvisorForm = (props) => {
             }
         }
         else if (currentPosition === 1) {
-            if (!userName.length || userName.length < 4) {
-                return updateField({ userNameErr: 'Minimum 4 Characters required!' })
+            if (!aboutService.length || aboutService.length < 4) {
+                return updateField({ aboutServiceErr: 'Minimum 4 Characters required!' })
             }
-            else if (!title.length || title.length < 4) {
-                return updateField({ titleErr: 'Minimum 4 Characters required!' })
+            else if (!aboutMe.length || aboutMe.length < 4) {
+                return updateField({ aboutMeErr: 'Minimum 4 Characters required!' })
             }
         }
-        else if (currentPosition === 2 && !getObjLength(ordersData)) {
-            return Alert.alert('Please select minimum 1 order!')
+        else if (currentPosition === 2) {
+            if (!getObjLength(ordersData)) {
+                return Alert.alert('Please select minimum 1 order!')
+            }
         }
-        else if (currentPosition === 3 && !uploadVideo) {
-            return Alert.alert('Please record or upload video!')
+        else if (currentPosition === 3) {
+            if (!uploadVideo) {
+                return Alert.alert('Please record or upload video!')
+            }
         }
-        else if (currentPosition === 4 && !getObjLength(categoriesData)) {
-            return Alert.alert('Please select minimum 1 category!')
+        else if (currentPosition === 4) {
+            if (!getObjLength(categoriesData)) {
+                return Alert.alert('Please select minimum 1 category!')
+            }
+            else {
+                return registerAdvisor()
+            }
         }
         else {
-            registerAdvisor()
+            return registerAdvisor()
         }
         if (e === 'right') {
             updateField({ currentPosition: currentPosition + 1 })
@@ -164,44 +161,37 @@ const BecomeAdvisorForm = (props) => {
     }
 
     const uploadCloud = async () => {
-        console.log(photo)
+        // if (photo.indexOf('https://res.cloudinary.com') === -1) {
+        //     await uploadFile(photo)
+        //         .then(response => response.json())
+        //         .then((result) => {
+        //             console.log('767')
+        //             setPhoto(result.secure_url)
+        //         })
+        //         .catch((e) => {
+        //             Alert.alert('Oops Something Went Wrong!')
+        //         })
+        // }
+        // await uploadFile(state.thumbnail)
+        //     .then(response => response.json())
+        //     .then((result) => {
+        //         updateField({ thumbnail: result.secure_url })
+        //     })
+        console.log('uploadVideo', uploadVideo)
+        await uploadFile(uploadVideo)
+            .then(response => response.json())
+            .then((result) => {
+                console.log('res', result)
+            })
     }
 
     const registerAdvisor = async () => {
+        console.log('chal gya')
         await uploadCloud()
+        console.log('*****')
     }
 
     const getObjLength = (obj) => Object.values(obj).filter(v => v).length
-
-    const validateSignup = () => {
-        const { userName, email, password, confirmPass } = state
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (!userName.length || userName.length < 4) {
-            return updateField({ userNameErr: 'Minimum 4 Characters required!' })
-        }
-        else if (reg.test(email) === false) {
-            return updateField({ emailErr: 'Invalid Email!' })
-        }
-        else if (!password.length || password.length < 6) {
-            return updateField({ passwordErr: 'Password length must be 6 Characters!' })
-        }
-        else if (password !== confirmPass) {
-            return updateField({ confirmPassErr: 'Password did not match!' })
-        }
-        updateField({ isLoading: true })
-        client.mutate({ variables: { email, userName, password }, mutation: SIGN_UP })
-            .then((res) => {
-                updateField({ isLoading: false })
-                const { signUp } = res.data
-                if (signUp.success) {
-                    dispatch(loginUser(signUp.user))
-                }
-                else {
-                    Alert.alert(signUp.message)
-                }
-            })
-            .catch((e) => console.log(e))
-    }
 
     const updateField = (obj) => {
         setState({
@@ -260,7 +250,7 @@ const BecomeAdvisorForm = (props) => {
                     />
                 </View> : null}
                 <Video
-                    source={{ uri: uploadVideo.uri }}
+                    source={{ uri: uploadVideo }}
                     style={{ marginTop: Screen.height / 4, height: Screen.height / 2, width: Screen.width }}
                     controls
                     resizeMode="contain"
@@ -315,7 +305,7 @@ const BecomeAdvisorForm = (props) => {
 
                             {photo && (
                                 <Image
-                                    source={{ uri: photo.uri }}
+                                    source={{ uri: photo }}
                                     style={{ width: 150, height: 150, marginRight: 10, marginLeft: 10, borderRadius: 250 }}
                                 />
                             )}
@@ -325,7 +315,7 @@ const BecomeAdvisorForm = (props) => {
                                 placeholder="About my services"
                                 multiline={true}
                                 numberOfLines={4}
-                                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.aboutService ? 'red' : '#000000' }}
+                                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.aboutServiceErr ? 'red' : '#000000' }}
                                 onChangeText={e => updateField({ aboutService: e })}
                                 value={state.aboutService}
                                 errorMessage={state.aboutServiceErr}
@@ -335,7 +325,7 @@ const BecomeAdvisorForm = (props) => {
                                 placeholder="Aboutme"
                                 multiline={true}
                                 numberOfLines={4}
-                                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.aboutMe ? 'red' : '#000000' }}
+                                inputContainerStyle={{ ...loginStyles.inputLogin, borderColor: state.aboutMeErr ? 'red' : '#000000' }}
                                 onChangeText={e => updateField({ aboutMe: e })}
                                 value={state.aboutMe}
                                 errorMessage={state.aboutMeErr}
@@ -362,7 +352,7 @@ const BecomeAdvisorForm = (props) => {
                                 <View style={{ justifyContent: 'center' }}>
                                     <TouchableOpacity onPress={() => setShowVideo(true)} style={{ height: 230, width: Screen.width }}>
                                         <Image
-                                            source={{ uri: state.thumbnail.uri }}
+                                            source={{ uri: state.thumbnail }}
                                             style={{ height: 230, width: Screen.width, resizeMode: 'cover' }}
                                         />
                                     </TouchableOpacity>

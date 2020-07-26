@@ -46,12 +46,11 @@ const SettingsForm = (props) => {
             return updateField({ userNameErr: 'Minimum 4 Characters required!' })
         }
         updateField({ isLoading: true })
-        if (photo) {
+        if (photo !== null) {
             if (photo.indexOf('https://res.cloudinary.com') === -1) {
                 uploadFile(photo)
                     .then(response => response.json())
                     .then((result) => {
-                        console.log('result', result)
                         updateServer({ id, userName, photo: result.secure_url })
                         updateField({ photo: result.secure_url, isLoading: false })
                     })
