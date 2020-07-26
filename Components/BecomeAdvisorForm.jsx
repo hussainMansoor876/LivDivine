@@ -46,7 +46,8 @@ const BecomeAdvisorForm = (props) => {
         aboutMeErr: '',
         isLoading: false,
         currentPosition: 0,
-        thumbnail: null
+        thumbnail: null,
+        loadingText: 'Uploading Photo...'
     })
 
     const updateServer = (obj) => {
@@ -174,10 +175,12 @@ const BecomeAdvisorForm = (props) => {
                 return Alert.alert('Please select minimum 1 category!')
             }
             else {
+                updateField({ isLoading: true })
                 return registerAdvisor()
             }
         }
         else {
+            updateField({ isLoading: true })
             return registerAdvisor()
         }
         if (e === 'right') {
@@ -190,11 +193,7 @@ const BecomeAdvisorForm = (props) => {
             await uploadFile(photo)
                 .then(response => response.json())
                 .then((result) => {
-                    console.log('767')
                     setPhoto(result.secure_url)
-                })
-                .catch((e) => {
-                    Alert.alert('Oops Something Went Wrong!')
                 })
         }
         await uploadFile(state.thumbnail)
@@ -202,6 +201,7 @@ const BecomeAdvisorForm = (props) => {
             .then((result) => {
                 updateField({ thumbnail: result.secure_url })
             })
+        updateField({ loadingText: 'Uploading Video...' })
         await uploadVideoFile(uploadVideo)
             .then(response => response.json())
             .then((result) => {
@@ -210,10 +210,11 @@ const BecomeAdvisorForm = (props) => {
     }
 
     const registerAdvisor = async () => {
-        // await uploadCloud()
+        await uploadCloud()
+        updateField({ loadingText: 'Loading...' })
         const { userName, title, aboutMe, aboutService, thumbnail } = state
         const { id } = user
-        updateServer({ id, userName, title, image: photo, thumbnail, aboutService, aboutMe })
+        updateServer({ id, userName, title, image: photo, thumbnail, aboutService, aboutMe, video: uploadVideo })
     }
 
     const getObjLength = (obj) => Object.values(obj).filter(v => v).length
@@ -258,6 +259,11 @@ const BecomeAdvisorForm = (props) => {
 
     return (
         <SafeAreaView style={loginStyles.setFlex}>
+            <Spinner
+                visible={state.isLoading}
+                textContent={state.loadingText}
+                textStyle={loginStyles.spinnerTextStyle}
+            />
             {showVideo ? <View style={{ height: Screen.height, backgroundColor: '#000' }}>
                 <TouchableOpacity onPress={goBack} style={AdvisorStyles.leftIcon}>
                     <Icon
