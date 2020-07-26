@@ -211,18 +211,18 @@ const BecomeAdvisorForm = (props) => {
             .then((result) => {
                 updateField({ thumbnail: result.secure_url })
             })
-        await uploadVideoFile(uploadVideo)
-            .then(response => response.json())
-            .then((result) => {
-                setUploadVideo(result.secure_url)
-            })
+        // await uploadVideoFile(uploadVideo)
+        //     .then(response => response.json())
+        //     .then((result) => {
+        //         setUploadVideo(result.secure_url)
+        //     })
     }
 
     const registerAdvisor = async () => {
-        // await uploadCloud()
+        await uploadCloud()
         const { userName, title, aboutMe, aboutService, thumbnail } = state
         const { id } = user
-        updateServer({ id, userName, title, image: photo, thumbnail, aboutService, aboutMe, video: uploadVideo })
+        updateServer({ id, userName, title, image: photo, thumbnail, aboutService, aboutMe })
     }
 
     const getObjLength = (obj) => Object.values(obj).filter(v => v).length

@@ -13,7 +13,7 @@ import Screen from '../../utils/ScreenDimensions'
 const AdvisorProfile = (props) => {
     const user = useSelector(state => state.authReducer.user);
     const dispatch = useDispatch()
-    const [isLoading, setLoading] = useState(false)
+    const [isLoading, setLoading] = useState(true)
     const [currentTime, setCurretTime] = useState(0)
     const [showVideo, setShowVideo] = useState(false)
 
@@ -42,12 +42,12 @@ const AdvisorProfile = (props) => {
                 {isLoading ? <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height: Screen.height, position: 'absolute' }}>
                     <ActivityIndicator
                         color="#fff"
-                        size="large"
+                        size="small"
                         style={AdvisorStyles.ActivityIndicatorStyle}
                     />
                 </View> : null}
                 <Video
-                    source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
+                    source={{ uri: user.video }}
                     style={{ marginTop: Screen.height / 4, height: Screen.height / 2, width: Screen.width }}
                     controls
                     resizeMode="stretch"

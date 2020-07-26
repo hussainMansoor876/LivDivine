@@ -51,7 +51,11 @@ const SignupForm = (props) => {
                     Alert.alert(signUp.message)
                 }
             })
-            .catch((e) => console.log(e))
+            .catch((e) => {
+                updateField({ isLoading: false })
+                Alert.alert('OOPS Something went wrong!')
+                console.log(e)
+            })
     }
 
     const updateField = (obj) => {

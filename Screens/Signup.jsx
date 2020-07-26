@@ -32,7 +32,7 @@ const Signup = (props) => {
         </View>
         <View style={loginStyles.loginView}>
           <Text style={signupStyles.baseText}>
-            You must be at least 18 years old to sign up for Purple Ocean. &nbsp;
+            You must be at least 18 years old to sign up for LivDivine. &nbsp;
           <Text>By signing up you agree to the</Text>
             <Text style={signupStyles.innerText}> Privacy Policy&nbsp;</Text>
             <Text>and</Text>
